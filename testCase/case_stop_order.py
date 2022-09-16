@@ -1,11 +1,8 @@
 import time
 import unittest
-
-from appium.webdriver.common.appiumby import AppiumBy
-
 from common.AlertError import AlertError
 from common.baseDriver import android_driver
-from pageObject.normal_stop_page import StopOrderPage
+from pageObject.stop_order_page import StopOrderPage
 
 
 class CaseStopOrder(unittest.TestCase):

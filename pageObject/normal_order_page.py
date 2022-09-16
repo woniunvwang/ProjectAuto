@@ -18,8 +18,7 @@ class NormalOrderPage(BasePage):
     confirm_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/confirm")
     allow_button_id = (AppiumBy.ID, "com.android.permissioncontroller:id/permission_allow_button")
     agree_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/agree")
-    sell_side_id = (AppiumBy.ID, "com.atp.newdemo2:id/order_direction_sell")
-    buy_side_id = (AppiumBy.ID, "com.atp.newdemo2:id/order_direction_buy")
+    cancel_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/cancel")
     # 合约组 "自动化测试合约"的path
     contract_group_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("自动化测试合约")')
 
@@ -32,59 +31,68 @@ class NormalOrderPage(BasePage):
     K_line = (AppiumBy.ID, 'com.atp.newdemo2:id/k_line_thumbnail')  # enabled=true
     # 合约组中第一个合约的买卖盘及涨跌幅path
 
-    Chg_path = (AppiumBy.XPATH,
-                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.HorizontalScrollView[2]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[4]/android.widget.TextView[1]")
+    Chg_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[4]/android.widget.TextView[1]")
 
-    bid_price_path = (AppiumBy.XPATH,
-                      "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.HorizontalScrollView[2]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.TextView[1]")
-    bid_lots_path = (AppiumBy.XPATH,
-                     "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.HorizontalScrollView[2]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.TextView[2]")
-    offer_price_path = (AppiumBy.XPATH,
-                        "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.HorizontalScrollView[2]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]/android.widget.TextView[1]")
-    offer_lots_path = (AppiumBy.XPATH,
-                       "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.HorizontalScrollView[2]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]/android.widget.TextView[2]")
+    bid_price_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[1]/android.widget.TextView[1]")
+    bid_lots_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[1]/android.widget.TextView[2]")
+    offer_price_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[2]/android.widget.TextView[1]")
+    offer_lots_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[2]/android.widget.TextView[2]")
 
     trade_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/account")
     # 选择账户中的第二个账户
-    trade_account_text_path = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[2]/android.widget.TextView")
+    trade_account_text_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/recycler_view_account']/android.widget.LinearLayout[2]")
     change_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/action_change")
-
-    change_type_button = (AppiumBy.XPATH,
-                          "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.Button")
+    back_button = (AppiumBy.ACCESSIBILITY_ID, "转到上一层级")
+    sell_side_id = (AppiumBy.ID, "com.atp.newdemo2:id/order_direction_sell")
+    buy_side_id = (AppiumBy.ID, "com.atp.newdemo2:id/order_direction_buy")
+    lots_xpath = (AppiumBy.XPATH, "//*[resource-id='com.atp.newdemo2:id/lots']/android.view.ViewGroup/android.widget.EditText")
+    price_xpath = (AppiumBy.XPATH, "//*[resource-id='com.atp.newdemo2:id/price']/android.view.ViewGroup/android.widget.EditText")
+    change_type_button = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/normal_order_type']/android.widget.LinearLayout/android.widget.Button")
     type_Market_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Market")')
     type_Market_Limit_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Market Limit")')
-    type_Market_path = (AppiumBy.XPATH,
-                        "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.TextView")
-    type_MarketLimit_path = (AppiumBy.XPATH,
-                             "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[2]/android.widget.TextView")
-    type_Lim_path = (AppiumBy.XPATH,
-                     "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[3]/android.widget.TextView")
-    type_STP_path = (AppiumBy.XPATH,
-                     "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[4]/android.widget.TextView")
-    type_STL_path = (AppiumBy.XPATH,
-                     "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[5]/android.widget.TextView")
-    type_ICE_path = (AppiumBy.XPATH,
-                     "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[6]/android.widget.TextView")
-
-    button_time_option = (AppiumBy.XPATH,
-                          "//*[@resource-id='com.atp.newdemo2:id/time_option']/child::android.widget.LinearLayout"
-                          "/android.widget.Spinner")
+    type_Lim_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("LIM")')
+    type_STP_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("STP")')
+    type_STL_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("STL")')
+    type_ICE_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ICE")')
+    input_StPx_xpath = (AppiumBy.XPATH, "//*[resource-id='com.atp.newdemo2:id/stop_price']/android.view.ViewGroup/android.widget.EditText")
+    chunk_size_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/max_iceberg_chunk_size']/android.view.ViewGroup/android.widget.EditText")
+    TIF_change_button = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/time_option']/android.widget.LinearLayout/android.widget.Button")
+    TIF_DAY = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("DAY")')
+    TIF_GTC = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("GTC")')
+    TIF_GTD = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("GTD")')
+    TIF_FAK = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("FAK")')
+    TIF_FOK = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("FOK")')
+    date_pick_ID = (AppiumBy.ID, "com.atp.newdemo2:id/date_pick_text_view")
+    fak_min_quantity = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/min_quantity']/android.view.ViewGroup/android.widget.EditText")
+    offset_flag_change_button = (AppiumBy.XPATH, "//*[resource-id='com.atp.newdemo2:id/offset_flag_type']/android.widget.LinearLayout/com.atp.newdemo2:id/button")
+    offset_flag_auto_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("自动")')
+    offset_flag_open_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("开仓")')
+    offset_flag_close_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平仓")')
+    offset_flag_closeYesterday_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平昨")')
+    offset_flag_closeToday_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平今")')
+    offset_flag_C_CT_O_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平仓-平今-开仓")')
+    offset_flag_CT_C_O_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平今-平仓-开仓")')
+    offset_flag_C_O_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平仓-开仓")')
+    offset_flag_CT_O_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平今-开仓")')
+    offset_flag_CY_O_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平昨-开仓")')
+    hedge_flag_change_button = (AppiumBy.XPATH, "//*[resource-id=com.atp.newdemo2:id/hedge_flag_type]/android.widget.LinearLayout/com.atp.newdemo2:id/button")
+    hedge_flag_speculation_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("投机")')
+    hedge_flag_arbitrage_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("套利")')
+    hedge_flag_hedge_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("套保")')
 
     order_details_title = (AppiumBy.ID, 'com.atp.newdemo2:id/title')  # 订单详情
-    order_details_side = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[1]/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_contract = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_account = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[3]/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_lots = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[4]/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_side = (AppiumBy.XPATH, "//*[]"
+    order_details_contract = (AppiumBy.XPATH,
+    order_details_account = (AppiumBy.XPATH,
+    order_details_lots = (AppiumBy.XPATH,
     order_details_price = (AppiumBy.XPATH,
-                           "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[5]/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_type = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[6]/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_offset_flag = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[7]/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_hedge_flag = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[8]/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_tif = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[9]/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_t = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[10]/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_memo1 = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[11]/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_memo = (AppiumBy.XPATH,
-                          "//*[text()='备注']/preceding-sibling::android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_type = (AppiumBy.XPATH,
+    order_details_offset_flag = (AppiumBy.XPATH,
+    order_details_hedge_flag = (AppiumBy.XPATH,
+    order_details_tif = (AppiumBy.XPATH,
+    order_details_t = (AppiumBy.XPATH,
+    order_details_memo1 = (AppiumBy.XPATH,
+    order_details_memo = (AppiumBy.XPATH,"")
 
     alert_title = (AppiumBy.ID, 'com.atp.newdemo2:id/title')
     alert_contract_code = (AppiumBy.ID, 'com.atp.newdemo2:id/contract_code')
@@ -93,72 +101,29 @@ class NormalOrderPage(BasePage):
     button_view_details = (AppiumBy.ID, 'com.atp.newdemo2: id/positive_button')
     button_close = (AppiumBy.ID, 'com.atp.newdemo2:id/close_button')
 
-    lots_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.EditText")
-    price_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.view.ViewGroup[3]/android.view.ViewGroup/android.widget.EditText")
+
 
     last_price_and_lots = (AppiumBy.ID, "com.atp.newdemo2:id/lots_at_price")
 
-    input_fak_min_quantity = (
-        AppiumBy.XPATH,
-        "//*[@resource-id='com.atp.newdemo2:id/min_quantity']/child::android.view.ViewGroup/android.widget.EditText")
+   
 
-    chunk_size_xpath = (AppiumBy.XPATH,
-                        "//*[@resource-id='com.atp.newdemo2:id/max_iceberg_chunk_size']/child::android.view"
-                        ".ViewGroup/android.widget.EditText")
-    input_StPx_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.view.ViewGroup[4]/android.view.ViewGroup/android.widget.EditText")
 
-    TIF_change_button = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.Button")
-    TIF_DAY = (AppiumBy.XPATH,"/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.TextView")
-    TIF_GTC = (AppiumBy.XPATH,
-                             '/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[2]/android.widget.TextView')
-    TIF_GTD = (AppiumBy.XPATH,
-                             '/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[3]/android.widget.TextView')
-    TIF_FAK = (AppiumBy.XPATH,
-                             '/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[4]/android.widget.TextView')
-    TIF_FOK = (AppiumBy.XPATH,
-                             '/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[5]/android.widget.TextView')
+
+
 
     contract_management_ID = (AppiumBy.ID, "com.atp.newdemo2:id/manage_contract")
     # 自动化测试合约的合约管理中第一个合约的位置 TCU1907-SH （主测试合约，买卖盘有涨跌幅没有有数据）
-    first_contract_drag_path = ("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout"
-                                                "/android.widget.FrameLayout/android.widget.LinearLayout/android"
-                                                ".widget.FrameLayout/android.widget.LinearLayout/android.view"
-                                                ".ViewGroup["
-                                                "2]/android.widget.FrameLayout/android.widget.FrameLayout/android"
-                                                ".view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview"
-                                                ".widget.RecyclerView/android.view.ViewGroup["
-                                                "1]/android.widget.ImageView")
+    first_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/resort_button'][1]")
     # 自动化测试合约的合约管理中第二个合约的位置 BRN-2210-ICE（STL和STP类型下单测试合约，买卖盘及涨跌幅都有数据）
-    second_contract_drag_path = ("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]/android.widget.ImageView")
+    second_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/resort_button'][2]")
     # 自动化测试合约的合约管理中第三个合约的位置 TCU1906-SH（没有数据时手数价格的填充时的测试合约，买卖盘及涨跌幅没有数据）
-    third_contract_drag_path = ("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[3]/android.widget.ImageView")
-    back_button = (AppiumBy.ACCESSIBILITY_ID, "转到上一层级")
+    third_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/resort_button'][3]")
     illegal_lots_title_path = (AppiumBy.XPATH,
                                "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[2]")
 
-    offset_flag_change_button = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.LinearLayout/android.widget.Button")
-    offset_flag_auto_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.TextView")
-    offset_flag_open_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[2]/android.widget.TextView")
-    offset_flag_close_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[3]/android.widget.TextView")
-    offset_flag_closeYesterday_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[4]/android.widget.TextView")
-    offset_flag_closeToday_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[5]/android.widget.TextView")
-    offset_flag_C_CT_O_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[6]/android.widget.TextView")
-    offset_flag_CT_C_O_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[7]/android.widget.TextView")
-    offset_flag_C_O_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[8]/android.widget.TextView")
-    offset_flag_CT_O_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[9]/android.widget.TextView")
-    offset_flag_CY_O_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[10]/android.widget.TextView")
-
-    hedge_flag_change_button = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[4]/android.widget.LinearLayout/android.widget.Button")
-    hedge_flag_speculation_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.TextView")
-    hedge_flag_arbitrage_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[2]/android.widget.TextView")
-    hedge_flag_hedge_xpath = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[3]/android.widget.TextView")
-
-    # switch_ID = (AppiumBy.ID, "com.atp.newdemo2: id / one_plus_switch")
-    switch_ID = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[5]/android.widget.Switch")
+    T_switch_ID = (AppiumBy.ID, "com.atp.newdemo2: id / one_plus_switch")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
-
-    # 找到合约组"自动化测试合约"，
 
     def slide_action(self, x1, y1, x2, y2):
         actions = ActionChains(self.driver)
@@ -614,22 +579,22 @@ class NormalOrderPage(BasePage):
 
     def tif_fak_and_clear_min_quantity_and_order(self):
         self.change_tif_fak()
-        self.clear_action(self.input_fak_min_quantity)
+        self.clear_action(self.fak_min_quantity)
         self.press_confirm_button()
 
     def tif_fak_and_input_illegal_min_quantity(self, fak_min):
         self.change_tif_fak()
-        self.clear_action(self.input_fak_min_quantity)
-        self.input_action(self.input_fak_min_quantity, fak_min)
-        return self.get_visible_element(self.input_fak_min_quantity).text
+        self.clear_action(self.fak_min_quantity)
+        self.input_action(self.fak_min_quantity, fak_min)
+        return self.get_visible_element(self.fak_min_quantity).text
 
     def tif_fak_and_input_min_quantity_and_lots(self, fak_min, lots):
         self.change_tif_fak()
         self.clear_action(self.lots_xpath)
         self.input_action(self.lots_xpath, lots)
-        self.clear_action(self.input_fak_min_quantity)
-        self.input_action(self.input_fak_min_quantity, fak_min)
-        return self.get_visible_element(self.input_fak_min_quantity).text
+        self.clear_action(self.fak_min_quantity)
+        self.input_action(self.fak_min_quantity, fak_min)
+        return self.get_visible_element(self.fak_min_quantity).text
 
     def offset_flag_auto_and_order(self):
         self.press_offer()
@@ -747,7 +712,7 @@ class NormalOrderPage(BasePage):
 
     def change_T_switch_and_order(self):
         self.press_offer()
-        self.click_action(self.switch_ID)
+        self.click_action(self.T_switch_ID)
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
         self.press_confirm_button()
