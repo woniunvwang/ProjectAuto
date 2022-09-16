@@ -14,7 +14,9 @@ from common.basePage import BasePage
 from pageObject.login_page import LoginPage
 
 
-class NormalOrderPage(BasePage):
+class StopOrderPage(BasePage):
+    Stop_order = (AppiumBy.XPATH, "//android.widget.LinearLayout[@content-desc='Stop单']")
+
     confirm_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/confirm")
     allow_button_id = (AppiumBy.ID, "com.android.permissioncontroller:id/permission_allow_button")
     agree_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/agree")
@@ -158,6 +160,8 @@ class NormalOrderPage(BasePage):
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
 
+
+
     # 找到合约组"自动化测试合约"，
 
     def slide_action(self, x1, y1, x2, y2):
@@ -210,9 +214,12 @@ class NormalOrderPage(BasePage):
 
     def press_bid(self):
         self.click_action(self.bid_price_path)
+        time.sleep(2)
+        self.click_action(self.Stop_order)
 
     def press_offer(self):
         self.click_action(self.offer_price_path)
+        self.click_action(self.Stop_order)
 
     def change_trade_account(self):
         self.press_offer()
