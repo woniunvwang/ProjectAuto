@@ -20,76 +20,91 @@ class CaseNormalOrder(unittest.TestCase):
 
     # 买卖盘及涨跌幅有数据时根据交易方向相反数据填充
     def test_01_press_bid_and_side_should_sell(self):
-        self.normal_order_page.press_bid()
-        isSellChecked = self.normal_order_page.is_side_sell_checked()
-        isBuyChecked = self.normal_order_page.is_side_buy_checked()
-        self.assertEqual("true", isSellChecked)
-        self.assertEqual("false", isBuyChecked)
+        result = self.normal_order_page.press_bid_and_order()
+        order_message = self.normal_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual("false", result[0])
+        self.assertEqual("true", result[1])
+        self.assertEqual("卖", result[2])
 
     def test_02_press_bid_and_lots_should_bid_value(self):
         result = self.normal_order_page.press_bid_and_check_lots()
         self.assertEqual(result[0], result[1])
+        self.assertEqual(result[1], result[2])
 
     def test_03_press_bid_and_price_should_bid_value(self):
         result = self.normal_order_page.press_bid_and_check_price()
         self.assertEqual(result[0], result[1])
+        self.assertEqual(result[1], result[2])
 
-    def test_04_press_offer_and_side_should_buy(self):
-        self.normal_order_page.press_offer()
-        isBuyChecked = self.normal_order_page.is_side_buy_checked()
-        isSellChecked = self.normal_order_page.is_side_sell_checked()
-        self.assertEqual("true", isBuyChecked)
-        self.assertEqual("false", isSellChecked)
+    def test_01_press_offer_and_side_should_sell(self):
+        result = self.normal_order_page.press_offer_and_order()
+        order_message = self.normal_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual("true", result[0])
+        self.assertEqual("false", result[1])
+        self.assertEqual("买", result[2])
 
     def test_05_press_offer_and_lots_should_offer_value(self):
         result = self.normal_order_page.press_offer_and_check_lots()
         self.assertEqual(result[0], result[1])
+        self.assertEqual(result[1], result[2])
 
     def test_06_press_offer_and_price_should_offer_value(self):
         result = self.normal_order_page.press_offer_and_check_price()
         self.assertEqual(result[0], result[1])
+        self.assertEqual(result[1], result[2])
 
     def test_07_press_chg_and_side_should_buy(self):
-        self.normal_order_page.slide_and_press_chg()
-        isBuyChecked = self.normal_order_page.is_side_buy_checked()
-        isSellChecked = self.normal_order_page.is_side_sell_checked()
-        self.assertEqual("true", isBuyChecked)
-        self.assertEqual("false", isSellChecked)
+        result = self.normal_order_page.slide_and_press_chg()
+        order_message = self.normal_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual("true", result[0])
+        self.assertEqual("false", result[1])
+        self.assertEqual("买", result[2])
 
     def test_08_press_chg_and_lots_should_last_lots_value(self):
         result = self.normal_order_page.press_chg_and_check_lots()
         self.assertEqual(result[0], result[1])
+        self.assertEqual(result[1], result[2])
 
     def test_09_press_chg_and_price_should_last_price_value(self):
         result = self.normal_order_page.press_chg_and_check_price()
         self.assertEqual(result[0], result[1])
+        self.assertEqual(result[1], result[2])
 
     # 买卖盘及涨跌幅没有数据时手数和价格按照"1"，"0"填充。
     def test_10_press_no_data_bid_and_lots_should_fix_num(self):
         # 合约T2209-CF在第二个的时候执行代码
-        self.normal_order_page.drag_first_contract_to_second_location()
+        # self.normal_order_page.drag_first_contract_to_second_location()
         result = self.normal_order_page.press_bid_and_check_lots()
-        self.assertEqual(result, "1")
+        self.assertEqual(result[0], "1")
+        self.assertEqual(result[0], result[1])
 
     def test_11_press_no_data_bid_and_price_should_fix_num(self):
         result = self.normal_order_page.press_bid_and_check_price()
-        self.assertEqual(result, "0")
+        self.assertEqual(result[0], "0")
+        self.assertEqual(result[0], result[1])
 
     def test_12_press_no_data_offer_and_lots_should_fix_num(self):
         result = self.normal_order_page.press_offer_and_check_lots()
-        self.assertEqual(result, "1")
+        self.assertEqual(result[0], "1")
+        self.assertEqual(result[0], result[1])
 
     def test_13_press_no_data_offer_and_price_should_fix_num(self):
         result = self.normal_order_page.press_offer_and_check_price()
-        self.assertEqual(result, "0")
+        self.assertEqual(result[0], "0")
+        self.assertEqual(result[0], result[1])
 
     def test_14_press_no_data_chg_and_lots_should_fix_num(self):
         result = self.normal_order_page.press_chg_and_check_lots()
-        self.assertEqual(result, "1")
+        self.assertEqual(result[0], "1")
+        self.assertEqual(result[0], result[1])
 
     def test_15_press_no_data_chg_and_price_should_fix_num(self):
         result = self.normal_order_page.press_chg_and_check_price()
-        self.assertEqual(result, "0")
+        self.assertEqual(result[0], "0")
+        self.assertEqual(result[0], result[1])
 
     def test_16_no_change_and_order_should_success(self):
         self.normal_order_page.drag_first_contract_to_second_location()
@@ -104,13 +119,15 @@ class CaseNormalOrder(unittest.TestCase):
     def test_17_change_trade_account_should_success(self):
         result = self.normal_order_page.change_trade_account()
         self.assertEqual(result[0], result[1])
+        self.assertEqual(result[1], result[2])
 
     def test_18_change_side_should_success(self):
-        self.normal_order_page.change_buy_side()
-        isSellChecked = self.normal_order_page.is_side_sell_checked()
-        isBuyChecked = self.normal_order_page.is_side_buy_checked()
-        self.assertEqual("true", isSellChecked)
-        self.assertEqual("false", isBuyChecked)
+        result = self.normal_order_page.change_buy_side()
+        order_message = self.normal_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual("false", result[0])
+        self.assertEqual("true", result[1])
+        self.assertEqual("卖", result[2])
 
     def test_19_clear_lots_and_order_should_fail(self):
         self.normal_order_page.clear_lots_and_order()
@@ -143,9 +160,10 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual(True, result)
 
     def test_25_input_lots_and_price_and_order_should_success(self):
-        self.normal_order_page.input_lots_and_price_and_order(1, 80)
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.input_lots_and_price_and_order(1, 80)
+        order_message = self.normal_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(result[1], result[2])
 
     def test_26_changed_Market_type_and_price_should_Market(self):
         self.normal_order_page.change_type_market()
@@ -154,30 +172,34 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual(result[1], "Market")
 
     def test_27_changed_Market_type_and_order_should_success(self):
-        self.normal_order_page.Market_type_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.Market_type_and_order()
+        order_message = self.normal_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual("Market", result)
 
     def test_28_changed_Market_Limit_type_and_price_should_Market(self):
-        self.normal_order_page.change_type_market_Limit()
+        self.normal_order_page.change_type_market_limit()
         result = self.normal_order_page.input_price_enabled_and_value()
         self.assertEqual(result[0], "false")
         self.assertEqual(result[1], "Market")
 
     def test_29_changed_Market_Limit_type_and_order_should_success(self):
-        self.normal_order_page.Market_Limit_type_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.market_Limit_type_and_order()
+        order_message = self.normal_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual("Market Limit", result)
 
     def test_30_buy_side_and_Market_type_changed_LIM_type_and_price_should_offer_value(self):
-        result = self.normal_order_page.Market_type_changed_LIM_type()
+        result = self.normal_order_page.market_type_changed_lim_type()
+        self.assertEqual(result[0], result[1])
+
+    def test_30_buy_side_and_Market_Limit_type_changed_LIM_type_and_price_should_offer_value(self):
+        result = self.normal_order_page.market_type_changed_lim_type()
         self.assertEqual(result[0], result[1])
 
     def test_31_changed_stp_type_and_price_should_Market(self):
-        self.normal_order_page.change_type_stp()
-        result = self.normal_order_page.input_price_enabled_and_value()
-        self.assertEqual(result[0], "false")
-        self.assertEqual(result[1], "Market")
+        result = self.normal_order_page.change_type_stp()
+        self.assertEqual(result[2], "Market")
 
     def test_32_changed_stp_type_and_buy_side_and_StPx_should_offer_value(self):
         result = self.normal_order_page.change_type_stp()
@@ -188,15 +210,12 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.is_toast_exist(AlertError.alert_message_StPx)
         self.assertEqual(True, result)
 
-    def test_34_changed_stp_type_and_order_should_success(self):
-        self.normal_order_page.stp_type_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
-
     def test_35_stp_type_and_buy_side_and_input_StPx_above_last_price_should_success(self):
-        self.normal_order_page.stp_type_input_StPx_above_last_price_and_buy_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.stp_type_input_StPx_above_last_price_and_buy_order()
+        order_message = self.normal_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(result[0], result[2])
+        self.assertEqual(result[1], "Market")
 
     def test_36_stp_type_and_buy_side_and_input_StPx_below_last_price_should_fail(self):
         self.normal_order_page.stp_type_input_StPx_below_last_price_and_buy_order()
@@ -209,9 +228,11 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual(AlertError.alert_message_sell_order_rejected, result)
 
     def test_38_stp_type_and_sell_side_and_input_StPx_below_last_price_should_success(self):
-        self.normal_order_page.stp_type_input_StPx_below_last_price_and_sell_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.stp_type_input_StPx_below_last_price_and_sell_order()
+        order_message = self.normal_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(result[0], result[2])
+        self.assertEqual(result[1], "Market")
 
     def test_39_stl_type_and_buy_side_and_price_should_offer_value(self):
         result = self.normal_order_page.change_type_stl()
@@ -227,9 +248,12 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual(True, result)
 
     def test_42_stl_type_and_buy_side_and_input_price_equal_StPx_above_last_price_should_success(self):
-        self.normal_order_page.stl_type_input_StPx_above_last_price_and_buy_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.stl_type_input_StPx_above_last_price_and_buy_order()
+        order_message = self.normal_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(result[0], result[2])
+        self.assertEqual(result[1], result[3])
+        self.assertEqual(result[0], result[1])
 
     def test_43_stl_type_and_buy_side_and_input_price_equal_StPx_below_last_price_should_fail(self):
         self.normal_order_page.stl_type_input_StPx_below_last_price_and_buy_order()
@@ -242,14 +266,18 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual(AlertError.alert_message_sell_order_rejected, result)
 
     def test_45_stl_type_and_sell_side_and_input_price_equal_StPx_below_last_price_should_success(self):
-        self.normal_order_page.stl_type_input_StPx_below_last_price_and_sell_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.stl_type_input_StPx_below_last_price_and_sell_order()
+        order_message = self.normal_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(result[0], result[2])
+        self.assertEqual(result[1], result[3])
 
     def test_46_stl_type_and_buy_side_and_above_last_price_and_StPx_below_price_should_success(self):
-        self.normal_order_page.stl_type_input_StPx_below_price_and_buy_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.stl_type_input_StPx_below_price_and_buy_order()
+        order_message = self.normal_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(result[0], result[2])
+        self.assertEqual(result[1], result[3])
 
     def test_47_stl_type_and_buy_side_and_above_last_price_and_StPx_above_price_should_fail(self):
         self.normal_order_page.stl_type_input_StPx_above_price_and_buy_order()
@@ -262,9 +290,11 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual(True, result)
 
     def test_49_stl_type_and_sell_side_and_above_last_price_and_StPx_above_price_should_success(self):
-        self.normal_order_page.stl_type_input_StPx_above_price_and_sell_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.stl_type_input_StPx_above_price_and_sell_order()
+        order_message = self.normal_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(result[0], result[2])
+        self.assertEqual(result[1], result[3])
 
     def test_50_ice_type_and_chunk_size_should_fix_value(self):
         result = self.normal_order_page.change_type_ice()
@@ -438,8 +468,8 @@ class CaseNormalOrder(unittest.TestCase):
 
     def test_84_edit_memo_and_order_should_success(self):
         hint = self.normal_order_page.edit_memo_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        order_message = self.normal_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
         self.assertEqual(hint[0], AlertError.hint_message)
         self.assertEqual(hint[1], hint[2])
 

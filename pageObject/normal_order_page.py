@@ -40,13 +40,13 @@ class NormalOrderPage(BasePage):
 
     trade_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/account")
     # 选择账户中的第二个账户
-    trade_account_text_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/recycler_view_account']/android.widget.LinearLayout[2]")
+    trade_account_text_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/recycler_view_account']/android.widget.LinearLayout[2]/android.widget.TextView")
     change_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/action_change")
     back_button = (AppiumBy.ACCESSIBILITY_ID, "转到上一层级")
     sell_side_id = (AppiumBy.ID, "com.atp.newdemo2:id/order_direction_sell")
     buy_side_id = (AppiumBy.ID, "com.atp.newdemo2:id/order_direction_buy")
-    lots_xpath = (AppiumBy.XPATH, "//*[resource-id='com.atp.newdemo2:id/lots']/android.view.ViewGroup/android.widget.EditText")
-    price_xpath = (AppiumBy.XPATH, "//*[resource-id='com.atp.newdemo2:id/price']/android.view.ViewGroup/android.widget.EditText")
+    lots_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/lots']/android.view.ViewGroup/android.widget.EditText")
+    price_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price']/android.view.ViewGroup/android.widget.EditText")
     change_type_button = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/normal_order_type']/android.widget.LinearLayout/android.widget.Button")
     type_Market_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Market")')
     type_Market_Limit_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Market Limit")')
@@ -54,7 +54,7 @@ class NormalOrderPage(BasePage):
     type_STP_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("STP")')
     type_STL_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("STL")')
     type_ICE_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ICE")')
-    input_StPx_xpath = (AppiumBy.XPATH, "//*[resource-id='com.atp.newdemo2:id/stop_price']/android.view.ViewGroup/android.widget.EditText")
+    input_StPx_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/stop_price']/android.view.ViewGroup/android.widget.EditText")
     chunk_size_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/max_iceberg_chunk_size']/android.view.ViewGroup/android.widget.EditText")
     TIF_change_button = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/time_option']/android.widget.LinearLayout/android.widget.Button")
     TIF_DAY = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("DAY")')
@@ -64,7 +64,7 @@ class NormalOrderPage(BasePage):
     TIF_FOK = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("FOK")')
     date_pick_ID = (AppiumBy.ID, "com.atp.newdemo2:id/date_pick_text_view")
     fak_min_quantity = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/min_quantity']/android.view.ViewGroup/android.widget.EditText")
-    offset_flag_change_button = (AppiumBy.XPATH, "//*[resource-id='com.atp.newdemo2:id/offset_flag_type']/android.widget.LinearLayout/com.atp.newdemo2:id/button")
+    offset_flag_change_button = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/offset_flag_type']/android.widget.LinearLayout/android.widget.Button")
     offset_flag_auto_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("自动")')
     offset_flag_open_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("开仓")')
     offset_flag_close_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平仓")')
@@ -75,53 +75,42 @@ class NormalOrderPage(BasePage):
     offset_flag_C_O_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平仓-开仓")')
     offset_flag_CT_O_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平今-开仓")')
     offset_flag_CY_O_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平昨-开仓")')
-    hedge_flag_change_button = (AppiumBy.XPATH, "//*[resource-id=com.atp.newdemo2:id/hedge_flag_type]/android.widget.LinearLayout/com.atp.newdemo2:id/button")
+    hedge_flag_change_button = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/hedge_flag_type']/android.widget.LinearLayout/android.widget.Button")
     hedge_flag_speculation_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("投机")')
     hedge_flag_arbitrage_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("套利")')
     hedge_flag_hedge_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("套保")')
 
     order_details_title = (AppiumBy.ID, 'com.atp.newdemo2:id/title')  # 订单详情
-    order_details_side = (AppiumBy.XPATH, "//*[]"
-    order_details_contract = (AppiumBy.XPATH,
-    order_details_account = (AppiumBy.XPATH,
-    order_details_lots = (AppiumBy.XPATH,
-    order_details_price = (AppiumBy.XPATH,
-    order_details_type = (AppiumBy.XPATH,
-    order_details_offset_flag = (AppiumBy.XPATH,
-    order_details_hedge_flag = (AppiumBy.XPATH,
-    order_details_tif = (AppiumBy.XPATH,
-    order_details_t = (AppiumBy.XPATH,
-    order_details_memo1 = (AppiumBy.XPATH,
-    order_details_memo = (AppiumBy.XPATH,"")
-
+    order_details_side = (AppiumBy.XPATH, "//*[@text='方向']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_contract = (AppiumBy.XPATH, "//*[@text='合约']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_account = (AppiumBy.XPATH, "//*[@text='交易账户']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_lots = (AppiumBy.XPATH, "//*[@text='手数']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_price = (AppiumBy.XPATH, "//*[@text='价格']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_stpx = (AppiumBy.XPATH, "//*[@text='StPx']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_type = (AppiumBy.XPATH, "//*[@text='类型']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_offset_flag = (AppiumBy.XPATH, "//*[@text='开平标志']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_hedge_flag = (AppiumBy.XPATH, "//*[@text='投保标志']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_tif = (AppiumBy.XPATH, "//*[@text='TIF']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_t = (AppiumBy.XPATH, "//*[@text='T+1']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_memo = (AppiumBy.XPATH, "//*[@text='备注']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     alert_title = (AppiumBy.ID, 'com.atp.newdemo2:id/title')
     alert_contract_code = (AppiumBy.ID, 'com.atp.newdemo2:id/contract_code')
     alert_order_id = (AppiumBy.ID, 'com.atp.newdemo2:id/order_id')
     alert_message_ID = (AppiumBy.ID, "com.atp.newdemo2:id/message")
     button_view_details = (AppiumBy.ID, 'com.atp.newdemo2: id/positive_button')
     button_close = (AppiumBy.ID, 'com.atp.newdemo2:id/close_button')
-
-
-
     last_price_and_lots = (AppiumBy.ID, "com.atp.newdemo2:id/lots_at_price")
-
-   
-
-
-
-
 
     contract_management_ID = (AppiumBy.ID, "com.atp.newdemo2:id/manage_contract")
     # 自动化测试合约的合约管理中第一个合约的位置 TCU1907-SH （主测试合约，买卖盘有涨跌幅没有有数据）
-    first_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/resort_button'][1]")
+    first_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[1]/com.atp.newdemo2:id/resort_button")
     # 自动化测试合约的合约管理中第二个合约的位置 BRN-2210-ICE（STL和STP类型下单测试合约，买卖盘及涨跌幅都有数据）
-    second_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/resort_button'][2]")
+    second_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[2]/com.atp.newdemo2:id/resort_button")
     # 自动化测试合约的合约管理中第三个合约的位置 TCU1906-SH（没有数据时手数价格的填充时的测试合约，买卖盘及涨跌幅没有数据）
-    third_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/resort_button'][3]")
-    illegal_lots_title_path = (AppiumBy.XPATH,
-                               "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[2]")
+    third_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[3]/com.atp.newdemo2:id/resort_button")
+    illegal_lots_title_path = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[2]")
 
-    T_switch_ID = (AppiumBy.ID, "com.atp.newdemo2: id / one_plus_switch")
+    T_switch_ID = (AppiumBy.ID, "com.atp.newdemo2:id/one_plus_switch")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
 
@@ -143,6 +132,61 @@ class NormalOrderPage(BasePage):
         time.sleep(1)
         self.slide_action(960, 280, 700, 280)
         self.click_action(self.contract_group_text)
+
+    def alert_order_details_message(self):
+        result = self.get_visible_element(self.alert_message_ID).text
+        return result
+
+    def alert_illegal_lots_title(self):
+        return self.get_visible_element(self.illegal_lots_title_path).text
+
+    def order_details_side_value(self):
+        order_details_side_value = self.get_visible_element(self.order_details_side).text
+        return order_details_side_value
+
+    def order_details_contract_value(self):
+        order_details_contract_value = self.get_visible_element(self.order_details_contract).text
+        return order_details_contract_value
+
+    def order_details_account_value(self):
+        order_details_account_value = self.get_visible_element(self.order_details_account).text
+        return order_details_account_value
+
+    def order_details_lots_value(self):
+        order_details_lots_value = self.get_visible_element(self.order_details_lots).text
+        return order_details_lots_value
+
+    def order_details_price_value(self):
+        order_details_price_value = self.get_visible_element(self.order_details_price).text
+        return order_details_price_value
+
+    def order_details_stpx_value(self):
+        order_details_stpx_value = self.get_visible_element(self.order_details_stpx).text
+        return order_details_stpx_value
+
+    def order_details_type_value(self):
+        order_details_type_value = self.get_visible_element(self.order_details_type).text
+        return order_details_type_value
+
+    def order_details_offset_flag_value(self):
+        order_details_offset_flag_value = self.get_visible_element(self.order_details_offset_flag).text
+        return order_details_offset_flag_value
+
+    def order_details_hedge_flag_value(self):
+        order_details_hedge_flag_value = self.get_visible_element(self.order_details_hedge_flag).text
+        return order_details_hedge_flag_value
+
+    def order_details_TIF_value(self):
+        order_details_TIF_value = self.get_visible_element(self.order_details_tif).text
+        return order_details_TIF_value
+
+    def order_details_T_value(self):
+        order_details_T_value = self.get_visible_element(self.order_details_t).text
+        return order_details_T_value
+
+    def order_details_memo_value(self):
+        order_details_memo_value = self.get_visible_element(self.order_details_memo).text
+        return order_details_memo_value
 
     def press_confirm_button(self):
         self.click_action(self.confirm_button_id)
@@ -187,54 +231,87 @@ class NormalOrderPage(BasePage):
         self.click_action(self.change_account_ID)
         time.sleep(1)
         changed_trade_account_value = self.get_visible_element(self.trade_account_ID).text
-        return trade_account_value, changed_trade_account_value
+        self.press_confirm_button()
+        order_details_account_value = self.get_visible_element(self.order_details_account).text
+        return trade_account_value, changed_trade_account_value, order_details_account_value
 
-    def is_side_buy_checked(self):
-        buy = self.get_visible_element(self.buy_side_id)
-        return buy.get_attribute("checked")
+    def press_bid_and_order(self):
+        self.press_bid()
+        buy_value = self.get_visible_element(self.buy_side_id)
+        sell_value = self.get_visible_element(self.sell_side_id)
+        buy_checkbox = buy_value.get_attribute("checked")
+        sell_checkbox = sell_value.get_attribute("checked")
+        self.press_confirm_button()
+        order_details_side_value = self.get_visible_element(self.order_details_side).text
+        self.press_confirm_button()
+        return buy_checkbox, sell_checkbox, order_details_side_value
 
-    def is_side_sell_checked(self):
-        return self.get_visible_element(self.sell_side_id).get_attribute("checked")
+    def press_offer_and_order(self):
+        self.press_offer()
+        buy_value = self.get_visible_element(self.buy_side_id)
+        sell_value = self.get_visible_element(self.sell_side_id)
+        buy_checkbox = buy_value.get_attribute("checked")
+        sell_checkbox = sell_value.get_attribute("checked")
+        self.press_confirm_button()
+        order_details_side_value = self.get_visible_element(self.order_details_side).text
+        self.press_confirm_button()
+        return buy_checkbox, sell_checkbox, order_details_side_value
 
     def change_buy_side(self):
         self.press_offer()
         self.click_action(self.sell_side_id)
+        buy_value = self.get_visible_element(self.buy_side_id)
+        sell_value = self.get_visible_element(self.sell_side_id)
+        buy_checkbox = buy_value.get_attribute("checked")
+        sell_checkbox = sell_value.get_attribute("checked")
+        self.press_confirm_button()
+        order_details_side_value = self.get_visible_element(self.order_details_side).text
+        self.press_confirm_button()
+        return buy_checkbox, sell_checkbox, order_details_side_value
 
     def press_bid_and_check_lots(self):
         bid_lots_value = self.get_visible_element(self.bid_lots_path).text
         self.press_bid()
         lots_value = self.get_visible_element(self.lots_xpath).text
+        self.press_confirm_button()
+        order_details_lots_value = self.order_details_lots_value()
         if bid_lots_value == "-":
-            return lots_value
+            return lots_value, order_details_lots_value
         else:
-            return bid_lots_value, lots_value
+            return bid_lots_value, lots_value, order_details_lots_value
 
     def press_bid_and_check_price(self):
         bid_price_value = self.get_visible_element(self.bid_price_path).text
         self.press_bid()
         price_value = self.get_visible_element(self.price_xpath).text
+        self.press_confirm_button()
+        order_details_price_value = self.order_details_price_value()
         if bid_price_value == "-":
-            return price_value
+            return price_value, order_details_price_value
         else:
-            return bid_price_value, price_value
+            return bid_price_value, price_value, order_details_price_value
 
     def press_offer_and_check_lots(self):
         bid_lots_value = self.get_visible_element(self.offer_lots_path).text
         self.press_offer()
         lots_value = self.get_visible_element(self.lots_xpath).text
+        self.press_confirm_button()
+        order_details_lots_value = self.order_details_lots_value()
         if bid_lots_value == "-":
-            return lots_value
+            return lots_value, order_details_lots_value
         else:
-            return bid_lots_value, lots_value
+            return bid_lots_value, lots_value, order_details_lots_value
 
     def press_offer_and_check_price(self):
         bid_price_value = self.get_visible_element(self.offer_price_path).text
         self.press_offer()
         price_value = self.get_visible_element(self.price_xpath).text
+        self.press_confirm_button()
+        order_details_price_value = self.order_details_price_value()
         if bid_price_value == "-":
-            return price_value
+            return price_value, order_details_price_value
         else:
-            return bid_price_value, price_value
+            return bid_price_value, price_value, order_details_price_value
 
     def slide_and_chg(self):
         self.slide_action(967, 978, 678, 978)
@@ -242,9 +319,14 @@ class NormalOrderPage(BasePage):
     def slide_and_press_chg(self):
         self.slide_and_chg()
         self.click_action(self.Chg_path)
-
-    def alert_illegal_lots_title(self):
-        return self.get_visible_element(self.illegal_lots_title_path).text
+        buy_value = self.get_visible_element(self.buy_side_id)
+        sell_value = self.get_visible_element(self.sell_side_id)
+        buy_checkbox = buy_value.get_attribute("checked")
+        sell_checkbox = sell_value.get_attribute("checked")
+        self.press_confirm_button()
+        order_details_side_value = self.get_visible_element(self.order_details_side).text
+        self.press_confirm_button()
+        return buy_checkbox, sell_checkbox, order_details_side_value
 
     def press_chg_and_check_price(self):
         last_price_and_lots = self.get_visible_element(self.last_price_and_lots).text
@@ -253,10 +335,12 @@ class NormalOrderPage(BasePage):
         Chg_value = self.get_visible_element(self.Chg_path).text
         self.click_action(self.Chg_path)
         price_value = self.get_visible_element(self.price_xpath).text
+        self.press_confirm_button()
+        order_details_price_value = self.order_details_price_value()
         if Chg_value == "-":
-            return price_value
+            return price_value, order_details_price_value
         else:
-            return float(last_price), float(price_value)
+            return float(last_price), float(price_value), order_details_price_value
 
     def press_chg_and_check_lots(self):
         last_price_and_lots = self.get_visible_element(self.last_price_and_lots).text
@@ -265,13 +349,16 @@ class NormalOrderPage(BasePage):
         Chg_value = self.get_visible_element(self.Chg_path).text
         self.click_action(self.Chg_path)
         lots_value = self.get_visible_element(self.lots_xpath).text
+        self.press_confirm_button()
+        order_details_lots_value = self.order_details_lots_value()
         if Chg_value == "-":
-            return lots_value
+            return lots_value, order_details_lots_value
         else:
-            return float(last_lots), float(lots_value)
+            return float(last_lots), float(lots_value), order_details_lots_value
 
     def drag_first_contract_to_second_location(self):
         self.click_action(self.contract_management_ID)
+        time.sleep(1)
         x = self.driver.find_element(AppiumBy.XPATH, self.third_contract_drag_path)
         y = self.driver.find_element(AppiumBy.XPATH, self.first_contract_drag_path)
         ActionChains(self.driver).drag_and_drop(y, x).pause(5).perform()
@@ -279,7 +366,6 @@ class NormalOrderPage(BasePage):
 
     def drag_third_contract_to_second_location(self):
         self.click_action(self.contract_management_ID)
-        time.sleep(2)
         x = self.driver.find_element(AppiumBy.XPATH, self.third_contract_drag_path)
         y = self.driver.find_element(AppiumBy.XPATH, self.first_contract_drag_path)
         ActionChains(self.driver).drag_and_drop(x, y).pause(5).perform()
@@ -293,30 +379,38 @@ class NormalOrderPage(BasePage):
 
     # 类型为STP/Market/Market Limit时价格处显示为置灰的Market
 
-    def input_price_enabled_and_value(self):
-        price_enabled = self.get_visible_element(self.price_xpath)
-        price_value = self.get_visible_element(self.price_xpath).text
-        return price_enabled.get_attribute("enabled"), price_value
-
     def Market_type_and_order(self):
         self.change_type_market()
         self.press_confirm_button()
+        order_details_type_value = self.order_details_type_value()
         self.press_confirm_button()
+        return order_details_type_value
 
-    def change_type_market_Limit(self):
+    def change_type_market_limit(self):
         self.press_offer()
         self.click_action(self.change_type_button)
         self.click_action(self.type_Market_Limit_text)
         self.press_confirm_button()
 
-    def Market_Limit_type_and_order(self):
-        self.change_type_market_Limit()
+    def market_Limit_type_and_order(self):
+        self.change_type_market_limit()
         self.press_confirm_button()
+        order_details_type_value = self.order_details_type_value()
         self.press_confirm_button()
+        return order_details_type_value
 
-    def Market_type_changed_LIM_type(self):
+    def market_type_changed_lim_type(self):
         bid_price_value = self.get_visible_element(self.offer_price_path).text
         self.change_type_market()
+        self.click_action(self.change_type_button)
+        self.click_action(self.type_Lim_path)
+        self.press_confirm_button()
+        input_price_value = self.get_visible_element(self.price_xpath).text
+        return bid_price_value, input_price_value
+
+    def market_Limit_type_changed_lim_type(self):
+        bid_price_value = self.get_visible_element(self.offer_price_path).text
+        self.change_type_market_limit()
         self.click_action(self.change_type_button)
         self.click_action(self.type_Lim_path)
         self.press_confirm_button()
@@ -338,11 +432,6 @@ class NormalOrderPage(BasePage):
         self.clear_action(self.input_StPx_xpath)
         self.press_confirm_button()
 
-    def stp_type_and_order(self):
-        self.change_type_stp()
-        self.press_confirm_button()
-        self.press_confirm_button()
-
     def stp_type_input_difference_value(self, difference):
         self.change_type_stp()
         self.clear_action(self.input_StPx_xpath)
@@ -350,11 +439,16 @@ class NormalOrderPage(BasePage):
         last_trade_price = float(last_price_and_lots.split('@')[1])
         price_value = last_trade_price + int(difference)
         self.input_action(self.input_StPx_xpath, price_value)
+        stpx_value = self.get_visible_element(self.input_StPx_xpath).text
+        return stpx_value
 
     def stp_type_input_StPx_above_last_price_and_buy_order(self):
-        self.stp_type_input_difference_value(+5)
+        stpx_value = self.stp_type_input_difference_value(+5)
         self.press_confirm_button()
+        order_details_price_value = self.order_details_price_value()
+        order_details_stpx_value = self.order_details_stpx_value()
         self.press_confirm_button()
+        return stpx_value, order_details_price_value, order_details_stpx_value
 
     def stp_type_input_StPx_below_last_price_and_buy_order(self):
         self.stp_type_input_difference_value(-5)
@@ -368,10 +462,13 @@ class NormalOrderPage(BasePage):
         self.press_confirm_button()
 
     def stp_type_input_StPx_below_last_price_and_sell_order(self):
-        self.stp_type_input_difference_value(-5)
+        stpx_value = self.stp_type_input_difference_value(-5)
         self.click_action(self.sell_side_id)
         self.press_confirm_button()
+        order_details_price_value = self.order_details_price_value()
+        order_details_stpx_value = self.order_details_stpx_value()
         self.press_confirm_button()
+        return stpx_value, order_details_price_value, order_details_stpx_value
 
     def change_type_stl(self):
         offer_price_value = self.get_visible_element(self.offer_price_path).text
@@ -382,11 +479,6 @@ class NormalOrderPage(BasePage):
         price = self.get_visible_element(self.price_xpath).text
         input_StPx = self.get_visible_element(self.input_StPx_xpath).text
         return offer_price_value, input_StPx, price
-
-    def stl_type_and_order(self):
-        self.change_type_stl()
-        self.press_confirm_button()
-        self.press_confirm_button()
 
     def stl_clear_StPx_and_order(self):
         self.change_type_stl()
@@ -402,11 +494,19 @@ class NormalOrderPage(BasePage):
         price_value = last_trade_price + int(difference)
         self.input_action(self.input_StPx_xpath, price_value)
         self.input_action(self.price_xpath, price_value)
+        StPx_value = self.get_visible_element(self.input_StPx_xpath).text
+        price_value = self.get_visible_element(self.price_xpath).text
+        return StPx_value, price_value
 
     def stl_type_input_StPx_above_last_price_and_buy_order(self):
-        self.stl_type_input_difference_value(+5)
+        value = self.stl_type_input_difference_value(+5)
+        StPx_value = value[0]
+        price_value = value[1]
         self.press_confirm_button()
+        order_details_price_value = self.order_details_price_value()
+        order_details_stpx_value = self.order_details_stpx_value()
         self.press_confirm_button()
+        return StPx_value, price_value, order_details_stpx_value, order_details_price_value
 
     def stl_type_input_StPx_below_last_price_and_buy_order(self):
         self.stl_type_input_difference_value(-5)
@@ -420,10 +520,15 @@ class NormalOrderPage(BasePage):
         self.press_confirm_button()
 
     def stl_type_input_StPx_below_last_price_and_sell_order(self):
-        self.stl_type_input_difference_value(-5)
+        value = self.stl_type_input_difference_value(-5)
+        StPx_value = value[0]
+        price_value = value[1]
         self.click_action(self.sell_side_id)
         self.press_confirm_button()
+        order_details_price_value = self.order_details_price_value()
+        order_details_stpx_value = self.order_details_stpx_value()
         self.press_confirm_button()
+        return StPx_value, price_value, order_details_stpx_value, order_details_price_value
 
     def stl_type_input_StPx_diff_and_price_diff(self, StPx_diff, price_diff):
         self.change_type_stl()
@@ -435,11 +540,19 @@ class NormalOrderPage(BasePage):
         StPx_value = last_trade_price + int(StPx_diff)
         self.input_action(self.input_StPx_xpath, StPx_value)
         self.input_action(self.price_xpath, price_value)
+        StPx_value = self.get_visible_element(self.input_StPx_xpath).text
+        price_value = self.get_visible_element(self.price_xpath).text
+        return StPx_value, price_value
 
     def stl_type_input_StPx_below_price_and_buy_order(self):
-        self.stl_type_input_StPx_diff_and_price_diff(5, 10)
+        value = self.stl_type_input_StPx_diff_and_price_diff(5, 10)
+        StPx_value = value[0]
+        price_value = value[1]
         self.press_confirm_button()
+        order_details_price_value = self.order_details_price_value()
+        order_details_stpx_value = self.order_details_stpx_value()
         self.press_confirm_button()
+        return StPx_value, price_value, order_details_stpx_value, order_details_price_value
 
     def stl_type_input_StPx_above_price_and_buy_order(self):
         self.stl_type_input_StPx_diff_and_price_diff(10, 5)
@@ -452,10 +565,15 @@ class NormalOrderPage(BasePage):
         self.press_confirm_button()
 
     def stl_type_input_StPx_above_price_and_sell_order(self):
-        self.stl_type_input_StPx_diff_and_price_diff(-5, -10)
+        value = self.stl_type_input_StPx_diff_and_price_diff(-5, -10)
+        StPx_value = value[0]
+        price_value = value[1]
         self.click_action(self.sell_side_id)
         self.press_confirm_button()
+        order_details_price_value = self.order_details_price_value()
+        order_details_stpx_value = self.order_details_stpx_value()
         self.press_confirm_button()
+        return StPx_value, price_value, order_details_stpx_value, order_details_price_value
 
     def change_type_ice(self):
         self.press_offer()
@@ -516,7 +634,10 @@ class NormalOrderPage(BasePage):
         self.clear_action(self.price_xpath)
         self.input_action(self.price_xpath, price)
         self.press_confirm_button()
+        order_details_lots_value = self.order_details_lots_value()
+        order_details_price_value = self.order_details_price_value()
         self.press_confirm_button()
+        return order_details_lots_value, order_details_price_value
 
     def get_element_from_send_successfully_alert_and_close_alert(self):
         alert_title = self.get_visible_element(self.alert_title).text
@@ -525,8 +646,6 @@ class NormalOrderPage(BasePage):
         self.click_action(self.button_close)
         return alert_title, alert_contract_code, alert_order_id
 
-    def alert_order_details_message(self):
-        return self.get_visible_element(self.alert_message_ID).text
 
     def change_tif_gtc(self):
         self.press_offer()
@@ -599,6 +718,7 @@ class NormalOrderPage(BasePage):
     def offset_flag_auto_and_order(self):
         self.press_offer()
         offset_flag_default_value = self.get_visible_element(self.offset_flag_change_button).text
+        self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
         self.press_confirm_button()
         return offset_flag_default_value
@@ -738,10 +858,9 @@ class NormalOrderPage(BasePage):
         hint = self.get_visible_element(self.error_hint_ID).text
         memo_value = self.get_visible_element(self.edit_memo_ID).text
         self.press_confirm_button()
-        details_memo_value = self.get_visible_element(self.order_details_memo).text
+        order_details_memo_value = self.order_details_memo_value()
         self.press_confirm_button()
-        self.press_confirm_button()
-        return hint, list(memo_value), list(details_memo_value)
+        return hint, memo_value, order_details_memo_value
 
 
 
