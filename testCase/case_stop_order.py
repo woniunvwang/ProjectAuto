@@ -25,11 +25,15 @@ class CaseStopOrder(unittest.TestCase):
 
     def test_02_press_bid_and_lots_should_bid_value(self):
         result = self.stop_order_page.press_bid_and_check_lots()
-        self.assertEqual(result[0], result[1])
+        bid_lots_value = result[0]
+        lots_value = result[1]
+        self.assertEqual(bid_lots_value, lots_value)
 
     def test_03_press_bid_and_price_should_bid_value(self):
         result = self.stop_order_page.press_bid_and_check_price()
-        self.assertEqual(result[0], result[1])
+        bid_price_value = result[0]
+        price_value = result[1]
+        self.assertEqual(bid_price_value, price_value)
 
     def test_04_press_offer_and_side_should_buy(self):
         self.stop_order_page.press_offer()
