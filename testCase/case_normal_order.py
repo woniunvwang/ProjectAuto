@@ -1,8 +1,4 @@
-import time
 import unittest
-
-from appium.webdriver.common.appiumby import AppiumBy
-
 from common.AlertError import AlertError
 from common.baseDriver import android_driver
 from pageObject.normal_order_page import NormalOrderPage
@@ -112,51 +108,57 @@ class CaseNormalOrder(unittest.TestCase):
 
     def test_11_press_no_data_bid_and_price_should_fix_num(self):
         result = self.normal_order_page.press_bid_and_check_price()
-        self.assertEqual(result[0], "0")
-        self.assertEqual(result[0], result[1])
+        price_value = result[0]
+        order_details_price_value = result[1]
+        self.assertEqual(price_value, "0")
+        self.assertEqual(price_value, order_details_price_value)
 
     def test_12_press_no_data_offer_and_lots_should_fix_num(self):
         result = self.normal_order_page.press_offer_and_check_lots()
-        self.assertEqual(result[0], "1")
-        self.assertEqual(result[0], result[1])
+        lots_value = result[0]
+        order_details_lots_value = result[1]
+        self.assertEqual(lots_value, "1")
+        self.assertEqual(lots_value, order_details_lots_value)
 
     def test_13_press_no_data_offer_and_price_should_fix_num(self):
         result = self.normal_order_page.press_offer_and_check_price()
-        self.assertEqual(result[0], "0")
-        self.assertEqual(result[0], result[1])
+        price_value = result[0]
+        order_details_price_value = result[1]
+        self.assertEqual(price_value, "0")
+        self.assertEqual(price_value, order_details_price_value)
 
     def test_14_press_no_data_chg_and_lots_should_fix_num(self):
         result = self.normal_order_page.press_chg_and_check_lots()
-        self.assertEqual(result[0], "1")
-        self.assertEqual(result[0], result[1])
+        lots_value = result[0]
+        order_details_lots_value = result[1]
+        self.assertEqual(lots_value, "1")
+        self.assertEqual(lots_value, order_details_lots_value)
 
     def test_15_press_no_data_chg_and_price_should_fix_num(self):
         result = self.normal_order_page.press_chg_and_check_price()
-        self.assertEqual(result[0], "0")
-        self.assertEqual(result[0], result[1])
-
-    def test_16_no_change_and_order_should_success(self):
-        self.normal_order_page.drag_first_contract_to_second_location()
-        self.normal_order_page.press_bid()
-        time.sleep(1)
-        self.normal_order_page.press_confirm_button()
-        self.normal_order_page.press_confirm_button()
-        time.sleep(1)
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        price_value = result[0]
+        order_details_price_value = result[1]
+        self.assertEqual(price_value, "0")
+        self.assertEqual(price_value, order_details_price_value)
 
     def test_17_change_trade_account_should_success(self):
         result = self.normal_order_page.change_trade_account()
-        self.assertEqual(result[0], result[1])
-        self.assertEqual(result[1], result[2])
+        trade_account_value = result[0]
+        changed_trade_account_value = result[1]
+        order_details_account_value = result[2]
+        self.assertEqual(trade_account_value, changed_trade_account_value)
+        self.assertEqual(changed_trade_account_value, order_details_account_value)
 
     def test_18_change_side_should_success(self):
         result = self.normal_order_page.change_buy_side()
+        buy_checkbox = result[0]
+        sell_checkbox = result[1]
+        order_details_side_value = result[2]
         order_message = self.normal_order_page.alert_order_details_message()
         self.assertEqual(order_message, AlertError.alert_message_succeed)
-        self.assertEqual("false", result[0])
-        self.assertEqual("true", result[1])
-        self.assertEqual("卖", result[2])
+        self.assertEqual("false", buy_checkbox)
+        self.assertEqual("true", sell_checkbox)
+        self.assertEqual("卖", order_details_side_value)
 
     def test_19_clear_lots_and_order_should_fail(self):
         self.normal_order_page.clear_lots_and_order()
@@ -173,26 +175,34 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.is_toast_exist(AlertError.alert_message_price)
         self.assertEqual(True, result)
 
-    def test_22_input_illegal_price1_and_order_should_fail(self):
+    def test_22_input_illegal_price_and_order_should_fail(self):
         self.normal_order_page.input_illegal_price_and_order(".")
         result = self.normal_order_page.is_toast_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
-    def test_23_input_illegal_price2_and_order_should_fail(self):
+    def test_23_input_illegal_price_and_order_should_fail(self):
         self.normal_order_page.input_illegal_price_and_order("+")
         result = self.normal_order_page.is_toast_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
-    def test_24_input_illegal_price3_and_order_should_fail(self):
+    def test_24_input_illegal_price_and_order_should_fail(self):
         self.normal_order_page.input_illegal_price_and_order("-")
         result = self.normal_order_page.is_toast_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
-    def test_25_input_lots_and_price_and_order_should_success(self):
-        result = self.normal_order_page.input_lots_and_price_and_order(1, 80)
+    def test_25_input_illegal_price_tick_size_and_order_should_fail(self):
+        self.normal_order_page.input_illegal_price_and_order("0.0000001")
+        result = self.normal_order_page.is_toast_exist(AlertError.alert_illegal_price_tick_size)
+        self.assertEqual(True, result)
+
+    def test_25_input_legal_lots_and_price_and_order_should_success(self):
+        result = self.normal_order_page.input_lots_and_price_and_order(10, 80)
+        order_details_lots_value = result[0]
+        order_details_price_value = result[1]
         order_message = self.normal_order_page.alert_order_details_message()
         self.assertEqual(order_message, AlertError.alert_message_succeed)
-        self.assertEqual(result[1], result[2])
+        self.assertEqual(order_details_lots_value, "10")
+        self.assertEqual(order_details_price_value, "80")
 
     def test_26_changed_Market_type_and_price_should_Market(self):
         result = self.normal_order_page.change_type_market()
@@ -596,11 +606,14 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual(result, AlertError.alert_message_succeed)
 
     def test_84_edit_memo_and_order_should_success(self):
-        hint = self.normal_order_page.edit_memo_and_order()
+        result = self.normal_order_page.edit_memo_and_order()
+        hint = result[0]
+        memo_value = result[1]
+        order_details_memo_value = result[2]
         order_message = self.normal_order_page.alert_order_details_message()
         self.assertEqual(order_message, AlertError.alert_message_succeed)
-        self.assertEqual(hint[0], AlertError.hint_message)
-        self.assertEqual(hint[1], hint[2])
+        self.assertEqual(hint, AlertError.hint_message)
+        self.assertEqual(memo_value, order_details_memo_value)
 
 
 if __name__ == '__main__':

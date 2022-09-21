@@ -1,17 +1,12 @@
 from appium import webdriver
 from appium.options.common import AppiumOptions
 from appium.webdriver.common.appiumby import AppiumBy
-from appium.webdriver.common.touch_action import TouchAction
-import time
-
 from selenium.webdriver import ActionChains
-from selenium.webdriver.common import desired_capabilities
 from selenium.webdriver.common.actions import interaction
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
-
 from common.baseLog import logger
-
+import time
 
 def android_driver():
     desired_caps = {
@@ -29,7 +24,6 @@ def android_driver():
         caps = AppiumOptions().load_capabilities(desired_caps)
         driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', options=caps)
         time.sleep(2)
-
         actions = ActionChains(driver)
         actions.w3c_actions = ActionBuilder(driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
         actions.w3c_actions.pointer_action.move_to_location(688, 1872)

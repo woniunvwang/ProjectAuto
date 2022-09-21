@@ -1,9 +1,14 @@
 class AlertError:
     alert_illegal_price = "价格不合法"
+    alert_illegal_stop_price = "止损价不合法"
+    alert_illegal_price_tick_size = "价格必须是最小变动价格的整数倍"
+    alert_illegal_order_price_tick_size = "下单价必须是最小变动价格的整数倍"
+    alert_illegal_order_stop_price_tick_size = "止损价必须是最小变动价格的整数倍"
     alert_illegal_lots = "手数不合法"
     illegal_lots = "非法手数"
     alert_message_lots = "请输入手数"
     alert_message_price = "请输入价格"
+    alert_message_stop_price = "请输入止损价"
     alert_title_succeed = "下单请求发送成功!"
     alert_message_succeed = "下单成功"
     alert_message_StPx = "请输入StPx"
@@ -14,6 +19,7 @@ class AlertError:
     alert_message_buy_order_rejected = "New order rejected, Buy order stop price must be above last trade price"
     alert_message_sell_order_rejected = "New order rejected, Sell order stop price must be below last trade price"
     hint_message = "输入长度不能超过255个字符"
+
 
 
 

@@ -63,7 +63,6 @@ class LoginPage(BasePage):
         self.press_login_button()
         self.click_action(self.permission_allow)
         self.click_action(self.allow_button_id)
-        self.click_action(self.allow_button_id)
         self.press_login_button()
         self.click_action(self.agree_button)
         self.click_action(self.agree_button)
