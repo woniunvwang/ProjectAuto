@@ -10,7 +10,7 @@ class AlertError:
     alert_message_price = "请输入价格"
     alert_message_stop_price = "请输入止损价"
     alert_title_succeed = "下单请求发送成功!"
-    alert_message_succeed = "下单成功"
+    alert_message_succeed = "下单成功" or "订单详情"
     alert_message_StPx = "请输入StPx"
     alert_message_chunk_size = "请输入暴露数量"
     alert_message_min_quantity = "请输入最小数量"

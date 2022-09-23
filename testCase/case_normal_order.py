@@ -534,71 +534,121 @@ class CaseNormalOrder(unittest.TestCase):
 
     # 让有开平投保标志的合约TCU1907-SH排在第一位
     def test_70_offset_flag_auto_and_order_should_success(self):
-        offset_flag_default_value = self.normal_order_page.offset_flag_auto_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.offset_flag_auto_and_order()
+        offset_flag_default_value = result[0]
+        order_details_offset_flag_value = result[1]
+        order_message = self.normal_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
         self.assertEqual(offset_flag_default_value, '自动')
+        self.assertEqual(offset_flag_default_value, order_details_offset_flag_value)
 
     def test_71_offset_flag_open_and_order_should_success(self):
-        self.normal_order_page.offset_flag_open_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.offset_flag_open_and_order()
+        offset_flag_value = result[0]
+        order_details_offset_flag_value = result[1]
+        order_message = self.normal_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(offset_flag_value, '开仓')
+        self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
     def test_72_offset_flag_close_and_order_should_success(self):
-        self.normal_order_page.offset_flag_close_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.offset_flag_close_and_order()
+        offset_flag_value = result[0]
+        order_details_offset_flag_value = result[1]
+        order_message = self.normal_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(offset_flag_value, '平仓')
+        self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
     def test_73_offset_flag_closeYesterday_and_order_should_success(self):
-        self.normal_order_page.offset_flag_closeYesterday_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.offset_flag_closeYesterday_and_order()
+        offset_flag_value = result[0]
+        order_details_offset_flag_value = result[1]
+        order_message = self.normal_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(offset_flag_value, '平昨')
+        self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
     def test_74_offset_flag_closeToday_and_order_should_success(self):
-        self.normal_order_page.offset_flag_closeToday_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.offset_flag_closeToday_and_order()
+        offset_flag_value = result[0]
+        order_details_offset_flag_value = result[1]
+        order_message = self.normal_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(offset_flag_value, '平今')
+        self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
     def test_75_offset_flag_C_CT_O_and_order_should_success(self):
-        self.normal_order_page.offset_flag_C_CT_O_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.offset_flag_C_CT_O_and_order()
+        offset_flag_value = result[0]
+        order_details_offset_flag_value = result[1]
+        order_message = self.normal_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(offset_flag_value, '平仓-平今-开仓')
+        self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
     def test_76_offset_flag_CT_C_O_and_order_should_success(self):
-        self.normal_order_page.offset_flag_CT_C_O_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.offset_flag_CT_C_O_and_order()
+        offset_flag_value = result[0]
+        order_details_offset_flag_value = result[1]
+        order_message = self.normal_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(offset_flag_value, '平今-平仓-开仓')
+        self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
     def test_77_offset_flag_C_O_and_order_should_success(self):
-        self.normal_order_page.offset_flag_C_O_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.offset_flag_C_O_and_order()
+        offset_flag_value = result[0]
+        order_details_offset_flag_value = result[1]
+        order_message = self.normal_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(offset_flag_value, '平仓-开仓')
+        self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
     def test_78_offset_flag_CT_O_and_order_should_success(self):
-        self.normal_order_page.offset_flag_CT_O_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.offset_flag_CT_O_and_order()
+        offset_flag_value = result[0]
+        order_details_offset_flag_value = result[1]
+        order_message = self.normal_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(offset_flag_value, '平今-开仓')
+        self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
     def test_79_offset_flag_CY_O_and_order_should_success(self):
-        self.normal_order_page.offset_flag_CY_O_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.offset_flag_CY_O_and_order()
+        offset_flag_value = result[0]
+        order_details_offset_flag_value = result[1]
+        order_message = self.normal_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(offset_flag_value, '平昨-开仓')
+        self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
     def test_80_hedge_flag_speculation_and_order_should_success(self):
-        offset_flag_default_value = self.normal_order_page.hedge_flag_speculation_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
-        self.assertEqual(offset_flag_default_value, '投机')
+        result = self.normal_order_page.hedge_flag_speculation_and_order()
+        hedge_flag_default_value = result[0]
+        order_details_hedge_flag_value = result[1]
+        order_message = self.normal_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(hedge_flag_default_value, '投机')
+        self.assertEqual(hedge_flag_default_value, order_details_hedge_flag_value)
 
     def test_81_hedge_flag_arbitrage_and_order_should_success(self):
-        self.normal_order_page.hedge_flag_arbitrage_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.hedge_flag_arbitrage_and_order()
+        hedge_flag_value = result[0]
+        order_details_hedge_flag_value = result[1]
+        order_message = self.normal_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(hedge_flag_value, '套利')
+        self.assertEqual(hedge_flag_value, order_details_hedge_flag_value)
 
     def test_82_hedge_flag_hedge_and_order_should_success(self):
-        self.normal_order_page.hedge_flag_hedge_and_order()
-        result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        result = self.normal_order_page.hedge_flag_hedge_and_order()
+        hedge_flag_value = result[0]
+        order_details_hedge_flag_value = result[1]
+        order_message = self.normal_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(hedge_flag_value, '套保')
+        self.assertEqual(hedge_flag_value, order_details_hedge_flag_value)
 
     def test_83_change_T_switch_and_order_should_success(self):
         self.normal_order_page.change_T_switch_and_order()

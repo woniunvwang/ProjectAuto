@@ -67,20 +67,20 @@ class NormalOrderPage(BasePage):
     date_pick_ID = (AppiumBy.ID, "com.atp.newdemo2:id/date_pick_text_view")
     fak_min_quantity = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/min_quantity']/android.view.ViewGroup/android.widget.EditText")
     offset_flag_change_button = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/offset_flag_type']/android.widget.LinearLayout/android.widget.Button")
-    offset_flag_auto_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("自动" or "Auto")')
-    offset_flag_open_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("开仓" or "Open")')
-    offset_flag_close_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平仓" or "Close")')
-    offset_flag_closeYesterday_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平昨" or "CloseYesterday")')
-    offset_flag_closeToday_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平今" or "CloseToday")')
-    offset_flag_C_CT_O_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平仓-平今-开仓" or "C-CT-O")')
-    offset_flag_CT_C_O_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平今-平仓-开仓" or "CT-C-O")')
-    offset_flag_C_O_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平仓-开仓" or "C-O")')
-    offset_flag_CT_O_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平今-开仓" or "CT-O")')
-    offset_flag_CY_O_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平昨-开仓" or "CY-O")')
-    hedge_flag_change_button = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/hedge_flag_type']/android.widget.LinearLayout/android.widget.Button")
-    hedge_flag_speculation_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("投机" or "Speculation")')
-    hedge_flag_arbitrage_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("套利" or "Arbitrage")')
-    hedge_flag_hedge_xpath = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("套保" or "Hedge")')
+    offset_flag_auto_xpath = (AppiumBy.XPATH, "//*[@text='自动' or @text='Auto']/..")
+    offset_flag_open_xpath = (AppiumBy.XPATH, "//*[@text='开仓' or @text='Open']/..")
+    offset_flag_close_xpath = (AppiumBy.XPATH, "//*[@text='平仓' or @text='Close']/..")
+    offset_flag_closeYesterday_xpath = (AppiumBy.XPATH, "//*[@text='平昨' or @text='CloseYesterday']/..")
+    offset_flag_closeToday_xpath = (AppiumBy.XPATH, "//*[@text='平今' or @text='CloseToday']/..")
+    offset_flag_C_CT_O_xpath = (AppiumBy.XPATH, "//*[@text='平仓-平今-开仓' or @text='C-CT-O']/..")
+    offset_flag_CT_C_O_xpath = (AppiumBy.XPATH, "//*[@text='平今-平仓-开仓' or @text='CT-C-O']/..")
+    offset_flag_C_O_xpath = (AppiumBy.XPATH, "//*[@text='平仓-开仓' or @text='C-O']/..")
+    offset_flag_CT_O_xpath = (AppiumBy.XPATH, "//*[@text='平今-开仓' or @text='CT-O']/..")
+    offset_flag_CY_O_xpath = (AppiumBy.XPATH, "//*[@text='平昨-开仓' or @text='CY-O']/..")
+    hedge_flag_change_button = (AppiumBy.ID, "com.atp.newdemo2:id/hedge_flag")
+    hedge_flag_speculation_xpath = (AppiumBy.XPATH, "//*[@text='投机' or @text='Speculation']/..")
+    hedge_flag_arbitrage_xpath = (AppiumBy.XPATH, "//*[@text='套利' or @text='Arbitrage']/..")
+    hedge_flag_hedge_xpath = (AppiumBy.XPATH, "//*[@text='套保' or @text='Hedge']/..")
 
     order_details_title = (AppiumBy.ID, 'com.atp.newdemo2:id/title')  # 订单详情
     order_details_side = (AppiumBy.XPATH, "//*[@text='方向' or @text='Side']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
@@ -682,6 +682,10 @@ class NormalOrderPage(BasePage):
         self.click_action(self.button_close)
         return alert_title, alert_contract_code, alert_order_id
 
+    def alert_title_send_order_successfully(self):
+        alert_title = self.get_visible_element(self.alert_title).text
+        self.click_action(self.button_close)
+        return alert_title
 
     def change_tif_gtc(self):
         self.press_offer()
@@ -757,115 +761,150 @@ class NormalOrderPage(BasePage):
         offset_flag_default_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
-        return offset_flag_default_value
+        return offset_flag_default_value, order_details_offset_flag_value
 
     def offset_flag_open_and_order(self):
         self.press_offer()
         self.click_action(self.offset_flag_change_button)
         self.click_action(self.offset_flag_open_xpath)
         self.press_confirm_button()
+        offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
+        return offset_flag_value, order_details_offset_flag_value
 
     def offset_flag_close_and_order(self):
         self.press_offer()
         self.click_action(self.offset_flag_change_button)
         self.click_action(self.offset_flag_close_xpath)
         self.press_confirm_button()
+        offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
+        return offset_flag_value, order_details_offset_flag_value
 
     def offset_flag_closeYesterday_and_order(self):
         self.press_offer()
         self.click_action(self.offset_flag_change_button)
         self.click_action(self.offset_flag_closeYesterday_xpath)
         self.press_confirm_button()
+        offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
+        return offset_flag_value, order_details_offset_flag_value
 
     def offset_flag_closeToday_and_order(self):
         self.press_offer()
         self.click_action(self.offset_flag_change_button)
         self.click_action(self.offset_flag_closeToday_xpath)
         self.press_confirm_button()
+        offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
+        return offset_flag_value, order_details_offset_flag_value
 
     def offset_flag_C_CT_O_and_order(self):
         self.press_offer()
         self.click_action(self.offset_flag_change_button)
         self.click_action(self.offset_flag_C_CT_O_xpath)
         self.press_confirm_button()
+        offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
+        return offset_flag_value, order_details_offset_flag_value
 
     def offset_flag_CT_C_O_and_order(self):
         self.press_offer()
         self.click_action(self.offset_flag_change_button)
         self.click_action(self.offset_flag_CT_C_O_xpath)
         self.press_confirm_button()
+        offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
+        return offset_flag_value, order_details_offset_flag_value
 
     def offset_flag_C_O_and_order(self):
         self.press_offer()
         self.click_action(self.offset_flag_change_button)
         self.click_action(self.offset_flag_C_O_xpath)
         self.press_confirm_button()
+        offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
+        return offset_flag_value, order_details_offset_flag_value
 
     def offset_flag_CT_O_and_order(self):
         self.press_offer()
         self.click_action(self.offset_flag_change_button)
         self.click_action(self.offset_flag_CT_O_xpath)
         self.press_confirm_button()
+        offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
+        return offset_flag_value, order_details_offset_flag_value
 
     def offset_flag_CY_O_and_order(self):
         self.press_offer()
         self.click_action(self.offset_flag_change_button)
         self.click_action(self.offset_flag_CY_O_xpath)
         self.press_confirm_button()
+        offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
+        return offset_flag_value, order_details_offset_flag_value
 
     def hedge_flag_speculation_and_order(self):
         self.press_offer()
         hedge_flag_default_value = self.get_visible_element(self.hedge_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
+        order_details_hedge_flag_value = self.order_details_hedge_flag_value()
         self.press_confirm_button()
-        return hedge_flag_default_value
+        return hedge_flag_default_value, order_details_hedge_flag_value
 
     def hedge_flag_arbitrage_and_order(self):
         self.press_offer()
         self.click_action(self.hedge_flag_change_button)
         self.click_action(self.hedge_flag_arbitrage_xpath)
         self.press_confirm_button()
+        hedge_flag_value = self.get_visible_element(self.hedge_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
+        order_details_hedge_flag_value = self.order_details_hedge_flag_value()
         self.press_confirm_button()
+        return hedge_flag_value, order_details_hedge_flag_value
 
     def hedge_flag_hedge_and_order(self):
         self.press_offer()
         self.click_action(self.hedge_flag_change_button)
         self.click_action(self.hedge_flag_hedge_xpath)
         self.press_confirm_button()
+        hedge_flag_value = self.get_visible_element(self.hedge_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
+        order_details_hedge_flag_value = self.order_details_hedge_flag_value()
         self.press_confirm_button()
+        return hedge_flag_value, order_details_hedge_flag_value
 
     def change_T_switch_and_order(self):
         self.press_offer()
