@@ -42,7 +42,7 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual(bid_price_value, price_value)
         self.assertEqual(price_value, order_details_price_value)
 
-    def test_01_press_offer_and_side_should_sell(self):
+    def test_04_press_offer_and_side_should_sell(self):
         result = self.normal_order_page.press_offer_and_order()
         buy_checkbox = result[0]
         sell_checkbox = result[1]
@@ -141,7 +141,7 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual(price_value, "0")
         self.assertEqual(price_value, order_details_price_value)
 
-    def test_17_change_trade_account_should_success(self):
+    def test_16_change_trade_account_should_success(self):
         result = self.normal_order_page.change_trade_account()
         trade_account_value = result[0]
         changed_trade_account_value = result[1]
@@ -149,7 +149,7 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual(trade_account_value, changed_trade_account_value)
         self.assertEqual(changed_trade_account_value, order_details_account_value)
 
-    def test_18_change_side_should_success(self):
+    def test_17_change_side_should_success(self):
         result = self.normal_order_page.change_buy_side()
         buy_checkbox = result[0]
         sell_checkbox = result[1]
@@ -160,37 +160,37 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual("true", sell_checkbox)
         self.assertEqual("卖", order_details_side_value)
 
-    def test_19_clear_lots_and_order_should_fail(self):
+    def test_18_clear_lots_and_order_should_fail(self):
         self.normal_order_page.clear_lots_and_order()
         result = self.normal_order_page.is_toast_exist(AlertError.alert_message_lots)
         self.assertEqual(True, result)
 
-    def test_20_input_illegal_lots_and_order_should_fail(self):
+    def test_19_input_illegal_lots_and_order_should_fail(self):
         self.normal_order_page.input_illegal_lots_and_order("1.")
         result = self.normal_order_page.alert_illegal_lots_title()
         self.assertEqual(result, AlertError.illegal_lots)
 
-    def test_21_clear_price_and_order_should_fail(self):
+    def test_20_clear_price_and_order_should_fail(self):
         self.normal_order_page.clear_price_and_order()
         result = self.normal_order_page.is_toast_exist(AlertError.alert_message_price)
         self.assertEqual(True, result)
 
-    def test_22_input_illegal_price_and_order_should_fail(self):
+    def test_21_input_illegal_price_and_order_should_fail(self):
         self.normal_order_page.input_illegal_price_and_order(".")
         result = self.normal_order_page.is_toast_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
-    def test_23_input_illegal_price_and_order_should_fail(self):
+    def test_22_input_illegal_price_and_order_should_fail(self):
         self.normal_order_page.input_illegal_price_and_order("+")
         result = self.normal_order_page.is_toast_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
-    def test_24_input_illegal_price_and_order_should_fail(self):
+    def test_23_input_illegal_price_and_order_should_fail(self):
         self.normal_order_page.input_illegal_price_and_order("-")
         result = self.normal_order_page.is_toast_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
-    def test_25_input_illegal_price_tick_size_and_order_should_fail(self):
+    def test_24_input_illegal_price_tick_size_and_order_should_fail(self):
         self.normal_order_page.input_illegal_price_and_order("0.0000001")
         result = self.normal_order_page.is_toast_exist(AlertError.alert_illegal_price_tick_size)
         self.assertEqual(True, result)
@@ -244,7 +244,7 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual(bid_price_value, price_value)
         self.assertEqual("LIM", type_value)
 
-    def test_30_buy_side_and_Market_Limit_type_changed_LIM_type_and_price_should_offer_value(self):
+    def test_31_buy_side_and_Market_Limit_type_changed_LIM_type_and_price_should_offer_value(self):
         result = self.normal_order_page.market_type_changed_lim_type()
         bid_price_value = result[0]
         price_value = result[1]
@@ -252,14 +252,14 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual(bid_price_value, price_value)
         self.assertEqual("LIM", type_value)
 
-    def test_31_changed_stp_type_and_price_should_Market(self):
+    def test_32_changed_stp_type_and_price_should_Market(self):
         result = self.normal_order_page.change_type_stp()
         type_value = result[4]
         price_value = result[3]
         self.assertEqual(price_value, "Market")
         self.assertEqual(type_value, "STP")
 
-    def test_32_changed_stp_type_and_buy_side_and_StPx_should_offer_value(self):
+    def test_33_changed_stp_type_and_buy_side_and_StPx_should_offer_value(self):
         result = self.normal_order_page.change_type_stp()
         offer_price_value = result[0]
         StPx_title = result[1]
@@ -267,7 +267,7 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual("StPx", StPx_title)
         self.assertEqual(offer_price_value, input_StPx)
 
-    def test_33_stp_type_clear_StPx_and_order_should_fail(self):
+    def test_34_stp_type_clear_StPx_and_order_should_fail(self):
         self.normal_order_page.stp_clear_StPx_and_order()
         result = self.normal_order_page.is_toast_exist(AlertError.alert_message_StPx)
         self.assertEqual(True, result)

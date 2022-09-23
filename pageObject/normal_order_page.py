@@ -113,7 +113,7 @@ class NormalOrderPage(BasePage):
     second_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[2]/com.atp.newdemo2:id/resort_button")
     # 自动化测试合约的合约管理中第三个合约的位置 TCU1906-SH（没有数据时手数价格的填充时的测试合约，买卖盘及涨跌幅没有数据）
     third_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[3]/com.atp.newdemo2:id/resort_button")
-    illegal_lots_title_path = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[2]")
+    illegal_lots_xpath = (AppiumBy.XPATH, "//*[@text='非法手数']")
 
     T_switch_ID = (AppiumBy.ID, "com.atp.newdemo2:id/one_plus_switch")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
@@ -143,7 +143,7 @@ class NormalOrderPage(BasePage):
         return result
 
     def alert_illegal_lots_title(self):
-        return self.get_visible_element(self.illegal_lots_title_path).text
+        return self.get_visible_element(self.illegal_lots_xpath).text
 
     def order_details_side_value(self):
         order_details_side_value = self.get_visible_element(self.order_details_side).text
