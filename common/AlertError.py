@@ -1,6 +1,7 @@
 class AlertError:
     alert_illegal_price = "价格不合法"
     alert_illegal_gap = "Gap不合法"
+    alert_illegal_step = "Step不合法"
     alert_illegal_stop_price = "止损价不合法"
     alert_illegal_price_tick_size = "价格必须是最小变动价格的整数倍"
     alert_illegal_input_limit = "最多s输入8位整数和8位小数"
