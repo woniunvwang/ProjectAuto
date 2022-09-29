@@ -1,3 +1,4 @@
+import time
 import unittest
 from common.AlertError import AlertError
 from common.baseDriver import android_driver
@@ -99,7 +100,12 @@ class CaseNormalOrder(unittest.TestCase):
     # 买卖盘及涨跌幅没有数据时手数和价格按照"1"，"0"填充。
     def test_10_press_no_data_bid_and_lots_should_fix_num(self):
         # 合约T2209-CF在第二个的时候执行代码
-        # self.normal_order_page.drag_first_contract_to_second_location()
+        self.normal_order_page.no_data_contract_to_top()
+        time.sleep(10)
+        self.normal_order_page.main_contract_to_top()
+        time.sleep(10)
+        self.normal_order_page.have_data_contract_to_top()
+
         result = self.normal_order_page.press_bid_and_check_lots()
         lots_value = result[0]
         order_details_lots_value = result[1]

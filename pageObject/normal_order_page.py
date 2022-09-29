@@ -108,13 +108,12 @@ class NormalOrderPage(BasePage):
 
     contract_management_ID = (AppiumBy.ID, "com.atp.newdemo2:id/manage_contract")
     # 自动化测试合约的合约管理中第一个合约的位置 TCU1907-SH （主测试合约，买卖盘有涨跌幅没有有数据）
-    first_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[1]/com.atp.newdemo2:id/resort_button")
+    main_test_contract_drag_path = ("//*[@text='GC2212-CME']/../android.widget.ImageView")
     # 自动化测试合约的合约管理中第二个合约的位置 BRN-2210-ICE（STL和STP类型下单测试合约，买卖盘及涨跌幅都有数据）
-    second_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[2]/com.atp.newdemo2:id/resort_button")
+    have_data_contract_drag_path = ("//*[@text='TCU1907-SH']/../android.widget.ImageView")
     # 自动化测试合约的合约管理中第三个合约的位置 TCU1906-SH（没有数据时手数价格的填充时的测试合约，买卖盘及涨跌幅没有数据）
-    third_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[3]/com.atp.newdemo2:id/resort_button")
+    no_data_contract_drag_path = ("//*[@text='T2209-CF']/../android.widget.ImageView")
     illegal_lots_xpath = (AppiumBy.XPATH, "//*[@text='非法手数']")
-
     T_switch_ID = (AppiumBy.ID, "com.atp.newdemo2:id/one_plus_switch")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
@@ -364,20 +363,27 @@ class NormalOrderPage(BasePage):
         else:
             return float(last_lots), float(lots_value), order_details_lots_value
 
-    def drag_first_contract_to_second_location(self):
+    def no_data_contract_to_top(self):
         self.click_action(self.contract_management_ID)
         time.sleep(1)
-        x = self.driver.find_element(AppiumBy.XPATH, self.third_contract_drag_path)
-        y = self.driver.find_element(AppiumBy.XPATH, self.first_contract_drag_path)
-        ActionChains(self.driver).drag_and_drop(y, x).pause(5).perform()
+        source = self.driver.find_element(by=AppiumBy.XPATH, value=self.no_data_contract_drag_path)
+        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, 220).pause(5).perform()
         self.click_action(self.back_button)
 
-    def drag_third_contract_to_second_location(self):
+    def main_contract_to_top(self):
         self.click_action(self.contract_management_ID)
-        x = self.driver.find_element(AppiumBy.XPATH, self.third_contract_drag_path)
-        y = self.driver.find_element(AppiumBy.XPATH, self.first_contract_drag_path)
-        ActionChains(self.driver).drag_and_drop(x, y).pause(5).perform()
+        time.sleep(1)
+        source = self.driver.find_element(by=AppiumBy.XPATH, value=self.main_test_contract_drag_path)
+        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, 220).pause(5).perform()
         self.click_action(self.back_button)
+
+    def have_data_contract_to_top(self):
+        self.click_action(self.contract_management_ID)
+        source = self.driver.find_element(by=AppiumBy.XPATH, value=self.have_data_contract_drag_path)
+        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, 350).pause(5).perform()
+        self.click_action(self.back_button)
+
+
 
     def change_type_market(self):
         self.press_offer()

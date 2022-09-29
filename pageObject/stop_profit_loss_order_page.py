@@ -20,23 +20,22 @@ class StopProfitLossOrderPage(BasePage):
     # 合约组 "自动化测试合约"的path
     contract_group_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("自动化测试合约")')
     stop_profit_loss_order_path = (AppiumBy.XPATH, "//android.widget.LinearLayout[@content-desc='止盈止损单']/android.widget.TextView")
-    # 页面核心元素
     page_title = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget"
                                   ".FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget"
                                   ".LinearLayout/android.view.ViewGroup["
-                                  "1]/android.view.ViewGroup/android.widget.TextView")  # 新单
+                                  "1]/android.view.ViewGroup/android.widget.TextView")
     contract_name = (AppiumBy.ID, 'com.atp.newdemo2:id/contract_name_or_code')
-    K_line = (AppiumBy.ID, 'com.atp.newdemo2:id/k_line_thumbnail')  # enabled=true
+    K_line = (AppiumBy.ID, 'com.atp.newdemo2:id/k_line_thumbnail')
     # 合约组中第一个合约的买卖盘及涨跌幅path
-
     Chg_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[4]/android.widget.TextView[1]")
-
     bid_price_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[1]/android.widget.TextView[1]")
     bid_lots_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[1]/android.widget.TextView[2]")
     offer_price_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[2]/android.widget.TextView[1]")
     offer_lots_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[2]/android.widget.TextView[2]")
-
     trade_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/account")
+    stop_profit_mode_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/stop_profit_mode']/android.widget.LinearLayout/android.widget.Button")
+    By_open_position_average_price_xpath = (AppiumBy.XPATH, "//*[@text='按开仓均价止盈止损' or @text='By open position average price']/..")
+    By_custom_price_xpath = (AppiumBy.XPATH, "//*[@text='按自定义价止盈止损(不开仓)' or @text='By custom price(not open order)']/..")
     # 选择账户中的第二个账户
     trade_account_text_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/recycler_view_account']/android.widget.LinearLayout[2]/android.widget.TextView")
     change_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/action_change")
@@ -45,6 +44,15 @@ class StopProfitLossOrderPage(BasePage):
     buy_side_id = (AppiumBy.ID, "com.atp.newdemo2:id/order_direction_buy")
     lots_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/lots']/android.view.ViewGroup/android.widget.EditText")
     price_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price']/android.view.ViewGroup/android.widget.EditText")
+    stop_loss_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/stop_loss']/android.view.ViewGroup/android.widget.EditText")
+    stop_profit_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/stop_profit']/android.view.ViewGroup/android.widget.EditText")
+    order_type_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/order_type']/android.view.ViewGroup/android.widget.EditText")
+    select_type_market_xpath = (AppiumBy.XPATH, "//*[@text='Market'/..")
+    select_type_lim_xpath = (AppiumBy.XPATH, "//*[@text='LIM'/..")
+    support_market_xpath = (AppiumBy.ID,  "com.atp.newdemo2:id/support_market")
+    close_px_diff_price_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/close_px_diff_price']/android.view.ViewGroup/android.widget.EditText")
+    open_px_diff_price_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/open_px_diff_price']/android.view.ViewGroup/android.widget.EditText")
+    times_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/times']/android.view.ViewGroup/android.widget.EditText")
     offset_flag_change_button = (AppiumBy.ID, "com.atp.newdemo2:id/offset_flag")
     offset_flag_auto_xpath = (AppiumBy.XPATH, "//*[@text='自动' or @text='Auto']/..")
     offset_flag_open_xpath = (AppiumBy.XPATH, "//*[@text='开仓' or @text='Open']/..")
@@ -61,8 +69,15 @@ class StopProfitLossOrderPage(BasePage):
     order_details_side = (AppiumBy.XPATH, "//*[@text='方向' or @text='Side']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_contract = (AppiumBy.XPATH, "//*[@text='合约' or @text='Contract']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_account = (AppiumBy.XPATH, "//*[@text='交易账户' or @text='Trade Account']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_mode = (AppiumBy.XPATH, "//*[@text='模式' or @text='Mode']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_lots = (AppiumBy.XPATH, "//*[@text='手数' or @text='Lots']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_price = (AppiumBy.XPATH, "//*[@text='价格' or @text='Price']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_price = (AppiumBy.XPATH, "//*[@text='下单价' or @text='Order Price']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_stop_loss = (AppiumBy.XPATH, "//*[@text='止损' or @text='Stop Loss']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_stop_profit = (AppiumBy.XPATH, "//*[@text='止盈' or @text='Stop Profit']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_type = (AppiumBy.XPATH, "//*[@text='类型' or @text='Type']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_close_px_diff_price = (AppiumBy.XPATH, "//*[@text='平仓价差' or @text='Close Pxdiff']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_open_px_diff_price = (AppiumBy.XPATH, "//*[@text='开仓价差' or @text='Open_Pxdiff']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_times = (AppiumBy.XPATH, "//*[@text='数量' or @text='Times']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_offset_flag = (AppiumBy.XPATH, "//*[@text='开平标志' or @text='Offset Flag']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_hedge_flag = (AppiumBy.XPATH, "//*[@text='投保标志' or @text='Hedge Flag']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_t = (AppiumBy.XPATH, "//*[@text='T+1']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
@@ -80,9 +95,7 @@ class StopProfitLossOrderPage(BasePage):
     second_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[2]/com.atp.newdemo2:id/resort_button")
     # 自动化测试合约的合约管理中第三个合约的位置 TCU1906-SH（没有数据时手数价格的填充时的测试合约，买卖盘及涨跌幅没有数据）
     third_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[3]/com.atp.newdemo2:id/resort_button")
-    illegal_lots_xpath = (AppiumBy.XPATH, "//*[@text='非法手数'")
-
-    T_switch_ID = (AppiumBy.ID, "com.atp.newdemo2:id/one_plus_switch")
+    illegal_lots_xpath = (AppiumBy.XPATH, "//*[@text='非法手数']")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
 
@@ -139,10 +152,6 @@ class StopProfitLossOrderPage(BasePage):
     def order_details_hedge_flag_value(self):
         order_details_hedge_flag_value = self.get_visible_element(self.order_details_hedge_flag).text
         return order_details_hedge_flag_value
-
-    def order_details_T_value(self):
-        order_details_T_value = self.get_visible_element(self.order_details_t).text
-        return order_details_T_value
 
     def order_details_memo_value(self):
         order_details_memo_value = self.get_visible_element(self.order_details_memo).text
@@ -202,6 +211,9 @@ class StopProfitLossOrderPage(BasePage):
         sell_value = self.get_visible_element(self.sell_side_id)
         buy_checkbox = buy_value.get_attribute("checked")
         sell_checkbox = sell_value.get_attribute("checked")
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_side_value = self.get_visible_element(self.order_details_side).text
         self.press_confirm_button()
@@ -213,6 +225,9 @@ class StopProfitLossOrderPage(BasePage):
         sell_value = self.get_visible_element(self.sell_side_id)
         buy_checkbox = buy_value.get_attribute("checked")
         sell_checkbox = sell_value.get_attribute("checked")
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_side_value = self.get_visible_element(self.order_details_side).text
         self.press_confirm_button()
@@ -225,6 +240,9 @@ class StopProfitLossOrderPage(BasePage):
         sell_value = self.get_visible_element(self.sell_side_id)
         buy_checkbox = buy_value.get_attribute("checked")
         sell_checkbox = sell_value.get_attribute("checked")
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_side_value = self.get_visible_element(self.order_details_side).text
         self.press_confirm_button()
@@ -234,6 +252,9 @@ class StopProfitLossOrderPage(BasePage):
         bid_lots_value = self.get_visible_element(self.bid_lots_path).text
         self.press_bid()
         lots_value = self.get_visible_element(self.lots_xpath).text
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_lots_value = self.order_details_lots_value()
         if bid_lots_value == "-":
@@ -246,6 +267,8 @@ class StopProfitLossOrderPage(BasePage):
         self.press_bid()
         price_value = self.get_visible_element(self.price_xpath).text
         self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_price_value = self.order_details_price_value()
         if bid_price_value == "-":
@@ -257,6 +280,9 @@ class StopProfitLossOrderPage(BasePage):
         offer_lots_value = self.get_visible_element(self.offer_lots_path).text
         self.press_offer()
         lots_value = self.get_visible_element(self.lots_xpath).text
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_lots_value = self.order_details_lots_value()
         if offer_lots_value == "-":
@@ -269,6 +295,8 @@ class StopProfitLossOrderPage(BasePage):
         self.press_offer()
         price_value = self.get_visible_element(self.price_xpath).text
         self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_price_value = self.order_details_price_value()
         if offer_price_value == "-":
@@ -287,6 +315,9 @@ class StopProfitLossOrderPage(BasePage):
         sell_value = self.get_visible_element(self.sell_side_id)
         buy_checkbox = buy_value.get_attribute("checked")
         sell_checkbox = sell_value.get_attribute("checked")
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_side_value = self.get_visible_element(self.order_details_side).text
         self.press_confirm_button()
@@ -300,6 +331,9 @@ class StopProfitLossOrderPage(BasePage):
         self.click_action(self.Chg_path)
         self.click_action(self.stop_profit_loss_order_path)
         price_value = self.get_visible_element(self.price_xpath).text
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_price_value = self.order_details_price_value()
         if chg_value == "-":
@@ -315,6 +349,9 @@ class StopProfitLossOrderPage(BasePage):
         self.click_action(self.Chg_path)
         self.click_action(self.stop_profit_loss_order_path)
         lots_value = self.get_visible_element(self.lots_xpath).text
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_lots_value = self.order_details_lots_value()
         if Chg_value == "-":
@@ -340,11 +377,17 @@ class StopProfitLossOrderPage(BasePage):
     def clear_lots_and_order(self):
         self.press_bid()
         self.clear_action(self.lots_xpath)
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
 
     def clear_price_and_order(self):
         self.press_offer()
         self.clear_action(self.price_xpath)
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
 
     def input_illegal_lots_and_order(self, lots):
@@ -352,12 +395,17 @@ class StopProfitLossOrderPage(BasePage):
         self.clear_action(self.lots_xpath)
         self.input_action(self.lots_xpath, lots)
         self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
 
     def input_illegal_price_and_order(self, price):
         self.press_offer()
         self.clear_action(self.price_xpath)
         self.input_action(self.price_xpath, price)
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
 
     def input_lots_and_price_and_order(self, lots, price):
@@ -366,6 +414,9 @@ class StopProfitLossOrderPage(BasePage):
         self.input_action(self.lots_xpath, lots)
         self.clear_action(self.price_xpath)
         self.input_action(self.price_xpath, price)
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_lots_value = self.order_details_lots_value()
         order_details_price_value = self.order_details_price_value()
@@ -381,6 +432,8 @@ class StopProfitLossOrderPage(BasePage):
         self.press_offer()
         offset_flag_default_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
@@ -393,6 +446,8 @@ class StopProfitLossOrderPage(BasePage):
         self.press_confirm_button()
         offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
@@ -405,6 +460,8 @@ class StopProfitLossOrderPage(BasePage):
         self.press_confirm_button()
         offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
@@ -417,6 +474,8 @@ class StopProfitLossOrderPage(BasePage):
         self.press_confirm_button()
         offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
@@ -429,6 +488,8 @@ class StopProfitLossOrderPage(BasePage):
         self.press_confirm_button()
         offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
@@ -441,6 +502,8 @@ class StopProfitLossOrderPage(BasePage):
         self.press_confirm_button()
         offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
@@ -453,6 +516,8 @@ class StopProfitLossOrderPage(BasePage):
         self.press_confirm_button()
         offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
@@ -462,6 +527,8 @@ class StopProfitLossOrderPage(BasePage):
         self.press_offer()
         hedge_flag_default_value = self.get_visible_element(self.hedge_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_hedge_flag_value = self.order_details_hedge_flag_value()
         self.press_confirm_button()
@@ -474,6 +541,8 @@ class StopProfitLossOrderPage(BasePage):
         self.press_confirm_button()
         hedge_flag_value = self.get_visible_element(self.hedge_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_hedge_flag_value = self.order_details_hedge_flag_value()
         self.press_confirm_button()
@@ -486,6 +555,8 @@ class StopProfitLossOrderPage(BasePage):
         self.press_confirm_button()
         hedge_flag_value = self.get_visible_element(self.hedge_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         self.press_confirm_button()
         order_details_hedge_flag_value = self.order_details_hedge_flag_value()
         self.press_confirm_button()
@@ -509,6 +580,8 @@ class StopProfitLossOrderPage(BasePage):
         input_value = ''.join([random.choice(string.ascii_letters+string.digits) for _ in range(256)])
         self.input_action(self.edit_memo_ID, input_value)
         self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
         hint = self.get_visible_element(self.error_hint_ID).text
         memo_value = self.get_visible_element(self.edit_memo_ID).text
         self.press_confirm_button()
