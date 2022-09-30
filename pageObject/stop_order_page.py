@@ -1,8 +1,6 @@
 # encoding = 'utf-8'
 import random
 import string
-
-import button as button
 from appium.webdriver.common.appiumby import AppiumBy
 import time
 from selenium.webdriver import ActionChains
@@ -19,27 +17,20 @@ class StopOrderPage(BasePage):
     allow_button_id = (AppiumBy.ID, "com.android.permissioncontroller:id/permission_allow_button")
     agree_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/agree")
     cancel_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/cancel")
-    # 合约组 "自动化测试合约"的path
-    contract_group_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("自动化测试合约")')
+    contract_group_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("自动化测试合约")')     # 合约组 "自动化测试合约"的path
     stop_order_path = (AppiumBy.XPATH, "//android.widget.LinearLayout[@content-desc='Stop单']/android.widget.TextView")
-    # 页面核心元素
     page_title = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget"
                                   ".FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget"
                                   ".LinearLayout/android.view.ViewGroup["
                                   "1]/android.view.ViewGroup/android.widget.TextView")
     contract_name = (AppiumBy.ID, 'com.atp.newdemo2:id/contract_name_or_code')
     K_line = (AppiumBy.ID, 'com.atp.newdemo2:id/k_line_thumbnail')
-    # 合约组中第一个合约的买卖盘及涨跌幅path
-
     Chg_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[4]/android.widget.TextView[1]")
-
     bid_price_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[1]/android.widget.TextView[1]")
     bid_lots_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[1]/android.widget.TextView[2]")
     offer_price_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[2]/android.widget.TextView[1]")
     offer_lots_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[2]/android.widget.TextView[2]")
-
     trade_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/account")
-    # 选择账户中的第二个账户
     trade_account_text_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/recycler_view_account']/android.widget.LinearLayout[2]/android.widget.TextView")
     change_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/action_change")
     back_button = (AppiumBy.ACCESSIBILITY_ID, "转到上一层级")
@@ -120,9 +111,6 @@ class StopOrderPage(BasePage):
     def alert_order_details_message(self):
         result = self.get_visible_element(self.alert_message_ID).text
         return result
-
-    def alert_illegal_lots_title(self):
-        return self.get_visible_element(self.illegal_lots_xpath).text
 
     def order_details_side_value(self):
         order_details_side_value = self.get_visible_element(self.order_details_side).text
@@ -644,9 +632,6 @@ class StopOrderPage(BasePage):
         order_details_memo_value = self.order_details_memo_value()
         self.press_confirm_button()
         return hint, memo_value, order_details_memo_value
-
-
-
 
 
 if __name__ == '__main__':

@@ -1,8 +1,6 @@
 # encoding = 'utf-8'
 import random
 import string
-
-import button as button
 from appium.webdriver.common.appiumby import AppiumBy
 import time
 from selenium.webdriver import ActionChains
@@ -22,22 +20,18 @@ class GainBestOrderPage(BasePage):
     # 合约组 "自动化测试合约"的path
     contract_group_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("自动化测试合约")')
     gain_best_order_path = (AppiumBy.XPATH, "//android.widget.LinearLayout[@content-desc='Gain best单']/android.widget.TextView")
-    # 页面核心元素
     page_title = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget"
                                   ".FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget"
                                   ".LinearLayout/android.view.ViewGroup["
-                                  "1]/android.view.ViewGroup/android.widget.TextView")  # 新单
+                                  "1]/android.view.ViewGroup/android.widget.TextView")
     contract_name = (AppiumBy.ID, 'com.atp.newdemo2:id/contract_name_or_code')
-    K_line = (AppiumBy.ID, 'com.atp.newdemo2:id/k_line_thumbnail')  # enabled=true
-    # 合约组中第一个合约的买卖盘及涨跌幅path
-
+    K_line = (AppiumBy.ID, 'com.atp.newdemo2:id/k_line_thumbnail')
     Chg_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[4]/android.widget.TextView[1]")
     bid_price_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[1]/android.widget.TextView[1]")
     bid_lots_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[1]/android.widget.TextView[2]")
     offer_price_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[2]/android.widget.TextView[1]")
     offer_lots_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[2]/android.widget.TextView[2]")
     trade_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/account")
-    # 选择账户中的第二个账户
     trade_account_text_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/recycler_view_account']/android.widget.LinearLayout[2]/android.widget.TextView")
     change_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/action_change")
     back_button = (AppiumBy.ACCESSIBILITY_ID, "转到上一层级")
@@ -55,7 +49,7 @@ class GainBestOrderPage(BasePage):
     offset_flag_C_O_xpath = (AppiumBy.XPATH, "//*[@text='平仓-开仓' or @text='C-O']/..")
     offset_flag_CT_O_xpath = (AppiumBy.XPATH, "//*[@text='平今-开仓' or @text='CT-O']/..")
     offset_flag_CY_O_xpath = (AppiumBy.XPATH, "//*[@text='平昨-开仓' or @text='CY-O']/..")
-    hedge_flag_change_button = (AppiumBy.ID, "com.atp.newdemo2:id/hedge_flag")
+    hedge_flag_change_button = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/hedge_flag_type']/android.widget.LinearLayout/android.widget.Button")
     hedge_flag_speculation_xpath = (AppiumBy.XPATH, "//*[@text='投机' or @text='Speculation']/..")
     hedge_flag_arbitrage_xpath = (AppiumBy.XPATH, "//*[@text='套利' or @text='Arbitrage']/..")
     hedge_flag_hedge_xpath = (AppiumBy.XPATH, "//*[@text='套保' or @text='Hedge']/..")
@@ -89,7 +83,6 @@ class GainBestOrderPage(BasePage):
     permission_contract_drag_path = ("//*[@text='TCU1907-SH']/../android.widget.ImageView")
     # 无数据测试合约，买卖盘涨跌幅均无数据
     no_data_contract_drag_path = ("//*[@text='T2209-CF']/../android.widget.ImageView")
-
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
 
@@ -195,7 +188,6 @@ class GainBestOrderPage(BasePage):
         source = self.driver.find_element(by=AppiumBy.XPATH, value=self.permission_contract_drag_path)
         ActionChains(self.driver).drag_and_drop_by_offset(source, 0, 350).pause(5).perform()
         self.click_action(self.back_button)
-
 
     # def press_bid(self):
     #     actions = ActionChains(self.driver)
@@ -658,9 +650,6 @@ class GainBestOrderPage(BasePage):
         order_details_memo_value = self.order_details_memo_value()
         self.press_confirm_button()
         return hint, memo_value, order_details_memo_value
-
-
-
 
 
 if __name__ == '__main__':

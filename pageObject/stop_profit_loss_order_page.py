@@ -17,7 +17,6 @@ class StopProfitLossOrderPage(BasePage):
     allow_button_id = (AppiumBy.ID, "com.android.permissioncontroller:id/permission_allow_button")
     agree_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/agree")
     cancel_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/cancel")
-    # 合约组 "自动化测试合约"的path
     contract_group_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("自动化测试合约")')
     stop_profit_loss_order_path = (AppiumBy.XPATH, "//android.widget.LinearLayout[@content-desc='止盈止损单']/android.widget.TextView")
     page_title = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget"
@@ -26,7 +25,6 @@ class StopProfitLossOrderPage(BasePage):
                                   "1]/android.view.ViewGroup/android.widget.TextView")
     contract_name = (AppiumBy.ID, 'com.atp.newdemo2:id/contract_name_or_code')
     K_line = (AppiumBy.ID, 'com.atp.newdemo2:id/k_line_thumbnail')
-    # 合约组中第一个合约的买卖盘及涨跌幅path
     Chg_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[4]/android.widget.TextView[1]")
     bid_price_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[1]/android.widget.TextView[1]")
     bid_lots_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[1]/android.widget.TextView[2]")
@@ -36,7 +34,6 @@ class StopProfitLossOrderPage(BasePage):
     stop_profit_mode_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/stop_profit_mode']/android.widget.LinearLayout/android.widget.Button")
     By_open_position_average_price_xpath = (AppiumBy.XPATH, "//*[@text='按开仓均价止盈止损' or @text='By open position average price']/..")
     By_custom_price_xpath = (AppiumBy.XPATH, "//*[@text='按自定义价止盈止损(不开仓)' or @text='By custom price(not open order)']/..")
-    # 选择账户中的第二个账户
     trade_account_text_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/recycler_view_account']/android.widget.LinearLayout[2]/android.widget.TextView")
     change_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/action_change")
     back_button = (AppiumBy.ACCESSIBILITY_ID, "转到上一层级")
@@ -95,13 +92,11 @@ class StopProfitLossOrderPage(BasePage):
     second_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[2]/com.atp.newdemo2:id/resort_button")
     # 自动化测试合约的合约管理中第三个合约的位置 TCU1906-SH（没有数据时手数价格的填充时的测试合约，买卖盘及涨跌幅没有数据）
     third_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[3]/com.atp.newdemo2:id/resort_button")
-    illegal_lots_xpath = (AppiumBy.XPATH, "//*[@text='非法手数']")
     main_test_contract_drag_path = ("//*[@text='GC2212-CME']/../android.widget.ImageView")
     # 权限测试合约，买卖盘有数据涨跌幅无数据
     permission_contract_drag_path = ("//*[@text='TCU1907-SH']/../android.widget.ImageView")
     # 无数据测试合约，买卖盘涨跌幅均无数据
     no_data_contract_drag_path = ("//*[@text='T2209-CF']/../android.widget.ImageView")
-
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
 
@@ -127,9 +122,6 @@ class StopProfitLossOrderPage(BasePage):
     def alert_order_details_message(self):
         result = self.get_visible_element(self.alert_message_ID).text
         return result
-
-    def alert_illegal_lots_title(self):
-        return self.get_visible_element(self.illegal_lots_xpath).text
 
     def order_details_side_value(self):
         order_details_side_value = self.get_visible_element(self.order_details_side).text

@@ -19,25 +19,18 @@ class NormalOrderPage(BasePage):
     cancel_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/cancel")
     # 合约组 "自动化测试合约"的path
     contract_group_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("自动化测试合约")')
-
-    # 页面核心元素
     page_title = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget"
                                   ".FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget"
                                   ".LinearLayout/android.view.ViewGroup["
-                                  "1]/android.view.ViewGroup/android.widget.TextView")  # 新单
+                                  "1]/android.view.ViewGroup/android.widget.TextView")
     contract_name = (AppiumBy.ID, 'com.atp.newdemo2:id/contract_name_or_code')
-    K_line = (AppiumBy.ID, 'com.atp.newdemo2:id/k_line_thumbnail')  # enabled=true
-    # 合约组中第一个合约的买卖盘及涨跌幅path
-
+    K_line = (AppiumBy.ID, 'com.atp.newdemo2:id/k_line_thumbnail')
     Chg_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[4]/android.widget.TextView[1]")
-
     bid_price_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[1]/android.widget.TextView[1]")
     bid_lots_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[1]/android.widget.TextView[2]")
     offer_price_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[2]/android.widget.TextView[1]")
     offer_lots_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[2]/android.widget.TextView[2]")
-
     trade_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/account")
-    # 选择账户中的第二个账户
     trade_account_text_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/recycler_view_account']/android.widget.LinearLayout[2]/android.widget.TextView")
     change_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/action_change")
     back_button = (AppiumBy.ACCESSIBILITY_ID, "转到上一层级")
@@ -79,8 +72,7 @@ class NormalOrderPage(BasePage):
     hedge_flag_speculation_xpath = (AppiumBy.XPATH, "//*[@text='投机' or @text='Speculation']/..")
     hedge_flag_arbitrage_xpath = (AppiumBy.XPATH, "//*[@text='套利' or @text='Arbitrage']/..")
     hedge_flag_hedge_xpath = (AppiumBy.XPATH, "//*[@text='套保' or @text='Hedge']/..")
-
-    order_details_title = (AppiumBy.ID, 'com.atp.newdemo2:id/title')  # 订单详情
+    order_details_title = (AppiumBy.ID, 'com.atp.newdemo2:id/title')
     order_details_side = (AppiumBy.XPATH, "//*[@text='方向' or @text='Side']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_contract = (AppiumBy.XPATH, "//*[@text='合约' or @text='Contract']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_account = (AppiumBy.XPATH, "//*[@text='交易账户' or @text='Trade Account']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
@@ -103,7 +95,6 @@ class NormalOrderPage(BasePage):
     button_view_details = (AppiumBy.ID, 'com.atp.newdemo2: id/positive_button')
     button_close = (AppiumBy.ID, 'com.atp.newdemo2:id/close_button')
     last_price_and_lots = (AppiumBy.ID, "com.atp.newdemo2:id/lots_at_price")
-
     contract_management_ID = (AppiumBy.ID, "com.atp.newdemo2:id/manage_contract")
     # 主测试合约，买卖盘涨跌幅有数据
     main_test_contract_drag_path = ("//*[@text='GC2212-CME']/../android.widget.ImageView")
@@ -111,7 +102,6 @@ class NormalOrderPage(BasePage):
     permission_contract_drag_path = ("//*[@text='TCU1907-SH']/../android.widget.ImageView")
     # 无数据测试合约，买卖盘涨跌幅均无数据
     no_data_contract_drag_path = ("//*[@text='T2209-CF']/../android.widget.ImageView")
-
     illegal_lots_xpath = (AppiumBy.XPATH, "//*[@text='非法手数']")
     T_switch_ID = (AppiumBy.ID, "com.atp.newdemo2:id/one_plus_switch")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
