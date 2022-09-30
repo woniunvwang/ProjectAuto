@@ -26,9 +26,9 @@ class StopOrderPage(BasePage):
     page_title = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget"
                                   ".FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget"
                                   ".LinearLayout/android.view.ViewGroup["
-                                  "1]/android.view.ViewGroup/android.widget.TextView")  # 新单
+                                  "1]/android.view.ViewGroup/android.widget.TextView")
     contract_name = (AppiumBy.ID, 'com.atp.newdemo2:id/contract_name_or_code')
-    K_line = (AppiumBy.ID, 'com.atp.newdemo2:id/k_line_thumbnail')  # enabled=true
+    K_line = (AppiumBy.ID, 'com.atp.newdemo2:id/k_line_thumbnail')
     # 合约组中第一个合约的买卖盘及涨跌幅path
 
     Chg_path = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[4]/android.widget.TextView[1]")
@@ -89,9 +89,12 @@ class StopOrderPage(BasePage):
     second_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[2]/com.atp.newdemo2:id/resort_button")
     # 自动化测试合约的合约管理中第三个合约的位置 TCU1906-SH（没有数据时手数价格的填充时的测试合约，买卖盘及涨跌幅没有数据）
     third_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[3]/com.atp.newdemo2:id/resort_button")
-    illegal_lots_xpath = (AppiumBy.XPATH, "//*[@text='非法手数'")
-
-    T_switch_ID = (AppiumBy.ID, "com.atp.newdemo2:id/one_plus_switch")
+    # 主测试合约，买卖盘涨跌幅有数据
+    main_test_contract_drag_path = ("//*[@text='GC2212-CME']/../android.widget.ImageView")
+    # 权限测试合约，买卖盘有数据涨跌幅无数据
+    permission_contract_drag_path = ("//*[@text='TCU1907-SH']/../android.widget.ImageView")
+    # 无数据测试合约，买卖盘涨跌幅均无数据
+    no_data_contract_drag_path = ("//*[@text='T2209-CF']/../android.widget.ImageView")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
 
@@ -175,6 +178,33 @@ class StopOrderPage(BasePage):
     def agree_button(self):
         allow_button = self.get_visible_element(self.agree_button_id)
         allow_button.click()
+
+    def no_data_contract_to_top(self):
+        self.click_action(self.contract_management_ID)
+        time.sleep(1)
+        source = self.driver.find_element(by=AppiumBy.XPATH, value=self.no_data_contract_drag_path)
+        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, -220).pause(5).perform()
+        self.click_action(self.back_button)
+
+    def main_contract_to_top(self):
+        self.click_action(self.contract_management_ID)
+        time.sleep(1)
+        source = self.driver.find_element(by=AppiumBy.XPATH, value=self.main_test_contract_drag_path)
+        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, -220).pause(5).perform()
+        self.click_action(self.back_button)
+
+    def permission_contract_to_top(self):
+        self.click_action(self.contract_management_ID)
+        source = self.driver.find_element(by=AppiumBy.XPATH, value=self.permission_contract_drag_path)
+        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, -350).pause(5).perform()
+        self.click_action(self.back_button)
+
+    def permission_contract_to_bottom(self):
+        self.click_action(self.contract_management_ID)
+        source = self.driver.find_element(by=AppiumBy.XPATH, value=self.permission_contract_drag_path)
+        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, 350).pause(5).perform()
+        self.click_action(self.back_button)
+
 
     # def press_bid(self):
     #     actions = ActionChains(self.driver)

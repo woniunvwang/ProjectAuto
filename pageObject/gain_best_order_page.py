@@ -84,6 +84,12 @@ class GainBestOrderPage(BasePage):
     # 自动化测试合约的合约管理中第三个合约的位置 TCU1906-SH（没有数据时手数价格的填充时的测试合约，买卖盘及涨跌幅没有数据）
     third_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[3]/com.atp.newdemo2:id/resort_button")
     illegal_lots_xpath = (AppiumBy.XPATH, "//*[@text='非法手数'")
+    main_test_contract_drag_path = ("//*[@text='GC2212-CME']/../android.widget.ImageView")
+    # 权限测试合约，买卖盘有数据涨跌幅无数据
+    permission_contract_drag_path = ("//*[@text='TCU1907-SH']/../android.widget.ImageView")
+    # 无数据测试合约，买卖盘涨跌幅均无数据
+    no_data_contract_drag_path = ("//*[@text='T2209-CF']/../android.widget.ImageView")
+
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
 
@@ -163,6 +169,33 @@ class GainBestOrderPage(BasePage):
     def agree_button(self):
         allow_button = self.get_visible_element(self.agree_button_id)
         allow_button.click()
+
+    def no_data_contract_to_top(self):
+        self.click_action(self.contract_management_ID)
+        time.sleep(1)
+        source = self.driver.find_element(by=AppiumBy.XPATH, value=self.no_data_contract_drag_path)
+        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, -220).pause(5).perform()
+        self.click_action(self.back_button)
+
+    def main_contract_to_top(self):
+        self.click_action(self.contract_management_ID)
+        time.sleep(1)
+        source = self.driver.find_element(by=AppiumBy.XPATH, value=self.main_test_contract_drag_path)
+        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, -220).pause(5).perform()
+        self.click_action(self.back_button)
+
+    def permission_contract_to_top(self):
+        self.click_action(self.contract_management_ID)
+        source = self.driver.find_element(by=AppiumBy.XPATH, value=self.permission_contract_drag_path)
+        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, -350).pause(5).perform()
+        self.click_action(self.back_button)
+
+    def permission_contract_to_bottom(self):
+        self.click_action(self.contract_management_ID)
+        source = self.driver.find_element(by=AppiumBy.XPATH, value=self.permission_contract_drag_path)
+        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, 350).pause(5).perform()
+        self.click_action(self.back_button)
+
 
     # def press_bid(self):
     #     actions = ActionChains(self.driver)

@@ -16,6 +16,7 @@ class CaseNormalOrder(unittest.TestCase):
         self.driver.quit()
 
     # 买卖盘及涨跌幅有数据时根据交易方向相反数据填充
+    # GC2212-CME为主测试合约
     def test_01_press_bid_and_side_should_sell(self):
         result = self.normal_order_page.press_bid_and_order()
         buy_checkbox = result[0]
@@ -99,13 +100,7 @@ class CaseNormalOrder(unittest.TestCase):
 
     # 买卖盘及涨跌幅没有数据时手数和价格按照"1"，"0"填充。
     def test_10_press_no_data_bid_and_lots_should_fix_num(self):
-        # 合约T2209-CF在第二个的时候执行代码
-        self.normal_order_page.no_data_contract_to_top()
-        time.sleep(10)
-        self.normal_order_page.main_contract_to_top()
-        time.sleep(10)
-        self.normal_order_page.have_data_contract_to_top()
-
+        self.normal_order_page.no_data_contract_to_top()      # 让T2209-CF排在合约列表的第一位来进行没有数据时的测试
         result = self.normal_order_page.press_bid_and_check_lots()
         lots_value = result[0]
         order_details_lots_value = result[1]
@@ -148,6 +143,7 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual(price_value, order_details_price_value)
 
     def test_16_change_trade_account_should_success(self):
+        self.normal_order_page.main_contract_to_top()  # 没有数据时的测试结束，让主测试合约GC2212-CME排在合约列表的第一位来进行
         result = self.normal_order_page.change_trade_account()
         trade_account_value = result[0]
         changed_trade_account_value = result[1]
@@ -173,8 +169,8 @@ class CaseNormalOrder(unittest.TestCase):
 
     def test_19_input_illegal_lots_and_order_should_fail(self):
         self.normal_order_page.input_illegal_lots_and_order("1.")
-        result = self.normal_order_page.alert_illegal_lots_title()
-        self.assertEqual(result, AlertError.illegal_lots)
+        result = self.normal_order_page.is_toast_exist(AlertError.alert_illegal_lots)
+        self.assertEqual(True, result)
 
     def test_20_clear_price_and_order_should_fail(self):
         self.normal_order_page.clear_price_and_order()
@@ -538,8 +534,8 @@ class CaseNormalOrder(unittest.TestCase):
         fak_min_quantity = self.normal_order_page.tif_fak_and_input_min_quantity_and_lots(4, 3)
         self.assertEqual(fak_min_quantity, '3')
 
-    # 让有开平投保标志的合约TCU1907-SH排在第一位
     def test_70_offset_flag_auto_and_order_should_success(self):
+        self.normal_order_page.permission_contract_to_top()  # 让权限合约TCU1907-SH排在合约列表的第一位来进行
         result = self.normal_order_page.offset_flag_auto_and_order()
         offset_flag_default_value = result[0]
         order_details_offset_flag_value = result[1]
@@ -662,6 +658,7 @@ class CaseNormalOrder(unittest.TestCase):
         self.assertEqual(result, AlertError.alert_message_succeed)
 
     def test_84_edit_memo_and_order_should_success(self):
+        self.normal_order_page.permission_contract_to_bottom()  # 权限合约排到最底部，主合约排到第一位
         result = self.normal_order_page.edit_memo_and_order()
         hint = result[0]
         memo_value = result[1]

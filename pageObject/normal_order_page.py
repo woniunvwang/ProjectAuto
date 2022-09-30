@@ -1,8 +1,6 @@
 # encoding = 'utf-8'
 import random
 import string
-
-import button as button
 from appium.webdriver.common.appiumby import AppiumBy
 import time
 from selenium.webdriver import ActionChains
@@ -77,7 +75,7 @@ class NormalOrderPage(BasePage):
     offset_flag_C_O_xpath = (AppiumBy.XPATH, "//*[@text='平仓-开仓' or @text='C-O']/..")
     offset_flag_CT_O_xpath = (AppiumBy.XPATH, "//*[@text='平今-开仓' or @text='CT-O']/..")
     offset_flag_CY_O_xpath = (AppiumBy.XPATH, "//*[@text='平昨-开仓' or @text='CY-O']/..")
-    hedge_flag_change_button = (AppiumBy.ID, "com.atp.newdemo2:id/hedge_flag")
+    hedge_flag_change_button = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/hedge_flag_type']/android.widget.LinearLayout/android.widget.Button")
     hedge_flag_speculation_xpath = (AppiumBy.XPATH, "//*[@text='投机' or @text='Speculation']/..")
     hedge_flag_arbitrage_xpath = (AppiumBy.XPATH, "//*[@text='套利' or @text='Arbitrage']/..")
     hedge_flag_hedge_xpath = (AppiumBy.XPATH, "//*[@text='套保' or @text='Hedge']/..")
@@ -107,12 +105,13 @@ class NormalOrderPage(BasePage):
     last_price_and_lots = (AppiumBy.ID, "com.atp.newdemo2:id/lots_at_price")
 
     contract_management_ID = (AppiumBy.ID, "com.atp.newdemo2:id/manage_contract")
-    # 自动化测试合约的合约管理中第一个合约的位置 TCU1907-SH （主测试合约，买卖盘有涨跌幅没有有数据）
+    # 主测试合约，买卖盘涨跌幅有数据
     main_test_contract_drag_path = ("//*[@text='GC2212-CME']/../android.widget.ImageView")
-    # 自动化测试合约的合约管理中第二个合约的位置 BRN-2210-ICE（STL和STP类型下单测试合约，买卖盘及涨跌幅都有数据）
-    have_data_contract_drag_path = ("//*[@text='TCU1907-SH']/../android.widget.ImageView")
-    # 自动化测试合约的合约管理中第三个合约的位置 TCU1906-SH（没有数据时手数价格的填充时的测试合约，买卖盘及涨跌幅没有数据）
+    # 权限测试合约，买卖盘有数据涨跌幅无数据
+    permission_contract_drag_path = ("//*[@text='TCU1907-SH']/../android.widget.ImageView")
+    # 无数据测试合约，买卖盘涨跌幅均无数据
     no_data_contract_drag_path = ("//*[@text='T2209-CF']/../android.widget.ImageView")
+
     illegal_lots_xpath = (AppiumBy.XPATH, "//*[@text='非法手数']")
     T_switch_ID = (AppiumBy.ID, "com.atp.newdemo2:id/one_plus_switch")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
@@ -367,23 +366,27 @@ class NormalOrderPage(BasePage):
         self.click_action(self.contract_management_ID)
         time.sleep(1)
         source = self.driver.find_element(by=AppiumBy.XPATH, value=self.no_data_contract_drag_path)
-        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, 220).pause(5).perform()
+        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, -220).pause(5).perform()
         self.click_action(self.back_button)
 
     def main_contract_to_top(self):
         self.click_action(self.contract_management_ID)
         time.sleep(1)
         source = self.driver.find_element(by=AppiumBy.XPATH, value=self.main_test_contract_drag_path)
-        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, 220).pause(5).perform()
+        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, -220).pause(5).perform()
         self.click_action(self.back_button)
 
-    def have_data_contract_to_top(self):
+    def permission_contract_to_top(self):
         self.click_action(self.contract_management_ID)
-        source = self.driver.find_element(by=AppiumBy.XPATH, value=self.have_data_contract_drag_path)
+        source = self.driver.find_element(by=AppiumBy.XPATH, value=self.permission_contract_drag_path)
+        ActionChains(self.driver).drag_and_drop_by_offset(source, 0, -350).pause(5).perform()
+        self.click_action(self.back_button)
+
+    def permission_contract_to_bottom(self):
+        self.click_action(self.contract_management_ID)
+        source = self.driver.find_element(by=AppiumBy.XPATH, value=self.permission_contract_drag_path)
         ActionChains(self.driver).drag_and_drop_by_offset(source, 0, 350).pause(5).perform()
         self.click_action(self.back_button)
-
-
 
     def change_type_market(self):
         self.press_offer()

@@ -8,7 +8,6 @@ class AlertError:
     alert_illegal_order_price_tick_size = "下单价必须是最小变动价格的整数倍"
     alert_illegal_order_stop_price_tick_size = "止损价必须是最小变动价格的整数倍"
     alert_illegal_lots = "手数不合法"
-    illegal_lots = "非法手数"
     alert_message_lots = "请输入手数"
     alert_message_price = "请输入价格"
     alert_message_gap = "请输入Gap"
