@@ -49,7 +49,7 @@ class GainBestOrderPage(BasePage):
     offset_flag_C_O_xpath = (AppiumBy.XPATH, "//*[@text='平仓-开仓' or @text='C-O']/..")
     offset_flag_CT_O_xpath = (AppiumBy.XPATH, "//*[@text='平今-开仓' or @text='CT-O']/..")
     offset_flag_CY_O_xpath = (AppiumBy.XPATH, "//*[@text='平昨-开仓' or @text='CY-O']/..")
-    hedge_flag_change_button = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/hedge_flag_type']/android.widget.LinearLayout/android.widget.Button")
+    hedge_flag_change_button = (AppiumBy.ID, "com.atp.newdemo2:id/hedge_flag")
     hedge_flag_speculation_xpath = (AppiumBy.XPATH, "//*[@text='投机' or @text='Speculation']/..")
     hedge_flag_arbitrage_xpath = (AppiumBy.XPATH, "//*[@text='套利' or @text='Arbitrage']/..")
     hedge_flag_hedge_xpath = (AppiumBy.XPATH, "//*[@text='套保' or @text='Hedge']/..")
@@ -222,6 +222,8 @@ class GainBestOrderPage(BasePage):
         self.click_action(self.trade_account_text_path)
         self.click_action(self.change_account_ID)
         changed_trade_account_value = self.get_visible_element(self.trade_account_ID).text
+        self.input_action(self.gap_xpath, "1")
+        self.input_action(self.step_xpath, "1")
         self.press_confirm_button()
         order_details_account_value = self.get_visible_element(self.order_details_account).text
         return trade_account_value, changed_trade_account_value, order_details_account_value
@@ -334,6 +336,7 @@ class GainBestOrderPage(BasePage):
         sell_value = self.get_visible_element(self.sell_side_id)
         buy_checkbox = buy_value.get_attribute("checked")
         sell_checkbox = sell_value.get_attribute("checked")
+        self.slide_action(460, 1750, 460, 1400)
         self.input_action(self.gap_xpath, "1")
         self.input_action(self.step_xpath, "1")
         self.press_confirm_button()
@@ -349,6 +352,7 @@ class GainBestOrderPage(BasePage):
         self.click_action(self.Chg_path)
         self.click_action(self.gain_best_order_path)
         price_value = self.get_visible_element(self.price_xpath).text
+        self.slide_action(460, 1750, 460, 1400)
         self.input_action(self.gap_xpath, "1")
         self.input_action(self.step_xpath, "1")
         self.press_confirm_button()
@@ -366,6 +370,7 @@ class GainBestOrderPage(BasePage):
         self.click_action(self.Chg_path)
         self.click_action(self.gain_best_order_path)
         lots_value = self.get_visible_element(self.lots_xpath).text
+        self.slide_action(460, 1750, 460, 1400)
         self.input_action(self.gap_xpath, "1")
         self.input_action(self.step_xpath, "1")
         self.press_confirm_button()
@@ -414,10 +419,7 @@ class GainBestOrderPage(BasePage):
         self.press_offer()
         self.input_action(self.gap_xpath, gap_value)
         self.input_action(self.step_xpath, "1")
-        self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
-        order_details_gap_value = self.order_details_gap_value()
-        return order_details_gap_value
 
     def input_legal_gap_and_order(self, gap_value):
         self.press_offer()
@@ -439,7 +441,6 @@ class GainBestOrderPage(BasePage):
         self.press_offer()
         self.input_action(self.step_xpath, step_value)
         self.input_action(self.gap_xpath, "1")
-        self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
 
     def input_legal_step_and_order(self, step_value):
