@@ -143,7 +143,6 @@ class CaseStopOrder(unittest.TestCase):
 
     def test_16_change_trade_account_should_success(self):
         # self.gain_best_order_page.main_contract_to_top()  # 没有数据时的测试结束，让主测试合约GC2212-CME排在合约列表的第一位来进行
-        # time.sleep(2)
         result = self.gain_best_order_page.change_trade_account()
         trade_account_value = result[0]
         changed_trade_account_value = result[1]

@@ -205,6 +205,87 @@ class CaseStopOrder(unittest.TestCase):
         self.assertEqual(order_details_lots_value, "10")
         self.assertEqual(order_details_price_value, "80")
 
+    def test_26_not_input_stop_loss_and_order_should_fail(self):
+        self.stop_profit_loss_order_page.not_input_stop_loss_and_order()
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_message_stop_loss)
+        self.assertEqual(True, result)
+
+    def test_27_input_illegal_stop_loss_and_order_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_stop_loss_and_order(".")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_loss)
+        self.assertEqual(True, result)
+
+    def test_28_input_illegal_stop_loss_and_order_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_stop_loss_and_order("+")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_loss)
+        self.assertEqual(True, result)
+
+    def test_29_input_illegal_stop_loss_and_order_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_stop_loss_and_order("-")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_loss)
+        self.assertEqual(True, result)
+
+    def test_30_input_illegal_stop_loss_and_order_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_stop_loss_and_order("0")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_loss)
+        self.assertEqual(True, result)
+
+    def test_31_input_max_stop_loss_and_order_should_success(self):
+        order_details_gap_value = self.stop_profit_loss_order_page.input_legal_stop_loss_and_order("12345678.12345678")
+        order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual("12345678.12345678", order_details_gap_value)
+
+    def test_26_not_input_stop_profit_and_order_should_fail(self):
+        self.stop_profit_loss_order_page.not_input_stop_profit_and_order()
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_message_stop_profit)
+        self.assertEqual(True, result)
+
+    def test_27_input_illegal_stop_profit_and_order_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_stop_profit_and_order(".")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_profit)
+        self.assertEqual(True, result)
+
+    def test_28_input_illegal_stop_profit_and_order_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_stop_profit_and_order("+")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_profit)
+        self.assertEqual(True, result)
+
+    def test_29_input_illegal_stop_profit_and_order_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_stop_profit_and_order("-")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_profit)
+        self.assertEqual(True, result)
+
+    def test_30_input_illegal_stop_profit_and_order_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_stop_profit_and_order("0")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_profit)
+        self.assertEqual(True, result)
+
+    def test_31_input_max_stop_profit_and_order_should_success(self):
+        order_details_gap_value = self.stop_profit_loss_order_page.input_legal_stop_profit_and_order("12345678.12345678")
+        order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual("12345678.12345678", order_details_gap_value)
+
+    def test_41_change_mode_and_type_should_enabled_false(self):
+        result = self.stop_profit_loss_order_page.change_mode_and_check_type()
+        type_enabled = result[0]
+        type_value = result[1]
+        self.assertEqual(type_enabled, 'false')
+        self.assertEqual(type_value, "LIM")
+
+    def test_41_change_mode_and_order_should_success(self):
+        result = self.stop_profit_loss_order_page.change_mode_and_order()
+        mode_value = result[0]
+        order_details_mode_value = result[1]
+        order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(mode_value, '按自定义价止盈止损(不开仓)')
+        self.assertEqual(mode_value, order_details_mode_value)
+
+
+
+
     def test_40_offset_flag_auto_and_order_should_success(self):
         self.stop_profit_loss_order_page.permission_contract_to_top()  # 让权限合约TCU1907-SH排在合约列表的第一位来进行
         result = self.stop_profit_loss_order_page.offset_flag_auto_and_order()
