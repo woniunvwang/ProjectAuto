@@ -274,16 +274,66 @@ class CaseStopOrder(unittest.TestCase):
         self.assertEqual(type_enabled, 'false')
         self.assertEqual(type_value, "LIM")
 
-    def test_41_change_mode_and_order_should_success(self):
-        result = self.stop_profit_loss_order_page.change_mode_and_order()
-        mode_value = result[0]
-        order_details_mode_value = result[1]
+    def test_41_change_mode_close_and_order_should_success(self):
+        result = self.stop_profit_loss_order_page.change_mode_close_and_order()
+        mode_default_value = result[0]
+        mode_value = result[1]
+        order_details_mode_value = result[2]
         order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
         self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(mode_default_value, '按开仓均价止盈止损')
         self.assertEqual(mode_value, '按自定义价止盈止损(不开仓)')
         self.assertEqual(mode_value, order_details_mode_value)
 
+    def test_41_change_mode_open_and_order_should_success(self):
+        result = self.stop_profit_loss_order_page.change_mode_open_and_order()
+        type_enabled = result[0]
+        type_value = result[1]
+        mode_value = result[2]
+        order_details_mode_value = result[3]
+        order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(mode_value, '按开仓均价止盈止损')
+        self.assertEqual(type_enabled, 'true')
+        self.assertEqual(type_value, "LIM")
+        self.assertEqual(mode_value, order_details_mode_value)
 
+    def test_27_changed_market_type_and_price_should_market(self):
+        result = self.stop_profit_loss_order_page.change_market_type()
+        type_default_value = result[0]
+        price_value = result[1]
+        price_enabled = result[2]
+        type_value = result[3]
+        open_px_diff_price = result[4]
+        self.assertEqual("LIM", type_default_value)
+        self.assertEqual("Market", price_value)
+        self.assertEqual("false", price_enabled)
+        self.assertEqual("Market", type_value)
+        self.assertEqual("开仓价差", open_px_diff_price)
+
+    def test_27_changed_market_type_and_order_should_success(self):
+        result = self.stop_profit_loss_order_page.change_market_type_and_order()
+        order_details_type_value = result[0]
+        order_details_price_value = result[1]
+        open_px_diff_price_value = result[2]
+        order_details_open_px_diff_price_value = result[3]
+        order_message = self.stop_profit_loss_order_page.alert_order_details_message()
+        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual("Market", order_details_type_value)
+        self.assertEqual("Market", order_details_price_value)
+        self.assertEqual(open_px_diff_price_value, order_details_open_px_diff_price_value)
+
+    def test_30_market_type_changed_LIM_type_and_price_should_offer_value(self):
+        result = self.stop_profit_loss_order_page.market_type_changed_lim_type()
+        price_default_value = result[0]
+        price_value = result[1]
+        price_enabled = result[2]
+        type_value = result[3]
+        open_px_diff_price = result[4]
+        self.assertEqual(price_default_value, price_value)
+        self.assertEqual("true", price_enabled)
+        self.assertEqual("LIM", type_value)
+        self.assertEqual("false", open_px_diff_price)
 
 
     def test_40_offset_flag_auto_and_order_should_success(self):

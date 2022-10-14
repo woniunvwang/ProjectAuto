@@ -44,11 +44,13 @@ class StopProfitLossOrderPage(BasePage):
     stop_loss_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/stop_loss']/android.view.ViewGroup/android.widget.EditText")
     stop_profit_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/stop_profit']/android.view.ViewGroup/android.widget.EditText")
     order_type_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/order_type']/android.widget.LinearLayout/android.widget.Button")
-    select_type_market_xpath = (AppiumBy.XPATH, "//*[@text='Market'/..")
-    select_type_lim_xpath = (AppiumBy.XPATH, "//*[@text='LIM'/..")
+    select_type_market_xpath = (AppiumBy.XPATH, "//*[@text='Market']/..")
+    select_type_lim_xpath = (AppiumBy.XPATH, "//*[@text='LIM']/..")
     support_market_xpath = (AppiumBy.ID,  "com.atp.newdemo2:id/support_market")
     close_px_diff_price_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/close_px_diff_price']/android.view.ViewGroup/android.widget.EditText")
     open_px_diff_price_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/open_px_diff_price']/android.view.ViewGroup/android.widget.EditText")
+    open_px_diff_price_title_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/open_px_diff_price']/android.view.ViewGroup/android.widget.TextView")
+    open_px_diff_price_title = ("//*[@resource-id='com.atp.newdemo2:id/open_px_diff_price']/android.view.ViewGroup/android.widget.TextView")
     times_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/times']/android.view.ViewGroup/android.widget.EditText")
     offset_flag_change_button = (AppiumBy.ID, "com.atp.newdemo2:id/offset_flag")
     offset_flag_auto_xpath = (AppiumBy.XPATH, "//*[@text='自动' or @text='Auto']/..")
@@ -142,6 +144,14 @@ class StopProfitLossOrderPage(BasePage):
     def order_details_price_value(self):
         order_details_price_value = self.get_visible_element(self.order_details_price).text
         return order_details_price_value
+
+    def order_details_open_px_diff_price_value(self):
+        order_details_open_px_diff_price_value = self.get_visible_element(self.order_details_open_px_diff_price).text
+        return order_details_open_px_diff_price_value
+
+    def order_details_type_value(self):
+        order_details_type_value = self.get_visible_element(self.order_details_type).text
+        return order_details_type_value
 
     def order_details_stop_loss_value(self):
         order_details_stop_loss_value = self.get_visible_element(self.order_details_stop_loss).text
@@ -524,8 +534,9 @@ class StopProfitLossOrderPage(BasePage):
         type_value = type_element.text
         return type_enabled, type_value
 
-    def change_mode_and_order(self):
+    def change_mode_close_and_order(self):
         self.press_offer()
+        mode_default_value = self.get_visible_element(self.stop_profit_mode_xpath).text
         self.click_action(self.stop_profit_mode_xpath)
         self.click_action(self.By_custom_price_xpath)
         self.press_confirm_button()
@@ -536,9 +547,70 @@ class StopProfitLossOrderPage(BasePage):
         self.press_confirm_button()
         order_details_mode_value = self.order_details_mode_value()
         self.press_confirm_button()
-        return mode_value, order_details_mode_value
+        return mode_default_value, mode_value, order_details_mode_value
 
+    def change_mode_open_and_order(self):
+        self.press_offer()
+        self.click_action(self.stop_profit_mode_xpath)
+        self.click_action(self.By_custom_price_xpath)
+        self.press_confirm_button()
+        self.click_action(self.stop_profit_mode_xpath)
+        self.click_action(self.By_open_position_average_price_xpath)
+        self.press_confirm_button()
+        mode_value = self.get_visible_element(self.stop_profit_mode_xpath).text
+        type_element = self.get_visible_element(self.order_type_xpath)
+        type_enabled = type_element.get_attribute("enabled")
+        type_value = type_element.text
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
+        self.press_confirm_button()
+        order_details_mode_value = self.order_details_mode_value()
+        self.press_confirm_button()
+        return type_enabled, type_value, mode_value, order_details_mode_value
 
+    def change_market_type(self):
+        self.press_offer()
+        type_default_value = self.get_visible_element(self.order_type_xpath).text
+        self.click_action(self.order_type_xpath)
+        self.click_action(self.select_type_market_xpath)
+        self.press_confirm_button()
+        type_value = self.get_visible_element(self.order_type_xpath).text
+        price_element = self.get_visible_element(self.price_xpath)
+        price_value = price_element.text
+        price_enabled = price_element.get_attribute("enabled")
+        open_px_diff_price = self.get_visible_element(self.open_px_diff_price_title_xpath).text
+        return type_default_value, price_value, price_enabled, type_value, open_px_diff_price
+
+    def change_market_type_and_order(self):
+        self.change_market_type()
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
+        open_px_diff_price_value = self.get_visible_element(self.open_px_diff_price_xpath).text
+        self.press_confirm_button()
+        order_details_type_value = self.order_details_type_value()
+        order_details_price_value = self.order_details_price_value()
+        order_details_open_px_diff_price_value = self.order_details_open_px_diff_price_value()
+        self.press_confirm_button()
+        return order_details_type_value, order_details_price_value, open_px_diff_price_value, order_details_open_px_diff_price_value
+
+    def market_type_changed_lim_type(self):
+        self.press_offer()
+        price_default_value = self.get_visible_element(self.price_xpath).text
+        self.click_action(self.order_type_xpath)
+        self.click_action(self.select_type_market_xpath)
+        self.press_confirm_button()
+        self.click_action(self.order_type_xpath)
+        self.click_action(self.select_type_lim_xpath)
+        self.press_confirm_button()
+        price_element = self.get_visible_element(self.price_xpath)
+        price_value = price_element.text
+        price_enabled = price_element.get_attribute("enabled")
+        type_value = self.get_visible_element(self.order_type_xpath).text
+        self.slide_action(460, 1750, 460, 1400)
+        open_px_diff_price_value = self.driver.find_element_by_text("开仓价差")
+        return price_default_value, price_value, price_enabled, type_value, open_px_diff_price_value
 
     def offset_flag_auto_and_order(self):
         self.press_offer()

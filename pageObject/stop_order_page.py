@@ -75,17 +75,11 @@ class StopOrderPage(BasePage):
     last_price_and_lots = (AppiumBy.ID, "com.atp.newdemo2:id/lots_at_price")
     contract_management_ID = (AppiumBy.ID, "com.atp.newdemo2:id/manage_contract")
     # 自动化测试合约的合约管理中第一个合约的位置 TCU1907-SH （主测试合约，买卖盘有涨跌幅没有有数据）
-    first_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[1]/com.atp.newdemo2:id/resort_button")
-    # 自动化测试合约的合约管理中第二个合约的位置 BRN-2210-ICE（STL和STP类型下单测试合约，买卖盘及涨跌幅都有数据）
-    second_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[2]/com.atp.newdemo2:id/resort_button")
-    # 自动化测试合约的合约管理中第三个合约的位置 TCU1906-SH（没有数据时手数价格的填充时的测试合约，买卖盘及涨跌幅没有数据）
-    third_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[3]/com.atp.newdemo2:id/resort_button")
-    # 主测试合约，买卖盘涨跌幅有数据
     main_test_contract_drag_path = ("//*[@text='GC2212-CME']/../android.widget.ImageView")
     # 权限测试合约，买卖盘有数据涨跌幅无数据
     permission_contract_drag_path = ("//*[@text='TCU1907-SH']/../android.widget.ImageView")
     # 无数据测试合约，买卖盘涨跌幅均无数据
-    no_data_contract_drag_path = ("//*[@text='T2209-CF']/../android.widget.ImageView")
+    no_data_contract_drag_path = ("//*[@text='TCU1906-SH']/../android.widget.ImageView")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
 

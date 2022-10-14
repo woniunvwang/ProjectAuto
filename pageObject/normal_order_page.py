@@ -101,7 +101,7 @@ class NormalOrderPage(BasePage):
     # 权限测试合约，买卖盘有数据涨跌幅无数据
     permission_contract_drag_path = ("//*[@text='TCU1907-SH']/../android.widget.ImageView")
     # 无数据测试合约，买卖盘涨跌幅均无数据
-    no_data_contract_drag_path = ("//*[@text='T2209-CF']/../android.widget.ImageView")
+    no_data_contract_drag_path = ("//*[@text='TCU1906-SH']/../android.widget.ImageView")
     illegal_lots_xpath = (AppiumBy.XPATH, "//*[@text='非法手数']")
     T_switch_ID = (AppiumBy.ID, "com.atp.newdemo2:id/one_plus_switch")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
@@ -354,7 +354,7 @@ class NormalOrderPage(BasePage):
 
     def no_data_contract_to_top(self):
         self.click_action(self.contract_management_ID)
-        time.sleep(1)
+        time.sleep(2)
         source = self.driver.find_element(by=AppiumBy.XPATH, value=self.no_data_contract_drag_path)
         ActionChains(self.driver).drag_and_drop_by_offset(source, 0, -220).pause(5).perform()
         self.click_action(self.back_button)
@@ -630,7 +630,7 @@ class NormalOrderPage(BasePage):
         self.press_confirm_button()
 
     def ice_type_input_chunk_size_legal_value_and_order(self):
-        result = self.ice_type_and_input_lots_and_chunk_size(5, 2)
+        result = self.ice_type_and_input_lots_and_chunk_size(15, 10)
         lots_value = result[0]
         chunk_size_value = result[1]
         self.press_confirm_button()

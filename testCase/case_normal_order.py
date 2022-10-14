@@ -100,7 +100,7 @@ class CaseNormalOrder(unittest.TestCase):
 
     # 买卖盘及涨跌幅没有数据时手数和价格按照"1"，"0"填充。
     def test_10_press_no_data_bid_and_lots_should_fix_num(self):
-        self.normal_order_page.no_data_contract_to_top()      # 让T2209-CF排在合约列表的第一位来进行没有数据时的测试
+        self.normal_order_page.no_data_contract_to_top()      # 让TCU1906-SH排在合约列表的第一位来进行没有数据时的测试
         result = self.normal_order_page.press_bid_and_check_lots()
         lots_value = result[0]
         order_details_lots_value = result[1]
@@ -466,7 +466,8 @@ class CaseNormalOrder(unittest.TestCase):
         order_details_type_value = result[4]
         order_message = self.normal_order_page.alert_order_details_message()
         self.assertEqual(order_message, AlertError.alert_message_succeed)
-        self.assertGreater(lots_value, order_details_lots_value)
+        self.assertEqual(lots_value, order_details_lots_value)
+        self.assertGreater(lots_value, chunk_size_value)
         self.assertEqual(chunk_size_value, order_details_chunk_size_value)
         self.assertEqual("ICE", order_details_type_value)
 
