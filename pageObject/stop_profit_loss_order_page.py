@@ -88,17 +88,11 @@ class StopProfitLossOrderPage(BasePage):
     button_close = (AppiumBy.ID, 'com.atp.newdemo2:id/close_button')
     last_price_and_lots = (AppiumBy.ID, "com.atp.newdemo2:id/lots_at_price")
     contract_management_ID = (AppiumBy.ID, "com.atp.newdemo2:id/manage_contract")
-    # 自动化测试合约的合约管理中第一个合约的位置 TCU1907-SH （主测试合约，买卖盘有涨跌幅没有有数据）
-    first_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[1]/com.atp.newdemo2:id/resort_button")
-    # 自动化测试合约的合约管理中第二个合约的位置 BRN-2210-ICE（STL和STP类型下单测试合约，买卖盘及涨跌幅都有数据）
-    second_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[2]/com.atp.newdemo2:id/resort_button")
-    # 自动化测试合约的合约管理中第三个合约的位置 TCU1906-SH（没有数据时手数价格的填充时的测试合约，买卖盘及涨跌幅没有数据）
-    third_contract_drag_path = ("//*[@resource-id='com.atp.newdemo2:id/recycler_view_edit_contract']/android.view.ViewGroup[3]/com.atp.newdemo2:id/resort_button")
     main_test_contract_drag_path = ("//*[@text='GC2212-CME']/../android.widget.ImageView")
     # 权限测试合约，买卖盘有数据涨跌幅无数据
     permission_contract_drag_path = ("//*[@text='TCU1907-SH']/../android.widget.ImageView")
     # 无数据测试合约，买卖盘涨跌幅均无数据
-    no_data_contract_drag_path = ("//*[@text='T2209-CF']/../android.widget.ImageView")
+    no_data_contract_drag_path = ("//*[@text='GC2212-CME']/../android.widget.ImageView")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
 
@@ -407,21 +401,6 @@ class StopProfitLossOrderPage(BasePage):
             return lots_value, order_details_lots_value
         else:
             return float(last_lots), float(lots_value), order_details_lots_value
-
-    def drag_first_contract_to_second_location(self):
-        self.click_action(self.contract_management_ID)
-        time.sleep(1)
-        x = self.driver.find_element(AppiumBy.XPATH, self.third_contract_drag_path)
-        y = self.driver.find_element(AppiumBy.XPATH, self.first_contract_drag_path)
-        ActionChains(self.driver).drag_and_drop(y, x).pause(5).perform()
-        self.click_action(self.back_button)
-
-    def drag_third_contract_to_second_location(self):
-        self.click_action(self.contract_management_ID)
-        x = self.driver.find_element(AppiumBy.XPATH, self.third_contract_drag_path)
-        y = self.driver.find_element(AppiumBy.XPATH, self.first_contract_drag_path)
-        ActionChains(self.driver).drag_and_drop(x, y).pause(5).perform()
-        self.click_action(self.back_button)
 
     def clear_lots_and_order(self):
         self.press_bid()
@@ -776,3 +755,4 @@ class StopProfitLossOrderPage(BasePage):
 
 if __name__ == '__main__':
     driver = android_driver()
+

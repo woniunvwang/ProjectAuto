@@ -101,7 +101,7 @@ class NormalOrderPage(BasePage):
     # 权限测试合约，买卖盘有数据涨跌幅无数据
     permission_contract_drag_path = ("//*[@text='TCU1907-SH']/../android.widget.ImageView")
     # 无数据测试合约，买卖盘涨跌幅均无数据
-    no_data_contract_drag_path = ("//*[@text='TCU1906-SH']/../android.widget.ImageView")
+    no_data_contract_drag_path = ("//*[@text='GC2806-CME']/../android.widget.ImageView")
     illegal_lots_xpath = (AppiumBy.XPATH, "//*[@text='非法手数']")
     T_switch_ID = (AppiumBy.ID, "com.atp.newdemo2:id/one_plus_switch")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")

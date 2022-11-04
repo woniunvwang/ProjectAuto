@@ -79,7 +79,7 @@ class StopOrderPage(BasePage):
     # 权限测试合约，买卖盘有数据涨跌幅无数据
     permission_contract_drag_path = ("//*[@text='TCU1907-SH']/../android.widget.ImageView")
     # 无数据测试合约，买卖盘涨跌幅均无数据
-    no_data_contract_drag_path = ("//*[@text='TCU1906-SH']/../android.widget.ImageView")
+    no_data_contract_drag_path = ("//*[@text='GC2806-CME']/../android.widget.ImageView")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
 
@@ -389,21 +389,6 @@ class StopOrderPage(BasePage):
         else:
             return float(last_lots), float(lots_value), order_details_lots_value
 
-    def drag_first_contract_to_second_location(self):
-        self.click_action(self.contract_management_ID)
-        time.sleep(1)
-        x = self.driver.find_element(AppiumBy.XPATH, self.third_contract_drag_path)
-        y = self.driver.find_element(AppiumBy.XPATH, self.first_contract_drag_path)
-        ActionChains(self.driver).drag_and_drop(y, x).pause(5).perform()
-        self.click_action(self.back_button)
-
-    def drag_third_contract_to_second_location(self):
-        self.click_action(self.contract_management_ID)
-        x = self.driver.find_element(AppiumBy.XPATH, self.third_contract_drag_path)
-        y = self.driver.find_element(AppiumBy.XPATH, self.first_contract_drag_path)
-        ActionChains(self.driver).drag_and_drop(x, y).pause(5).perform()
-        self.click_action(self.back_button)
-
     def clear_lots_and_order(self):
         self.press_bid()
         self.clear_action(self.lots_xpath)
@@ -436,6 +421,7 @@ class StopOrderPage(BasePage):
         self.press_offer()
         self.clear_action(self.stop_price_xpath)
         self.input_action(self.stop_price_xpath, price)
+        self.press_confirm_button()
         self.press_confirm_button()
 
     def input_lots_and_price_and_order(self, lots, price):

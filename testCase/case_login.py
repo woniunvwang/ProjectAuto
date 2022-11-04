@@ -1,5 +1,6 @@
 import unittest
-
+import pytest
+import allure
 from appium import webdriver
 import self as self
 from appium.webdriver import webdriver
@@ -31,7 +32,7 @@ class CaseLogin(unittest.TestCase):
     # 根据登录名是否需要采集看穿式监管信息，若明确不需要采集则启用20-43行的用例，执行时间会短些，若需要采集或不确定是否需要采集则启用46-86行的用例
     # @file_data('../data/data_login.yaml')
 
-    # Step 1: 目的
+
     def test_01_login_page_input_wrong_username_wrong_password_should_fail(self):
         # Step 3: 动作
 

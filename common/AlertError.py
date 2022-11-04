@@ -6,7 +6,7 @@ class AlertError:
     alert_illegal_price_tick_size = "价格必须是最小变动价格的整数倍"
     alert_illegal_input_limit = "最多s输入8位整数和8位小数"
     alert_illegal_order_price_tick_size = "下单价必须是最小变动价格的整数倍"
-    alert_illegal_order_stop_price_tick_size = "止损价必须是最小变动价格的整数倍"
+    # alert_illegal_order_stop_price_tick_size = "止损价必须是最小变动价格的整数倍" 止损价不进行tick size校验
     alert_illegal_lots = "手数不合法"
     alert_message_lots = "请输入手数"
     alert_message_price = "请输入价格"
@@ -23,8 +23,8 @@ class AlertError:
     alert_message_min_quantity = "请输入最小数量"
     alert_buy_order_illegal_StPx = "买单StPx需小于等于价格"
     alert_sell_order_illegal_StPx = "卖单StPx需大于等于价格"
-    alert_message_buy_order_rejected = "New order rejected, Buy order stop price must be above last trade price"
-    alert_message_sell_order_rejected = "New order rejected, Sell order stop price must be below last trade price"
+    alert_message_buy_order_rejected = "New order rejected, Buy order stop price must be above last trade price."
+    alert_message_sell_order_rejected = "New order rejected, Sell order stop price must be below last trade price."
     hint_message = "输入长度不能超过255个字符"
 
 

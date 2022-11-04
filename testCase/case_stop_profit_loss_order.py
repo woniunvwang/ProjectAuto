@@ -335,7 +335,6 @@ class CaseStopOrder(unittest.TestCase):
         self.assertEqual("LIM", type_value)
         self.assertEqual("false", open_px_diff_price)
 
-
     def test_40_offset_flag_auto_and_order_should_success(self):
         self.stop_profit_loss_order_page.permission_contract_to_top()  # 让权限合约TCU1907-SH排在合约列表的第一位来进行
         result = self.stop_profit_loss_order_page.offset_flag_auto_and_order()
