@@ -63,3 +63,10 @@ class BasePage:
         actions.w3c_actions.pointer_action.move_to_location(x2, y2)
         actions.w3c_actions.pointer_action.release()
         actions.perform()
+
+    def isElementExist(self, element):
+        try:
+            self.get_visible_element(element)
+            return True
+        except:
+            return False

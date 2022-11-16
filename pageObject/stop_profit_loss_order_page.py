@@ -481,7 +481,7 @@ class StopProfitLossOrderPage(BasePage):
         self.press_confirm_button()
         return order_details_stop_profit_value
 
-    def change_mode_and_check_type(self):
+    def change_mode_and_check_type_and_times(self):
         self.press_offer()
         self.click_action(self.stop_profit_mode_xpath)
         self.click_action(self.By_custom_price_xpath)
@@ -490,7 +490,10 @@ class StopProfitLossOrderPage(BasePage):
         type_element = self.get_visible_element(self.order_type_xpath)
         type_enabled = type_element.get_attribute("enabled")
         type_value = type_element.text
-        return type_enabled, type_value
+        times_element = self.get_visible_element(self.times_xpath)
+        times_enabled = times_element.get_attribute("enabled")
+        times_value = times_element.text
+        return type_enabled, type_value, times_value, times_enabled
 
     def change_mode_close_and_order(self):
         self.press_offer()
@@ -537,7 +540,7 @@ class StopProfitLossOrderPage(BasePage):
         price_element = self.get_visible_element(self.price_xpath)
         price_value = price_element.text
         price_enabled = price_element.get_attribute("enabled")
-        open_px_diff_price = self.get_visible_element(self.open_px_diff_price_title_xpath).text
+        open_px_diff_price = self.isElementExist(self.open_px_diff_price_title)
         return type_default_value, price_value, price_enabled, type_value, open_px_diff_price
 
     def change_market_type_and_order(self):

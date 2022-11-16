@@ -267,12 +267,16 @@ class CaseStopProfitLossOrder(unittest.TestCase):
         self.assertEqual(order_message, AlertError.alert_title_succeed)
         self.assertEqual("12345678.12345678", order_details_gap_value)
 
-    def test_41_change_mode_and_type_should_enabled_false(self):
-        result = self.stop_profit_loss_order_page.change_mode_and_check_type()
+    def test_41_change_mode_and_type_and_times_should_enabled_false(self):
+        result = self.stop_profit_loss_order_page.change_mode_and_check_type_and_times()
         type_enabled = result[0]
         type_value = result[1]
+        times_value = result[2]
+        times_enabled = result[3]
         self.assertEqual(type_enabled, 'false')
         self.assertEqual(type_value, "LIM")
+        self.assertEqual(times_enabled, "false")
+        self.assertEqual(times_value, "1")
 
     def test_41_change_mode_close_and_order_should_success(self):
         result = self.stop_profit_loss_order_page.change_mode_close_and_order()
@@ -309,7 +313,7 @@ class CaseStopProfitLossOrder(unittest.TestCase):
         self.assertEqual("Market", price_value)
         self.assertEqual("false", price_enabled)
         self.assertEqual("Market", type_value)
-        self.assertEqual("开仓价差", open_px_diff_price)
+        self.assertEqual(True, open_px_diff_price)
 
     def test_27_changed_market_type_and_order_should_success(self):
         result = self.stop_profit_loss_order_page.change_market_type_and_order()
