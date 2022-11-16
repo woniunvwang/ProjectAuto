@@ -237,7 +237,7 @@ class CaseStopOrder(unittest.TestCase):
 
     # 价差为0.1
     def test_30_input_illegal_price_and_order_should_fail(self):
-        self.stop_order_page.input_illegal_price_and_order("0.0000001")
+        self.stop_order_page.input_illegal_price_and_order("0.00001")
         result = self.stop_order_page.is_toast_exist(AlertError.alert_illegal_order_price_tick_size)
         self.assertEqual(True, result)
 

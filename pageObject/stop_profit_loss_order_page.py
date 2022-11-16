@@ -9,6 +9,7 @@ from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
 from common.baseDriver import android_driver
 from common.basePage import BasePage
+from pageObject import login_page
 from pageObject.login_page import LoginPage
 
 
@@ -46,11 +47,11 @@ class StopProfitLossOrderPage(BasePage):
     order_type_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/order_type']/android.widget.LinearLayout/android.widget.Button")
     select_type_market_xpath = (AppiumBy.XPATH, "//*[@text='Market']/..")
     select_type_lim_xpath = (AppiumBy.XPATH, "//*[@text='LIM']/..")
-    support_market_xpath = (AppiumBy.ID,  "com.atp.newdemo2:id/support_market")
+    close_px_diff_price_title = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平仓价差")')
     close_px_diff_price_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/close_px_diff_price']/android.view.ViewGroup/android.widget.EditText")
+    open_px_diff_price_title = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("开仓价差")')
     open_px_diff_price_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/open_px_diff_price']/android.view.ViewGroup/android.widget.EditText")
     open_px_diff_price_title_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/open_px_diff_price']/android.view.ViewGroup/android.widget.TextView")
-    open_px_diff_price_title = ("//*[@resource-id='com.atp.newdemo2:id/open_px_diff_price']/android.view.ViewGroup/android.widget.TextView")
     times_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/times']/android.view.ViewGroup/android.widget.EditText")
     offset_flag_change_button = (AppiumBy.ID, "com.atp.newdemo2:id/offset_flag")
     offset_flag_auto_xpath = (AppiumBy.XPATH, "//*[@text='自动' or @text='Auto']/..")
@@ -64,6 +65,7 @@ class StopProfitLossOrderPage(BasePage):
     hedge_flag_speculation_xpath = (AppiumBy.XPATH, "//*[@text='投机' or @text='Speculation']/..")
     hedge_flag_arbitrage_xpath = (AppiumBy.XPATH, "//*[@text='套利' or @text='Arbitrage']/..")
     hedge_flag_hedge_xpath = (AppiumBy.XPATH, "//*[@text='套保' or @text='Hedge']/..")
+    exchange_market_order_switch = (AppiumBy.ID, "com.atp.newdemo2:id/support_market")
     order_details_title = (AppiumBy.ID, 'com.atp.newdemo2:id/title')
     order_details_side = (AppiumBy.XPATH, "//*[@text='方向' or @text='Side']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_contract = (AppiumBy.XPATH, "//*[@text='合约' or @text='Contract']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
@@ -74,8 +76,12 @@ class StopProfitLossOrderPage(BasePage):
     order_details_stop_loss = (AppiumBy.XPATH, "//*[@text='止损' or @text='Stop Loss']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_stop_profit = (AppiumBy.XPATH, "//*[@text='止盈' or @text='Stop Profit']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_type = (AppiumBy.XPATH, "//*[@text='类型' or @text='Type']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_close_px_diff_price_title = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("平仓价差")')
     order_details_close_px_diff_price = (AppiumBy.XPATH, "//*[@text='平仓价差' or @text='Close Pxdiff']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_open_px_diff_price_title = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("开仓价差")')
     order_details_open_px_diff_price = (AppiumBy.XPATH, "//*[@text='开仓价差' or @text='Open_Pxdiff']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_exchange_market_order_title = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("交易所市价指令")')
+    order_details_exchange_market_order_value = (AppiumBy.XPATH, "//*[@text='交易所市价指令' or @text='Use exchange market order']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_times = (AppiumBy.XPATH, "//*[@text='数量' or @text='Times']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_offset_flag = (AppiumBy.XPATH, "//*[@text='开平标志' or @text='Offset Flag']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_hedge_flag = (AppiumBy.XPATH, "//*[@text='投保标志' or @text='Hedge Flag']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
@@ -95,15 +101,6 @@ class StopProfitLossOrderPage(BasePage):
     no_data_contract_drag_path = ("//*[@text='GC2212-CME']/../android.widget.ImageView")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
-
-    def slide_action(self, x1, y1, x2, y2):
-        actions = ActionChains(self.driver)
-        actions.w3c_actions = ActionBuilder(self.driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
-        actions.w3c_actions.pointer_action.move_to_location(x1, y1)
-        actions.w3c_actions.pointer_action.pointer_down()
-        actions.w3c_actions.pointer_action.move_to_location(x2, y2)
-        actions.w3c_actions.pointer_action.release()
-        actions.perform()
 
     def login_successful(self):
         loginPage = LoginPage(self.driver)
@@ -207,24 +204,6 @@ class StopProfitLossOrderPage(BasePage):
         source = self.driver.find_element(by=AppiumBy.XPATH, value=self.permission_contract_drag_path)
         ActionChains(self.driver).drag_and_drop_by_offset(source, 0, 350).pause(5).perform()
         self.click_action(self.back_button)
-
-    # def press_bid(self):
-    #     actions = ActionChains(self.driver)
-    #     actions.click_and_hold(self.get_visible_element(self.bid_lots_path))
-    #     bid_lots = self.get_visible_element(self.bid_lots_path).text
-    #     bid_price = self.get_visible_element(self.bid_price_path).text
-    #     actions.release()
-    #     actions.perform()
-    #     return bid_lots, bid_price
-    #
-    # def press_offer(self):
-    #     actions = ActionChains(self.driver)
-    #     actions.click_and_hold(self.get_visible_element(self.offer_lots_path))
-    #     offer_lots = self.get_visible_element(self.offer_lots_path).text
-    #     offer_price = self.get_visible_element(self.offer_price_path).text
-    #     actions.release()
-    #     actions.perform()
-    #     return offer_lots, offer_price
 
     def press_bid(self):
         self.click_action(self.bid_price_path)
@@ -588,8 +567,128 @@ class StopProfitLossOrderPage(BasePage):
         price_enabled = price_element.get_attribute("enabled")
         type_value = self.get_visible_element(self.order_type_xpath).text
         self.slide_action(460, 1750, 460, 1400)
-        open_px_diff_price_value = self.driver.find_element_by_text("开仓价差")
+        open_px_diff_price_value = self.isElementExist("开仓价差")
         return price_default_value, price_value, price_enabled, type_value, open_px_diff_price_value
+
+    def exchange_market_order_default(self):
+        self.press_offer()
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
+        exchange_market_order_default = self.get_visible_element(self.exchange_market_order_switch).text
+        self.slide_action(460, 1750, 460, 1400)
+        self.press_confirm_button()
+        time.sleep(1)
+        order_detail_exchange_market_order = self.isElementExist(self.order_details_exchange_market_order_title)
+        return exchange_market_order_default, order_detail_exchange_market_order
+
+    def lim_type_and_exchange_market_order_open(self):
+        self.press_offer()
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
+        self.click_action(self.exchange_market_order_switch)
+        close_pxdiff = self.isElementExist(self.close_px_diff_price_xpath)
+        self.slide_action(460, 1750, 460, 1400)
+        self.press_confirm_button()
+        time.sleep(1)
+        order_detail_close_pxdiff = self.isElementExist(self.order_details_close_px_diff_price_title)
+        order_detail_exchange_market_order_value = self.get_visible_element(self.order_details_exchange_market_order_value).text
+        return close_pxdiff, order_detail_close_pxdiff, order_detail_exchange_market_order_value
+
+    def market_type_and_exchange_market_order_open(self):
+        self.change_market_type()
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
+        self.click_action(self.exchange_market_order_switch)
+        close_pxdiff = self.isElementExist(self.close_px_diff_price_xpath)
+        open_pxdiff = self.isElementExist(self.open_px_diff_price_xpath)
+        self.slide_action(460, 1750, 460, 1400)
+        self.press_confirm_button()
+        time.sleep(1)
+        order_detail_close_pxdiff = self.isElementExist(self.order_details_close_px_diff_price_title)
+        order_detail_open_pxdiff = self.isElementExist(self.order_details_open_px_diff_price_title)
+        order_detail_exchange_market_order_value = self.get_visible_element(self.order_details_exchange_market_order_value).text
+        return close_pxdiff, order_detail_close_pxdiff, open_pxdiff, order_detail_open_pxdiff, order_detail_exchange_market_order_value
+
+    def clear_close_pxdiff_and_press_confirm(self):
+        self.press_offer()
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
+        self.slide_action(460, 1750, 460, 1400)
+        self.clear_action(self.close_px_diff_price_xpath)
+        self.press_confirm_button()
+
+    def input_illegal_close_pxdiff_and_press_confirm(self, close_pxdiff_value):
+        self.press_offer()
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
+        self.slide_action(460, 1750, 460, 1400)
+        self.clear_action(self.close_px_diff_price_xpath)
+        self.input_action(self.close_px_diff_price_xpath, close_pxdiff_value)
+        self.press_confirm_button()
+
+    def input_legal_close_pxdiff_and_order(self, close_pxdiff_value):
+        self.press_offer()
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
+        self.slide_action(460, 1750, 460, 1400)
+        self.clear_action(self.close_px_diff_price_xpath)
+        self.input_action(self.close_px_diff_price_xpath, close_pxdiff_value)
+        self.press_confirm_button()
+        order_detail_close_pxdiff = self.get_visible_element(self.order_details_close_px_diff_price).text
+        self.press_confirm_button()
+        return order_detail_close_pxdiff
+
+    def clear_open_pxdiff_and_press_confirm(self):
+        self.change_market_type()
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
+        self.slide_action(460, 1750, 460, 1400)
+        self.clear_action(self.open_px_diff_price_xpath)
+        self.press_confirm_button()
+
+    def input_illegal_open_pxdiff_and_press_confirm(self, open_pxdiff_value):
+        self.change_market_type()
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
+        self.slide_action(460, 1750, 460, 1400)
+        self.clear_action(self.open_px_diff_price_xpath)
+        self.input_action(self.open_px_diff_price_xpath, open_pxdiff_value)
+        self.press_confirm_button()
+
+    def input_legal_open_pxdiff_and_order(self, open_pxdiff_value):
+        self.change_market_type()
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
+        self.slide_action(460, 1750, 460, 1400)
+        self.clear_action(self.open_px_diff_price_xpath)
+        self.input_action(self.open_px_diff_price_xpath, open_pxdiff_value)
+        self.press_confirm_button()
+        order_detail_open_pxdiff = self.get_visible_element(self.order_details_open_px_diff_price).text
+        self.press_confirm_button()
+        return order_detail_open_pxdiff
+
+    def clear_times_and_press_confirm(self):
+        self.press_offer()
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
+        self.slide_action(460, 1750, 460, 1400)
+        self.clear_action(self.times_xpath)
+        self.press_confirm_button()
+
+    def input_times_and_press_confirm(self, times_value):
+        self.press_offer()
+        self.input_action(self.stop_loss_xpath, "1")
+        self.input_action(self.stop_profit_xpath, "1")
+        self.slide_action(460, 1750, 460, 1400)
+        self.clear_action(self.times_xpath)
+        self.input_action(self.times_xpath, times_value)
+        self.press_confirm_button()
+
+    def input_legal_times_and_order(self, times_value):
+        self.input_times_and_press_confirm(times_value)
+        order_detail_times = self.get_visible_element(self.order_details_times).text
+        self.press_confirm_button()
+        return order_detail_times
 
     def offset_flag_auto_and_order(self):
         self.press_offer()

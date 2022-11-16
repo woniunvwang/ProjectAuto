@@ -5,7 +5,7 @@ from common.baseDriver import android_driver
 from pageObject.gain_best_order_page import GainBestOrderPage
 
 
-class CaseStopOrder(unittest.TestCase):
+class CaseGainBestOrder(unittest.TestCase):
 
     def setUp(self) -> None:
         self.driver = android_driver()

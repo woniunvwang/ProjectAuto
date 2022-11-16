@@ -4,7 +4,7 @@ from common.baseDriver import android_driver
 from pageObject.stop_profit_loss_order_page import StopProfitLossOrderPage
 
 
-class CaseStopOrder(unittest.TestCase):
+class CaseStopProfitLossOrder(unittest.TestCase):
 
     def setUp(self) -> None:
         self.driver = android_driver()
@@ -333,7 +333,147 @@ class CaseStopOrder(unittest.TestCase):
         self.assertEqual(price_default_value, price_value)
         self.assertEqual("true", price_enabled)
         self.assertEqual("LIM", type_value)
-        self.assertEqual("false", open_px_diff_price)
+        self.assertEqual(False, open_px_diff_price)
+
+    def test_31_exchange_market_order_default_value_should_closed(self):
+        result = self.stop_profit_loss_order_page.exchange_market_order_default()
+        exchange_market_order_default = result[0]
+        order_detail_exchange_market_order = result[1]
+        self.assertEqual("关闭", exchange_market_order_default)
+        self.assertEqual(False, order_detail_exchange_market_order)
+
+    def test_31_lim_type_and_exchange_market_order_value_Open_and_close_pxdiff_should_disappear(self):
+        result = self.stop_profit_loss_order_page.lim_type_and_exchange_market_order_open()
+        close_pxdiff = result[0]
+        order_detail_close_pxdiff = result[1]
+        order_detail_exchange_market_order_value = result[2]
+        self.assertEqual(False, close_pxdiff)
+        self.assertEqual(False, order_detail_close_pxdiff)
+        self.assertEqual("[平仓]", order_detail_exchange_market_order_value)
+
+    def test_31_market_type_and_exchange_market_order_value_Open_and_close_pxdiff_should_disappear(self):
+        result = self.stop_profit_loss_order_page.market_type_and_exchange_market_order_open()
+        close_pxdiff = result[0]
+        order_detail_close_pxdiff = result[1]
+        open_pxdiff = result[2]
+        order_detail_open_pxdiff = result[3]
+        order_detail_exchange_market_order_value = result[4]
+        self.assertEqual(False, close_pxdiff)
+        self.assertEqual(False, order_detail_close_pxdiff)
+        self.assertEqual(False, open_pxdiff)
+        self.assertEqual(False, order_detail_open_pxdiff)
+        self.assertEqual("[开仓,平仓]", order_detail_exchange_market_order_value)
+
+    def test_27_clear_close_pxdiff_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.clear_close_pxdiff_and_press_confirm()
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_message_close_pxdiff)
+        self.assertEqual(True, result)
+
+    def test_27_input_illegal_close_pxdiff_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_close_pxdiff_and_press_confirm(".")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_close_pxdiff)
+        self.assertEqual(True, result)
+
+    def test_28_input_illegal_close_pxdiff_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_close_pxdiff_and_press_confirm("+")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_close_pxdiff)
+        self.assertEqual(True, result)
+
+    def test_29_input_illegal_close_pxdiff_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_close_pxdiff_and_press_confirm("-")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_close_pxdiff)
+        self.assertEqual(True, result)
+
+    def test_25_input_illegal_close_pxdiff_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_close_pxdiff_and_press_confirm("1.0001")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_close_pxdiff_tick_size)
+        self.assertEqual(True, result)
+
+    def test_31_legal_close_pxdiff_and_order_should_success(self):
+        order_detail_close_pxdiff = self.stop_profit_loss_order_page.input_legal_close_pxdiff_and_order("0")
+        order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual("0", order_detail_close_pxdiff)
+
+    def test_32_legal_close_pxdiff_and_order_should_success(self):
+        order_detail_close_pxdiff = self.stop_profit_loss_order_page.input_legal_close_pxdiff_and_order("100")
+        order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual("100", order_detail_close_pxdiff)
+
+    def test_27_clear_open_pxdiff_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.clear_open_pxdiff_and_press_confirm()
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_message_open_pxdiff)
+        self.assertEqual(True, result)
+
+    def test_27_input_illegal_open_pxdiff_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_open_pxdiff_and_press_confirm(".")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_open_pxdiff)
+        self.assertEqual(True, result)
+
+    def test_28_input_illegal_open_pxdiff_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_open_pxdiff_and_press_confirm("+")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_open_pxdiff)
+        self.assertEqual(True, result)
+
+    def test_29_input_illegal_open_pxdiff_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_open_pxdiff_and_press_confirm("-")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_open_pxdiff)
+        self.assertEqual(True, result)
+
+    def test_25_input_illegal_open_pxdiff_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.input_illegal_open_pxdiff_and_press_confirm("1.0001")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_open_pxdiff_tick_size)
+        self.assertEqual(True, result)
+
+    def test_31_legal_open_pxdiff_and_order_should_success(self):
+        order_detail_open_pxdiff = self.stop_profit_loss_order_page.input_legal_open_pxdiff_and_order("0")
+        order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual("0", order_detail_open_pxdiff)
+
+    def test_32_legal_open_pxdiff_and_order_should_success(self):
+        order_detail_open_pxdiff = self.stop_profit_loss_order_page.input_legal_open_pxdiff_and_order("100")
+        order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual("100", order_detail_open_pxdiff)
+
+    def test_27_clear_times_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.input_times_and_press_confirm("")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_message_times)
+        self.assertEqual(True, result)
+
+    def test_27_input_illegal_times_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.input_times_and_press_confirm("+~!@#¥%^&*()_-")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_times)
+        self.assertEqual(True, result)
+
+    def test_28_input_illegal_times_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.input_times_and_press_confirm("+")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_times)
+        self.assertEqual(True, result)
+
+    def test_29_input_illegal_times_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.input_times_and_press_confirm("-")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_times)
+        self.assertEqual(True, result)
+
+    def test_25_input_illegal_times_and_press_confirm_should_fail(self):
+        self.stop_profit_loss_order_page.input_times_and_press_confirm("1.0001")
+        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_times)
+        self.assertEqual(True, result)
+
+    def test_31_illegal_times_and_order_should_success(self):
+        order_detail_times = self.stop_profit_loss_order_page.input_legal_times_and_order("0")
+        order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual("0", order_detail_times)
+
+    def test_32_legal_times_and_order_should_success(self):
+        order_detail_times = self.stop_profit_loss_order_page.input_legal_times_and_order("100")
+        order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
+        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual("100", order_detail_times)
 
     def test_40_offset_flag_auto_and_order_should_success(self):
         self.stop_profit_loss_order_page.permission_contract_to_top()  # 让权限合约TCU1907-SH排在合约列表的第一位来进行

@@ -80,15 +80,6 @@ class GainBestOrderPage(BasePage):
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
 
-    def slide_action(self, x1, y1, x2, y2):
-        actions = ActionChains(self.driver)
-        actions.w3c_actions = ActionBuilder(self.driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
-        actions.w3c_actions.pointer_action.move_to_location(x1, y1)
-        actions.w3c_actions.pointer_action.pointer_down()
-        actions.w3c_actions.pointer_action.move_to_location(x2, y2)
-        actions.w3c_actions.pointer_action.release()
-        actions.perform()
-
     def login_successful(self):
         loginPage = LoginPage(self.driver)
         loginPage.input_username("wangxin")

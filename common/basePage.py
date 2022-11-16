@@ -1,4 +1,8 @@
 from appium.webdriver.common.appiumby import AppiumBy
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.actions import interaction
+from selenium.webdriver.common.actions.action_builder import ActionBuilder
+from selenium.webdriver.common.actions.pointer_input import PointerInput
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from common.baseLog import logger
@@ -51,4 +55,11 @@ class BasePage:
     def quit_action(self):
         self.driver.close_app()
 
-
+    def slide_action(self, x1, y1, x2, y2):
+        actions = ActionChains(self.driver)
+        actions.w3c_actions = ActionBuilder(self.driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
+        actions.w3c_actions.pointer_action.move_to_location(x1, y1)
+        actions.w3c_actions.pointer_action.pointer_down()
+        actions.w3c_actions.pointer_action.move_to_location(x2, y2)
+        actions.w3c_actions.pointer_action.release()
+        actions.perform()

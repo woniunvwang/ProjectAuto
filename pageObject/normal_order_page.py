@@ -4,9 +4,6 @@ import string
 from appium.webdriver.common.appiumby import AppiumBy
 import time
 from selenium.webdriver import ActionChains
-from selenium.webdriver.common.actions import interaction
-from selenium.webdriver.common.actions.action_builder import ActionBuilder
-from selenium.webdriver.common.actions.pointer_input import PointerInput
 from common.baseDriver import android_driver
 from common.basePage import BasePage
 from pageObject.login_page import LoginPage
@@ -107,15 +104,6 @@ class NormalOrderPage(BasePage):
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
 
-    def slide_action(self, x1, y1, x2, y2):
-        actions = ActionChains(self.driver)
-        actions.w3c_actions = ActionBuilder(self.driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
-        actions.w3c_actions.pointer_action.move_to_location(x1, y1)
-        actions.w3c_actions.pointer_action.pointer_down()
-        actions.w3c_actions.pointer_action.move_to_location(x2, y2)
-        actions.w3c_actions.pointer_action.release()
-        actions.perform()
-
     def login_successful(self):
         loginPage = LoginPage(self.driver)
         loginPage.input_username("wangxin")
@@ -195,24 +183,6 @@ class NormalOrderPage(BasePage):
     def agree_button(self):
         allow_button = self.get_visible_element(self.agree_button_id)
         allow_button.click()
-
-    # def press_bid(self):
-    #     actions = ActionChains(self.driver)
-    #     actions.click_and_hold(self.get_visible_element(self.bid_lots_path))
-    #     bid_lots = self.get_visible_element(self.bid_lots_path).text
-    #     bid_price = self.get_visible_element(self.bid_price_path).text
-    #     actions.release()
-    #     actions.perform()
-    #     return bid_lots, bid_price
-    #
-    # def press_offer(self):
-    #     actions = ActionChains(self.driver)
-    #     actions.click_and_hold(self.get_visible_element(self.offer_lots_path))
-    #     offer_lots = self.get_visible_element(self.offer_lots_path).text
-    #     offer_price = self.get_visible_element(self.offer_price_path).text
-    #     actions.release()
-    #     actions.perform()
-    #     return offer_lots, offer_price
 
     def press_bid(self):
         self.click_action(self.bid_price_path)
@@ -936,9 +906,6 @@ class NormalOrderPage(BasePage):
         order_details_memo_value = self.order_details_memo_value()
         self.press_confirm_button()
         return hint, memo_value, order_details_memo_value
-
-
-
 
 
 if __name__ == '__main__':
