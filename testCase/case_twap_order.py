@@ -214,11 +214,7 @@ class CaseTwapOrder(unittest.TestCase):
         order_message = self.twap_order_page.alert_order_details_message()
         self.assertEqual(order_message, AlertError.alert_order_message)
 
-    def test_31_order_interval_default_value_should_none(self):
-        order_interval_value = self.twap_order_page.order_interval_default()
-        self.assertEqual("请输入秒数", order_interval_value)
-
-    def test_32_price_type_default_should_last_trade(self):
+    def test_31_price_type_default_should_last_trade(self):
         result = self.twap_order_page.price_type_default()
         price_type_default = result[0]
         order_detail_price_type_value = result[1]
@@ -227,7 +223,7 @@ class CaseTwapOrder(unittest.TestCase):
         order_message = self.twap_order_page.alert_order_details_message()
         self.assertEqual(order_message, AlertError.alert_order_message)
 
-    def test_33_change_price_type_market_buy_and_order_should_success(self):
+    def test_32_change_price_type_market_buy_and_order_should_success(self):
         result = self.twap_order_page.change_price_type_market_buy_and_order()
         price_type_default = result[0]
         order_detail_price_type_value = result[1]
@@ -236,7 +232,7 @@ class CaseTwapOrder(unittest.TestCase):
         order_message = self.twap_order_page.alert_order_details_message()
         self.assertEqual(order_message, AlertError.alert_order_message)
 
-    def test_34_change_price_type_best_bid_and_order_should_success(self):
+    def test_33_change_price_type_best_bid_and_order_should_success(self):
         result = self.twap_order_page.change_price_type_best_bid_and_order()
         price_type_default = result[0]
         order_detail_price_type_value = result[1]
@@ -244,6 +240,10 @@ class CaseTwapOrder(unittest.TestCase):
         self.assertEqual("对手价", order_detail_price_type_value)
         order_message = self.twap_order_page.alert_order_details_message()
         self.assertEqual(order_message, AlertError.alert_order_message)
+
+    def test_34_order_interval_default_value_should_none(self):
+        order_interval_value = self.twap_order_page.order_interval_default()
+        self.assertEqual("请输入秒数", order_interval_value)
 
     def test_35_clear_order_interval_value_and_order_should_fail(self):
         self.twap_order_page.input_order_interval_value("")
@@ -277,8 +277,8 @@ class CaseTwapOrder(unittest.TestCase):
     def test_41_input_illegal_order_interval_value_and_order_should_success(self):
         order_detail_order_interval_value = self.twap_order_page.input_order_interval_value_and_order("1")
         self.assertEqual("1s", order_detail_order_interval_value)
-        order_message = self.twap_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_order_message)
+        order_message = self.twap_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
 
     def test_42_input_illegal_order_interval_value_and_order_should_success(self):
         order_detail_order_interval_value = self.twap_order_page.input_order_interval_value_and_order("123456.123")
@@ -343,8 +343,8 @@ class CaseTwapOrder(unittest.TestCase):
 
     def test_54_input_cancel_order_interval_value_below_order_interval_and_order_should_success(self):
         self.twap_order_page.input_order_interval_and_cancel_interval_and_order("10", "5")
-        order_message = self.twap_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_order_message)
+        order_message = self.twap_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
 
     def test_55_start_time_default_value_should_effect_immediately(self):
         result = self.twap_order_page.start_time_default()

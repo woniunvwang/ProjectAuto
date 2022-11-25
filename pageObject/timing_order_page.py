@@ -10,13 +10,13 @@ from common.basePage import BasePage
 from pageObject.login_page import LoginPage
 
 
-class TwapOrderPage(BasePage):
+class TimingOrderPage(BasePage):
     confirm_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/confirm")
     allow_button_id = (AppiumBy.ID, "com.android.permissioncontroller:id/permission_allow_button")
     agree_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/agree")
     cancel_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/cancel")
     contract_group_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("自动化测试合约")')
-    twap_order_path = (AppiumBy.XPATH, "//android.widget.LinearLayout[@content-desc='TWAP单']/android.widget.TextView")
+    twap_order_path = (AppiumBy.XPATH, "//android.widget.LinearLayout[@content-desc='定时单']/android.widget.TextView")
     page_title = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget"
                                   ".FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget"
                                   ".LinearLayout/android.view.ViewGroup["
@@ -37,25 +37,14 @@ class TwapOrderPage(BasePage):
     buy_side_id = (AppiumBy.ID, "com.atp.newdemo2:id/order_direction_buy")
     lots_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/lots']/android.view.ViewGroup/android.widget.EditText")
     single_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/single']/android.view.ViewGroup/android.widget.EditText")
-    price_diff_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price_diff']/android.view.ViewGroup/android.widget.EditText")
-    price_type_button_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price_type']/android.widget.LinearLayout/android.widget.Button")
 
-    last_trade_xpath = (AppiumBy.XPATH, "//*[@text='最后成交价' or @text='Last trade']/..")
-    market_buy_xpath = (AppiumBy.XPATH, "//*[@text='市场买价' or @text='Market buy']/..")
-    market_sell_xpath = (AppiumBy.XPATH, "//*[@text='市场卖价' or @text='Market sell']/..")
-    best_bid_xpath = (AppiumBy.XPATH, "//*[@text='对手价' or @text='Best Bid/Offer']/..")
-    order_interval_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/order_interval']/android.view.ViewGroup/android.widget.EditText")
-    cancel_order_interval_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/cancel_order_interval']/android.view.ViewGroup/android.widget.EditText")
     effect_immediately_id = (AppiumBy.ID, "com.atp.newdemo2:id/effect_immediately")
     start_time_radio_id = (AppiumBy.ID, "com.atp.newdemo2:id/start_time_radio")
     start_time_id = (AppiumBy.ID, "com.atp.newdemo2:id/start_time")
     always_execute_id = (AppiumBy.ID, "com.atp.newdemo2:id/always_execute")
     end_time_radio_id = (AppiumBy.ID, "com.atp.newdemo2:id/end_time_radio")
     end_time_id = (AppiumBy.ID, "com.atp.newdemo2:id/end_time")
-    cancel_limit_switch = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/cancel_limit']/android.view.ViewGroup/android.widget.Switch")
-    cancel_limit_text = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/cancel_limit']/android.view.ViewGroup/android.widget.EditText")
-    price_limit_switch = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price_limit']/android.view.ViewGroup/android.widget.Switch")
-    price_limit_text = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price_limit']/android.view.ViewGroup/android.widget.EditText")
+
 
 
     offset_flag_change_button = (AppiumBy.ID, "com.atp.newdemo2:id/offset_flag")
@@ -80,12 +69,6 @@ class TwapOrderPage(BasePage):
     order_details_lots = (AppiumBy.XPATH, "//*[@text='手数' or @text='Lots']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_single = (AppiumBy.XPATH,
                           "//*[@text='单次手数' or @text='Single']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_order_interval = (AppiumBy.XPATH,
-                          "//*[@text='下单间隔' or @text='Order Interval']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_cancel_order_interval = (AppiumBy.XPATH,
-                          "//*[@text='撤单间隔' or @text='Cancel Order Interval']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_price_type = (AppiumBy.XPATH,
-                          "//*[@text='价格类型' or @text='Price type']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
 
     order_details_start_time = (AppiumBy.XPATH,
                           "//*[@text='开始时间' or @text='Start time']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
@@ -378,127 +361,8 @@ class TwapOrderPage(BasePage):
         self.press_confirm_button()
         return order_detail_single_value
 
-    def price_diff_default(self):
-        self.press_offer()
-        diff_value = self.get_visible_element(self.price_diff_xpath).text
-        return diff_value
 
-    def input_price_diff_value(self, price_diff_value):
-        self.press_offer()
-        self.clear_action(self.price_diff_xpath)
-        self.input_action(self.price_diff_xpath, price_diff_value)
-        self.slide_action(460, 1750, 460, 1400)
-        self.input_action(self.order_interval_xpath, "1")
-        self.input_action(self.cancel_order_interval_xpath, "1")
-        price_diff_value = self.get_visible_element(self.price_diff_xpath).text
-        self.press_confirm_button()
-        return price_diff_value
 
-    def input_price_diff_value_and_order(self, price_diff_value):
-        self.input_price_diff_value(price_diff_value)
-        order_detail_price_diff_value = self.get_visible_element(self.order_details_price_diff).text
-        self.press_confirm_button()
-        return order_detail_price_diff_value
-
-    def price_type_default(self):
-        self.press_offer()
-        price_type_default = self.get_visible_element(self.price_type_button_xpath).text
-        self.slide_action(460, 1750, 460, 1400)
-        self.input_action(self.order_interval_xpath, "1")
-        self.input_action(self.cancel_order_interval_xpath, "1")
-        self.press_confirm_button()
-        order_detail_price_type_value = self.get_visible_element(self.order_details_price_type).text
-        self.press_confirm_button()
-        return price_type_default,  order_detail_price_type_value
-
-    def change_price_type_and_order(self, change_type):
-        self.press_offer()
-        self.click_action(self.price_type_button_xpath)
-        self.click_action(change_type)
-        self.press_confirm_button()
-        price_type_value = self.get_visible_element(self.price_type_button_xpath).text
-        self.slide_action(460, 1750, 460, 1400)
-        self.input_action(self.order_interval_xpath, "1")
-        self.input_action(self.cancel_order_interval_xpath, "1")
-        self.press_confirm_button()
-        order_detail_price_type_value = self.get_visible_element(self.order_details_price_type).text
-        self.press_confirm_button()
-        return price_type_value, order_detail_price_type_value
-
-    def change_price_type_market_buy_and_order(self):
-        change_type = self.market_buy_xpath
-        result = self.change_price_type_and_order(change_type)
-        price_type_value = result[0]
-        order_detail_price_type_value = result[1]
-        return price_type_value, order_detail_price_type_value
-
-    def change_price_type_market_sell_and_order(self):
-        change_type = self.market_sell_xpath
-        result = self.change_price_type_and_order(change_type)
-        price_type_value = result[0]
-        order_detail_price_type_value = result[1]
-        return price_type_value, order_detail_price_type_value
-
-    def change_price_type_best_bid_and_order(self):
-        change_type = self.best_bid_xpath
-        result = self.change_price_type_and_order(change_type)
-        price_type_value = result[0]
-        order_detail_price_type_value = result[1]
-        return price_type_value, order_detail_price_type_value
-
-    def order_interval_default(self):
-        self.press_offer()
-        self.slide_action(460, 1750, 460, 1400)
-        order_interval_value = self.get_visible_element(self.order_interval_xpath).text
-        return order_interval_value
-
-    def input_order_interval_value(self, order_interval_value):
-        self.press_offer()
-        self.slide_action(460, 1750, 460, 1400)
-        self.clear_action(self.order_interval_xpath)
-        self.input_action(self.order_interval_xpath, order_interval_value)
-        self.input_action(self.cancel_order_interval_xpath, "1")
-        order_interval_value = self.get_visible_element(self.order_interval_xpath).text
-        self.press_confirm_button()
-        return order_interval_value
-
-    def input_order_interval_value_and_order(self, order_interval_value):
-        self.input_order_interval_value(order_interval_value)
-        order_detail_order_interval_value = self.get_visible_element(self.order_details_order_interval).text
-        self.press_confirm_button()
-        return order_detail_order_interval_value
-
-    def cancel_order_interval_default(self):
-        self.press_offer()
-        cancel_order_interval_value = self.get_visible_element(self.cancel_order_interval_xpath).text
-        return cancel_order_interval_value
-
-    def input_cancel_order_interval_value(self, cancel_order_interval_value):
-        self.press_offer()
-        self.slide_action(460, 1750, 460, 1400)
-        self.clear_action(self.cancel_order_interval_xpath)
-        self.input_action(self.cancel_order_interval_xpath, cancel_order_interval_value)
-        self.input_action(self.order_interval_xpath, "123456.123")
-        cancel_order_interval_value = self.get_visible_element(self.cancel_order_interval_xpath).text
-        self.press_confirm_button()
-        return cancel_order_interval_value
-
-    def input_cancel_order_interval_value_and_order(self, cancel_order_interval_value):
-        self.input_cancel_order_interval_value(cancel_order_interval_value)
-        order_detail_cancel_order_interval_value = self.get_visible_element(self.order_details_cancel_order_interval).text
-        self.press_confirm_button()
-        return order_detail_cancel_order_interval_value
-
-    def input_order_interval_and_cancel_interval(self, order_interval, cancel_interval):
-        self.press_offer()
-        self.slide_action(460, 1750, 460, 1400)
-        self.input_action(self.order_interval_xpath, order_interval)
-        self.input_action(self.cancel_order_interval_xpath, cancel_interval)
-        self.press_confirm_button()
-
-    def input_order_interval_and_cancel_interval_and_order(self, order_interval, cancel_interval):
-        self.input_order_interval_and_cancel_interval(order_interval, cancel_interval)
-        self.press_confirm_button()
 
     def start_time_default(self):
         self.press_offer()
@@ -585,13 +449,13 @@ class TwapOrderPage(BasePage):
         self.press_confirm_button()
         return offset_flag_default_value, order_details_offset_flag_value
 
-    def change_offset_flag_and_order(self, option_value):
+    def offset_flag_open_and_order(self):
         self.press_offer()
         self.click_action(self.offset_flag_change_button)
-        self.click_action(option_value)
+        self.click_action(self.offset_flag_open_xpath)
         self.press_confirm_button()
         offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
-        self.slide_action(460, 1750, 460, 1200)
+        self.slide_action(460, 1750, 460, 1400)
         self.input_action(self.order_interval_xpath, "1")
         self.input_action(self.cancel_order_interval_xpath, "1")
         self.press_confirm_button()
@@ -599,40 +463,74 @@ class TwapOrderPage(BasePage):
         self.press_confirm_button()
         return offset_flag_value, order_details_offset_flag_value
 
-    def offset_flag_open_and_order(self):
-        result = self.change_offset_flag_and_order(self.offset_flag_open_xpath)
-        offset_flag_value = result[0]
-        order_details_offset_flag_value = result[1]
-        return offset_flag_value, order_details_offset_flag_value
-
     def offset_flag_C_CT_O_and_order(self):
-        result = self.change_offset_flag_and_order(self.offset_flag_C_CT_O_xpath)
-        offset_flag_value = result[0]
-        order_details_offset_flag_value = result[1]
+        self.press_offer()
+        self.click_action(self.offset_flag_change_button)
+        self.click_action(self.offset_flag_C_CT_O_xpath)
+        self.press_confirm_button()
+        offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.order_interval_xpath, "1")
+        self.input_action(self.cancel_order_interval_xpath, "1")
+        self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
+        self.press_confirm_button()
         return offset_flag_value, order_details_offset_flag_value
 
     def offset_flag_CT_C_O_and_order(self):
-        result = self.change_offset_flag_and_order(self.offset_flag_CT_C_O_xpath)
-        offset_flag_value = result[0]
-        order_details_offset_flag_value = result[1]
+        self.press_offer()
+        self.click_action(self.offset_flag_change_button)
+        self.click_action(self.offset_flag_CT_C_O_xpath)
+        self.press_confirm_button()
+        offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.order_interval_xpath, "1")
+        self.input_action(self.cancel_order_interval_xpath, "1")
+        self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
+        self.press_confirm_button()
         return offset_flag_value, order_details_offset_flag_value
 
     def offset_flag_C_O_and_order(self):
-        result = self.change_offset_flag_and_order(self.offset_flag_C_O_xpath)
-        offset_flag_value = result[0]
-        order_details_offset_flag_value = result[1]
+        self.press_offer()
+        self.click_action(self.offset_flag_change_button)
+        self.click_action(self.offset_flag_C_O_xpath)
+        self.press_confirm_button()
+        offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.order_interval_xpath, "1")
+        self.input_action(self.cancel_order_interval_xpath, "1")
+        self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
+        self.press_confirm_button()
         return offset_flag_value, order_details_offset_flag_value
 
     def offset_flag_CT_O_and_order(self):
-        result = self.change_offset_flag_and_order(self.offset_flag_CT_O_xpath)
-        offset_flag_value = result[0]
-        order_details_offset_flag_value = result[1]
+        self.press_offer()
+        self.click_action(self.offset_flag_change_button)
+        self.click_action(self.offset_flag_CT_O_xpath)
+        self.press_confirm_button()
+        offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.order_interval_xpath, "1")
+        self.input_action(self.cancel_order_interval_xpath, "1")
+        self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
+        self.press_confirm_button()
         return offset_flag_value, order_details_offset_flag_value
 
     def offset_flag_CY_O_and_order(self):
-        result = self.change_offset_flag_and_order(self.offset_flag_CY_O_xpath)
-        offset_flag_value = result[0]
-        order_details_offset_flag_value = result[1]
+        self.press_offer()
+        self.click_action(self.offset_flag_change_button)
+        self.click_action(self.offset_flag_CY_O_xpath)
+        self.press_confirm_button()
+        offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.order_interval_xpath, "1")
+        self.input_action(self.cancel_order_interval_xpath, "1")
+        self.press_confirm_button()
+        order_details_offset_flag_value = self.order_details_offset_flag_value()
+        self.press_confirm_button()
         return offset_flag_value, order_details_offset_flag_value
 
     def hedge_flag_speculation_and_order(self):
