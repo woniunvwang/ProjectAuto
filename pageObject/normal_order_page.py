@@ -69,7 +69,6 @@ class NormalOrderPage(BasePage):
     hedge_flag_speculation_xpath = (AppiumBy.XPATH, "//*[@text='投机' or @text='Speculation']/..")
     hedge_flag_arbitrage_xpath = (AppiumBy.XPATH, "//*[@text='套利' or @text='Arbitrage']/..")
     hedge_flag_hedge_xpath = (AppiumBy.XPATH, "//*[@text='套保' or @text='Hedge']/..")
-    order_details_title = (AppiumBy.ID, 'com.atp.newdemo2:id/title')
     order_details_side = (AppiumBy.XPATH, "//*[@text='方向' or @text='Side']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_contract = (AppiumBy.XPATH, "//*[@text='合约' or @text='Contract']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_account = (AppiumBy.XPATH, "//*[@text='交易账户' or @text='Trade Account']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
@@ -89,6 +88,7 @@ class NormalOrderPage(BasePage):
     alert_contract_code = (AppiumBy.ID, 'com.atp.newdemo2:id/contract_code')
     alert_order_id = (AppiumBy.ID, 'com.atp.newdemo2:id/order_id')
     alert_message_ID = (AppiumBy.ID, "com.atp.newdemo2:id/message")
+    alert_message_title = (AppiumBy.ID, "com.atp.newdemo2:id/title")
     button_view_details = (AppiumBy.ID, 'com.atp.newdemo2: id/positive_button')
     button_close = (AppiumBy.ID, 'com.atp.newdemo2:id/close_button')
     last_price_and_lots = (AppiumBy.ID, "com.atp.newdemo2:id/lots_at_price")
@@ -114,9 +114,13 @@ class NormalOrderPage(BasePage):
         self.slide_action(960, 280, 700, 280)
         self.click_action(self.contract_group_text)
 
+    def alert_order_details_title(self):
+        alert_message_title = self.get_visible_element(self.alert_message_title).text
+        return alert_message_title
+
     def alert_order_details_message(self):
-        result = self.get_visible_element(self.alert_message_ID).text
-        return result
+        alert_message = self.get_visible_element(self.alert_message_ID).text
+        return alert_message
 
     def alert_illegal_lots_title(self):
         return self.get_visible_element(self.illegal_lots_xpath).text
@@ -650,11 +654,6 @@ class NormalOrderPage(BasePage):
         alert_order_id = self.get_visible_element(self.alert_order_id).text
         self.click_action(self.button_close)
         return alert_title, alert_contract_code, alert_order_id
-
-    def alert_title_send_order_successfully(self):
-        alert_title = self.get_visible_element(self.alert_title).text
-        self.click_action(self.button_close)
-        return alert_title
 
     def change_tif_gtc(self):
         self.press_offer()

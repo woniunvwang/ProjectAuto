@@ -39,7 +39,7 @@ class TwapOrderPage(BasePage):
     single_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/single']/android.view.ViewGroup/android.widget.EditText")
     price_diff_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price_diff']/android.view.ViewGroup/android.widget.EditText")
     price_type_button_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price_type']/android.widget.LinearLayout/android.widget.Button")
-    alert_title = (AppiumBy.ID, "com.atp.newdemo2:id/alert_title")
+
     last_trade_xpath = (AppiumBy.XPATH, "//*[@text='最后成交价' or @text='Last trade']/..")
     market_buy_xpath = (AppiumBy.XPATH, "//*[@text='市场买价' or @text='Market buy']/..")
     market_sell_xpath = (AppiumBy.XPATH, "//*[@text='市场卖价' or @text='Market sell']/..")
@@ -52,10 +52,10 @@ class TwapOrderPage(BasePage):
     always_execute_id = (AppiumBy.ID, "com.atp.newdemo2:id/always_execute")
     end_time_radio_id = (AppiumBy.ID, "com.atp.newdemo2:id/end_time_radio")
     end_time_id = (AppiumBy.ID, "com.atp.newdemo2:id/end_time")
-    cancel_limit_switch = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/cancel_limit'/android.view.ViewGroup/android.widget.Switch")
-    cancel_limit_text = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/cancel_limit'/android.view.ViewGroup/android.widget.EditText")
-    price_limit_switch = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price_limit'/android.view.ViewGroup/android.widget.Switch")
-    price_limit_text = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price_limit'/android.view.ViewGroup/android.widget.EditText")
+    cancel_limit_switch = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/cancel_limit']/android.view.ViewGroup/android.widget.Switch")
+    cancel_limit_text = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/cancel_limit']/android.view.ViewGroup/android.widget.EditText")
+    price_limit_switch = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price_limit']/android.view.ViewGroup/android.widget.Switch")
+    price_limit_text = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price_limit']/android.view.ViewGroup/android.widget.EditText")
 
 
     offset_flag_change_button = (AppiumBy.ID, "com.atp.newdemo2:id/offset_flag")
@@ -91,6 +91,10 @@ class TwapOrderPage(BasePage):
                           "//*[@text='开始时间' or @text='Start time']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_end_time = (AppiumBy.XPATH,
                           "//*[@text='结束时间' or @text='End time']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_cancel_limit = (AppiumBy.XPATH,
+                              "//*[@text='撤单上限' or @text='Cancel limit']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_price_limit = (AppiumBy.XPATH,
+                                  "//*[@text='限价' or @text='Price limit']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_offset_flag = (AppiumBy.XPATH, "//*[@text='开平标志' or @text='Offset Flag']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_hedge_flag = (AppiumBy.XPATH, "//*[@text='投保标志' or @text='Hedge Flag']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_t = (AppiumBy.XPATH, "//*[@text='T+1']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
@@ -98,6 +102,7 @@ class TwapOrderPage(BasePage):
     alert_contract_code = (AppiumBy.ID, 'com.atp.newdemo2:id/contract_code')
     alert_order_id = (AppiumBy.ID, 'com.atp.newdemo2:id/order_id')
     alert_message_ID = (AppiumBy.ID, "com.atp.newdemo2:id/message")
+    alert_message_title = (AppiumBy.ID, "com.atp.newdemo2:id/title")
     button_close = (AppiumBy.ID, 'com.atp.newdemo2:id/close_button')
     last_price_and_lots = (AppiumBy.ID, "com.atp.newdemo2:id/lots_at_price")
     contract_management_ID = (AppiumBy.ID, "com.atp.newdemo2:id/manage_contract")
@@ -119,9 +124,13 @@ class TwapOrderPage(BasePage):
         self.slide_action(960, 280, 700, 280)
         self.click_action(self.contract_group_text)
 
+    def alert_order_details_title(self):
+        alert_message_title = self.get_visible_element(self.alert_message_title).text
+        return alert_message_title
+
     def alert_order_details_message(self):
-        result = self.get_visible_element(self.alert_message_ID).text
-        return result
+        alert_message = self.get_visible_element(self.alert_message_ID).text
+        return alert_message
 
     def order_details_side_value(self):
         order_details_side_value = self.get_visible_element(self.order_details_side).text
@@ -336,10 +345,6 @@ class TwapOrderPage(BasePage):
         self.input_action(self.cancel_order_interval_xpath, "1")
         self.press_confirm_button()
 
-    def alert_title_send_order_successfully(self):
-        alert_title = self.get_visible_element(self.alert_title).text
-        return alert_title
-
     def single_default(self):
         self.press_offer()
         single_value = self.get_visible_element(self.single_xpath).text
@@ -537,31 +542,37 @@ class TwapOrderPage(BasePage):
         self.press_confirm_button()
         return start_time, order_detail_start_time
 
-
-
     def end_time_default(self):
         self.press_offer()
-        start_time = self.get_visible_element(self.always_execute_id)
+        end_time = self.get_visible_element(self.always_execute_id)
         option = self.get_visible_element(self.end_time_radio_id)
-        default_value = start_time.get_attribute("checked")
+        default_value = end_time.get_attribute("checked")
         option_value = option.get_attribute("checked")
         return default_value, option_value
-
-
 
     def change_end_time_radio(self):
         self.press_offer()
         click_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
         self.click_action(self.end_time_radio_id)
-        start_time_default = self.get_visible_element(self.always_execute_id)
-        start_time_option = self.get_visible_element(self.end_time_radio_id)
-        default_checked = start_time_default.get_attribute("checked")
-        option_checked = start_time_option.get_attribute("checked")
+        end_time_default = self.get_visible_element(self.always_execute_id)
+        end_time_option = self.get_visible_element(self.end_time_radio_id)
+        default_checked = end_time_default.get_attribute("checked")
+        option_checked = end_time_option.get_attribute("checked")
         end_time = self.get_visible_element(self.end_time_id)
         end_time_value = end_time.text
         end_time_enabled = end_time.get_attribute("enabled")
         return default_checked, option_checked, click_time, end_time_value, end_time_enabled
 
+    def end_time_radio_and_order(self):
+        self.change_end_time_radio()
+        end_time = self.get_visible_element(self.end_time_id)
+        self.slide_action(460, 1750, 460, 1400)
+        self.input_action(self.order_interval_xpath, "1")
+        self.input_action(self.cancel_order_interval_xpath, "1")
+        self.press_confirm_button()
+        order_detail_end_time = self.get_visible_element(self.order_details_end_time).text
+        self.press_confirm_button()
+        return end_time, order_detail_end_time
 
     def offset_flag_auto_and_order(self):
         self.press_offer()
@@ -696,6 +707,84 @@ class TwapOrderPage(BasePage):
         order_details_hedge_flag_value = self.order_details_hedge_flag_value()
         self.press_confirm_button()
         return hedge_flag_value, order_details_hedge_flag_value
+
+    def cancel_limit(self):
+        self.press_offer()
+        self.input_action(self.order_interval_xpath, "1")
+        self.input_action(self.cancel_order_interval_xpath, "1")
+        self.slide_action(460, 1750, 460, 1400)
+        cancel_limit_switch_default_value = self.get_visible_element(self.cancel_limit_switch)
+        switch_checked = cancel_limit_switch_default_value.get_attribute("checked")
+        cancel_limit_text = self.get_visible_element(self.cancel_limit_text)
+        switch_text_enabled = cancel_limit_text.get_attribute("enabled")
+        return switch_checked, switch_text_enabled
+
+    def open_cancel_limit(self):
+        self.press_offer()
+        self.slide_action(460, 1750, 460, 1400)
+        self.click_action(self.cancel_limit_switch)
+        cancel_limit_switch_default_value = self.get_visible_element(self.cancel_limit_switch)
+        switch_checked = cancel_limit_switch_default_value.get_attribute("checked")
+        cancel_limit_text = self.get_visible_element(self.cancel_limit_text)
+        switch_text_enabled = cancel_limit_text.get_attribute("enabled")
+        return switch_checked, switch_text_enabled
+
+    def input_cancel_limit_text(self, cancel_limit_value):
+        self.press_offer()
+        self.input_action(self.order_interval_xpath, "1")
+        self.input_action(self.cancel_order_interval_xpath, "1")
+        self.slide_action(460, 1750, 460, 1400)
+        self.click_action(self.cancel_limit_switch)
+        self.input_action(self.cancel_limit_text, cancel_limit_value)
+        cancel_limit_value = self.get_visible_element(self.cancel_limit_text).text
+        self.press_confirm_button()
+        return cancel_limit_value
+
+    def input_cancel_limit_text_and_order(self, cancel_limit):
+        cancel_limit_text = self.input_cancel_limit_text(cancel_limit)
+        order_detail_cancel_limit_text = self.get_visible_element(self.order_details_cancel_limit).text
+        self.press_confirm_button()
+        return cancel_limit_text, order_detail_cancel_limit_text
+
+
+    def price_limit(self):
+        self.press_offer()
+        self.slide_action(460, 1750, 460, 1400)
+        price_limit_switch_default_value = self.get_visible_element(self.price_limit_switch)
+        price_limit_text = self.get_visible_element(self.price_limit_text)
+        switch_checked = price_limit_switch_default_value.get_attribute("checked")
+        switch_text_enabled = price_limit_text.get_attribute("enabled")
+        return switch_checked, switch_text_enabled
+
+    def open_price_limit(self):
+        self.press_offer()
+        self.slide_action(460, 1750, 460, 1400)
+        self.click_action(self.price_limit_switch)
+        price_limit_switch_default_value = self.get_visible_element(self.price_limit_switch)
+        price_limit_text = self.get_visible_element(self.price_limit_text)
+        switch_checked = price_limit_switch_default_value.get_attribute("checked")
+        switch_text_enabled = price_limit_text.get_attribute("enabled")
+        return switch_checked, switch_text_enabled
+
+    def input_price_limit_text(self, price_limit_value):
+        self.press_offer()
+        self.input_action(self.order_interval_xpath, "1")
+        self.input_action(self.cancel_order_interval_xpath, "1")
+        self.slide_action(460, 1750, 460, 1400)
+        self.click_action(self.price_limit_switch)
+        self.input_action(self.price_limit_text, price_limit_value)
+        price_limit_value = self.get_visible_element(self.price_limit_text).text
+        self.press_confirm_button()
+        return price_limit_value
+
+    def input_price_limit_text_and_order(self, price_limit):
+        price_limit_text = self.input_price_limit_text(price_limit)
+        order_detail_price_limit_text = self.get_visible_element(self.order_details_price_limit).text
+        self.press_confirm_button()
+        return price_limit_text, order_detail_price_limit_text
+
+
+
 
     def edit_memo_and_order(self):
         self.press_offer()

@@ -21,7 +21,7 @@ class CaseStopOrder(unittest.TestCase):
         sell_checkbox = result[1]
         order_details_side_value = result[2]
         order_message = self.stop_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual("false", buy_checkbox)
         self.assertEqual("true", sell_checkbox)
         self.assertEqual("卖", order_details_side_value)
@@ -56,7 +56,7 @@ class CaseStopOrder(unittest.TestCase):
         sell_checkbox = result[1]
         order_details_side_value = result[2]
         order_message = self.stop_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual("true", buy_checkbox)
         self.assertEqual("false", sell_checkbox)
         self.assertEqual("买", order_details_side_value)
@@ -91,7 +91,7 @@ class CaseStopOrder(unittest.TestCase):
         sell_checkbox = result[1]
         order_details_side_value = result[2]
         order_message = self.stop_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual("true", buy_checkbox)
         self.assertEqual("false", sell_checkbox)
         self.assertEqual("买", order_details_side_value)
@@ -200,7 +200,7 @@ class CaseStopOrder(unittest.TestCase):
         sell_checkbox = result[1]
         order_details_side_value = result[2]
         order_message = self.stop_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual("false", buy_checkbox)
         self.assertEqual("true", sell_checkbox)
         self.assertEqual("卖", order_details_side_value)
@@ -266,7 +266,7 @@ class CaseStopOrder(unittest.TestCase):
         order_details_lots_value = result[0]
         order_details_price_value = result[1]
         order_message = self.stop_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(order_details_lots_value, "10")
         self.assertEqual(order_details_price_value, "80")
 
@@ -276,7 +276,7 @@ class CaseStopOrder(unittest.TestCase):
         stop_option_default_value = result[0]
         order_details_stop_option_value = result[1]
         order_message = self.stop_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(stop_option_default_value, '最后成交价')
         self.assertEqual(stop_option_default_value, order_details_stop_option_value)
 
@@ -285,7 +285,7 @@ class CaseStopOrder(unittest.TestCase):
         stop_option_market_buy_value = result[0]
         order_details_stop_option_value = result[1]
         order_message = self.stop_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
         self.assertEqual(stop_option_market_buy_value, '市场买价')
         self.assertEqual(stop_option_market_buy_value, order_details_stop_option_value)
 
@@ -294,7 +294,7 @@ class CaseStopOrder(unittest.TestCase):
         stop_option_market_sell_value = result[0]
         order_details_stop_option_value = result[1]
         order_message = self.stop_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
         self.assertEqual(stop_option_market_sell_value, '市场卖价')
         self.assertEqual(stop_option_market_sell_value, order_details_stop_option_value)
 
@@ -304,7 +304,7 @@ class CaseStopOrder(unittest.TestCase):
         offset_flag_default_value = result[0]
         order_details_offset_flag_value = result[1]
         order_message = self.stop_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
         self.assertEqual(offset_flag_default_value, '自动')
         self.assertEqual(offset_flag_default_value, order_details_offset_flag_value)
 
@@ -313,7 +313,7 @@ class CaseStopOrder(unittest.TestCase):
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
         order_message = self.stop_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
         self.assertEqual(offset_flag_value, '开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -322,7 +322,7 @@ class CaseStopOrder(unittest.TestCase):
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
         order_message = self.stop_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
         self.assertEqual(offset_flag_value, '平仓-平今-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -331,7 +331,7 @@ class CaseStopOrder(unittest.TestCase):
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
         order_message = self.stop_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
         self.assertEqual(offset_flag_value, '平今-平仓-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -340,7 +340,7 @@ class CaseStopOrder(unittest.TestCase):
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
         order_message = self.stop_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
         self.assertEqual(offset_flag_value, '平仓-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -349,7 +349,7 @@ class CaseStopOrder(unittest.TestCase):
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
         order_message = self.stop_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
         self.assertEqual(offset_flag_value, '平今-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -358,7 +358,7 @@ class CaseStopOrder(unittest.TestCase):
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
         order_message = self.stop_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
         self.assertEqual(offset_flag_value, '平昨-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -367,7 +367,7 @@ class CaseStopOrder(unittest.TestCase):
         hedge_flag_default_value = result[0]
         order_details_hedge_flag_value = result[1]
         order_message = self.stop_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
         self.assertEqual(hedge_flag_default_value, '投机')
         self.assertEqual(hedge_flag_default_value, order_details_hedge_flag_value)
 
@@ -376,7 +376,7 @@ class CaseStopOrder(unittest.TestCase):
         hedge_flag_value = result[0]
         order_details_hedge_flag_value = result[1]
         order_message = self.stop_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
         self.assertEqual(hedge_flag_value, '套利')
         self.assertEqual(hedge_flag_value, order_details_hedge_flag_value)
 
@@ -385,7 +385,7 @@ class CaseStopOrder(unittest.TestCase):
         hedge_flag_value = result[0]
         order_details_hedge_flag_value = result[1]
         order_message = self.stop_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
         self.assertEqual(hedge_flag_value, '套保')
         self.assertEqual(hedge_flag_value, order_details_hedge_flag_value)
 
@@ -396,7 +396,7 @@ class CaseStopOrder(unittest.TestCase):
         memo_value = result[1]
         order_details_memo_value = result[2]
         # order_message = self.stop_order_page.alert_order_details_message()
-        # self.assertEqual(order_message, AlertError.alert_message_succeed)
+        # self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(hint, AlertError.hint_message)
         self.assertEqual(memo_value, order_details_memo_value)
 

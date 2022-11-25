@@ -22,7 +22,7 @@ class CaseNormalOrder(unittest.TestCase):
         sell_checkbox = result[1]
         order_details_side_value = result[2]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual("false", buy_checkbox)
         self.assertEqual("true", sell_checkbox)
         self.assertEqual("卖", order_details_side_value)
@@ -49,7 +49,7 @@ class CaseNormalOrder(unittest.TestCase):
         sell_checkbox = result[1]
         order_details_side_value = result[2]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual("true", buy_checkbox)
         self.assertEqual("false", sell_checkbox)
         self.assertEqual("买", order_details_side_value)
@@ -76,7 +76,7 @@ class CaseNormalOrder(unittest.TestCase):
         sell_checkbox = result[1]
         order_details_side_value = result[2]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual("true", buy_checkbox)
         self.assertEqual("false", sell_checkbox)
         self.assertEqual("买", order_details_side_value)
@@ -156,7 +156,7 @@ class CaseNormalOrder(unittest.TestCase):
         sell_checkbox = result[1]
         order_details_side_value = result[2]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual("false", buy_checkbox)
         self.assertEqual("true", sell_checkbox)
         self.assertEqual("卖", order_details_side_value)
@@ -201,7 +201,7 @@ class CaseNormalOrder(unittest.TestCase):
         order_details_lots_value = result[0]
         order_details_price_value = result[1]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(order_details_lots_value, "10")
         self.assertEqual(order_details_price_value, "80")
 
@@ -217,7 +217,7 @@ class CaseNormalOrder(unittest.TestCase):
         order_details_type_value = result[0]
         order_details_price_value = result[1]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual("Market", order_details_type_value)
         self.assertEqual("Market", order_details_price_value)
 
@@ -233,7 +233,7 @@ class CaseNormalOrder(unittest.TestCase):
         order_details_type_value = result[0]
         order_details_price_value = result[1]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual("Market Limit", order_details_type_value)
         self.assertEqual("Market", order_details_price_value)
 
@@ -280,7 +280,7 @@ class CaseNormalOrder(unittest.TestCase):
         order_details_price_value = result[2]
         order_details_type_value = result[3]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(stpx_value, order_details_stpx_value)
         self.assertEqual(order_details_price_value, "Market")
         self.assertEqual(order_details_type_value, "STP")
@@ -302,7 +302,7 @@ class CaseNormalOrder(unittest.TestCase):
         order_details_price_value = result[2]
         order_details_type_value = result[3]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(stpx_value, order_details_stpx_value)
         self.assertEqual(order_details_price_value, "Market")
         self.assertEqual(order_details_type_value, "STP")
@@ -336,7 +336,7 @@ class CaseNormalOrder(unittest.TestCase):
         order_details_price_value = result[3]
         order_details_type_value = result[4]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(StPx_value, price_value)
         self.assertEqual(StPx_value, order_details_stpx_value)
         self.assertEqual(price_value, order_details_price_value)
@@ -360,7 +360,7 @@ class CaseNormalOrder(unittest.TestCase):
         order_details_price_value = result[3]
         order_details_type_value = result[4]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(StPx_value, price_value)
         self.assertEqual(StPx_value, order_details_stpx_value)
         self.assertEqual(price_value, order_details_price_value)
@@ -374,7 +374,7 @@ class CaseNormalOrder(unittest.TestCase):
         order_details_price_value = result[3]
         order_details_type_value = result[4]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertGreater(price_value, StPx_value)
         self.assertEqual(StPx_value, order_details_stpx_value)
         self.assertEqual(price_value, order_details_price_value)
@@ -398,7 +398,7 @@ class CaseNormalOrder(unittest.TestCase):
         order_details_price_value = result[3]
         order_details_type_value = result[4]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertGreater(StPx_value, price_value)
         self.assertEqual(StPx_value, order_details_stpx_value)
         self.assertEqual(price_value, order_details_price_value)
@@ -464,7 +464,7 @@ class CaseNormalOrder(unittest.TestCase):
         order_details_chunk_size_value = result[3]
         order_details_type_value = result[4]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(lots_value, order_details_lots_value)
         self.assertGreater(lots_value, chunk_size_value)
         self.assertEqual(chunk_size_value, order_details_chunk_size_value)
@@ -473,27 +473,27 @@ class CaseNormalOrder(unittest.TestCase):
     def test_57_TIF_DAY_order_should_success(self):
         self.normal_order_page.tif_day_and_order()
         result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        self.assertEqual(result, AlertError.alert_order_message)
 
     def test_58_TIF_GTC_order_should_success(self):
         self.normal_order_page.tif_gtc_and_order()
         result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        self.assertEqual(result, AlertError.alert_order_message)
 
     def test_59_TIF_GTD_order_should_success(self):
         self.normal_order_page.tif_gtd_and_order()
         result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        self.assertEqual(result, AlertError.alert_order_message)
 
     def test_60_TIF_FAK_order_should_success(self):
         self.normal_order_page.tif_fak_and_order()
         result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        self.assertEqual(result, AlertError.alert_order_message)
 
     def test_61_TIF_FOK_order_should_success(self):
         self.normal_order_page.tif_fok_and_order()
         result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        self.assertEqual(result, AlertError.alert_order_message)
 
     def test_62_tif_fak_and_clear_min_quantity_and_order_should_fail(self):
         self.normal_order_page.tif_fak_and_clear_min_quantity_and_order()
@@ -521,14 +521,14 @@ class CaseNormalOrder(unittest.TestCase):
         self.normal_order_page.press_confirm_button()
         self.normal_order_page.press_confirm_button()
         result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        self.assertEqual(result, AlertError.alert_order_message)
 
     def test_68_tif_fak_and_input_min_quantity_equal_lots_and_order_should_success(self):
         self.normal_order_page.tif_fak_and_input_min_quantity_and_lots(3, 3)
         self.normal_order_page.press_confirm_button()
         self.normal_order_page.press_confirm_button()
         result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        self.assertEqual(result, AlertError.alert_order_message)
 
     def test_69_tif_fak_and_input_min_quantity_above_lots_and_min_quantity_should_lots_value(self):
         fak_min_quantity = self.normal_order_page.tif_fak_and_input_min_quantity_and_lots(4, 3)
@@ -539,8 +539,8 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.offset_flag_auto_and_order()
         offset_flag_default_value = result[0]
         order_details_offset_flag_value = result[1]
-        order_message = self.normal_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        order_message = self.normal_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(offset_flag_default_value, '自动')
         self.assertEqual(offset_flag_default_value, order_details_offset_flag_value)
 
@@ -548,8 +548,8 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.offset_flag_open_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
-        order_message = self.normal_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        order_message = self.normal_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(offset_flag_value, '开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -557,8 +557,8 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.offset_flag_close_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
-        order_message = self.normal_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        order_message = self.normal_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(offset_flag_value, '平仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -566,8 +566,8 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.offset_flag_closeYesterday_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
-        order_message = self.normal_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        order_message = self.normal_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(offset_flag_value, '平昨')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -575,8 +575,8 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.offset_flag_closeToday_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
-        order_message = self.normal_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        order_message = self.normal_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(offset_flag_value, '平今')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -584,8 +584,8 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.offset_flag_C_CT_O_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
-        order_message = self.normal_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        order_message = self.normal_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(offset_flag_value, '平仓-平今-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -593,8 +593,8 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.offset_flag_CT_C_O_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
-        order_message = self.normal_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        order_message = self.normal_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(offset_flag_value, '平今-平仓-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -602,8 +602,8 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.offset_flag_C_O_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
-        order_message = self.normal_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        order_message = self.normal_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(offset_flag_value, '平仓-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -611,8 +611,8 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.offset_flag_CT_O_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
-        order_message = self.normal_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        order_message = self.normal_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(offset_flag_value, '平今-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -620,8 +620,8 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.offset_flag_CY_O_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
-        order_message = self.normal_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        order_message = self.normal_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(offset_flag_value, '平昨-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
@@ -629,8 +629,8 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.hedge_flag_speculation_and_order()
         hedge_flag_default_value = result[0]
         order_details_hedge_flag_value = result[1]
-        order_message = self.normal_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        order_message = self.normal_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(hedge_flag_default_value, '投机')
         self.assertEqual(hedge_flag_default_value, order_details_hedge_flag_value)
 
@@ -638,8 +638,8 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.hedge_flag_arbitrage_and_order()
         hedge_flag_value = result[0]
         order_details_hedge_flag_value = result[1]
-        order_message = self.normal_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        order_message = self.normal_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(hedge_flag_value, '套利')
         self.assertEqual(hedge_flag_value, order_details_hedge_flag_value)
 
@@ -647,15 +647,15 @@ class CaseNormalOrder(unittest.TestCase):
         result = self.normal_order_page.hedge_flag_hedge_and_order()
         hedge_flag_value = result[0]
         order_details_hedge_flag_value = result[1]
-        order_message = self.normal_order_page.alert_title_send_order_successfully()
-        self.assertEqual(order_message, AlertError.alert_title_succeed)
+        order_message = self.normal_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(hedge_flag_value, '套保')
         self.assertEqual(hedge_flag_value, order_details_hedge_flag_value)
 
     def test_83_change_T_switch_and_order_should_success(self):
         self.normal_order_page.change_T_switch_and_order()
         result = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(result, AlertError.alert_message_succeed)
+        self.assertEqual(result, AlertError.alert_order_message)
 
     def test_84_edit_memo_and_order_should_success(self):
         self.normal_order_page.permission_contract_to_bottom()  # 权限合约排到最底部，主合约排到第一位
@@ -664,7 +664,7 @@ class CaseNormalOrder(unittest.TestCase):
         memo_value = result[1]
         order_details_memo_value = result[2]
         order_message = self.normal_order_page.alert_order_details_message()
-        self.assertEqual(order_message, AlertError.alert_message_succeed)
+        self.assertEqual(order_message, AlertError.alert_order_message)
         self.assertEqual(hint, AlertError.hint_message)
         self.assertEqual(memo_value, order_details_memo_value)
 
