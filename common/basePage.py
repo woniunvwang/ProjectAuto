@@ -64,6 +64,12 @@ class BasePage:
         actions.w3c_actions.pointer_action.release()
         actions.perform()
 
+    def change_datetime_after_now(self, datetime):
+        self.slide_action(datetime, 850, datetime, 680)
+
+    def change_datetime_before_now(self, datetime):
+        self.slide_action(datetime, 680, datetime, 850)
+
     def isElementExist(self, element):
         try:
             self.get_visible_element(element)

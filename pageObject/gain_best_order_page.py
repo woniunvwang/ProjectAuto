@@ -171,24 +171,6 @@ class GainBestOrderPage(BasePage):
         ActionChains(self.driver).drag_and_drop_by_offset(source, 0, 350).pause(5).perform()
         self.click_action(self.back_button)
 
-    # def press_bid(self):
-    #     actions = ActionChains(self.driver)
-    #     actions.click_and_hold(self.get_visible_element(self.bid_lots_path))
-    #     bid_lots = self.get_visible_element(self.bid_lots_path).text
-    #     bid_price = self.get_visible_element(self.bid_price_path).text
-    #     actions.release()
-    #     actions.perform()
-    #     return bid_lots, bid_price
-    #
-    # def press_offer(self):
-    #     actions = ActionChains(self.driver)
-    #     actions.click_and_hold(self.get_visible_element(self.offer_lots_path))
-    #     offer_lots = self.get_visible_element(self.offer_lots_path).text
-    #     offer_price = self.get_visible_element(self.offer_price_path).text
-    #     actions.release()
-    #     actions.perform()
-    #     return offer_lots, offer_price
-
     def press_bid(self):
         self.click_action(self.bid_price_path)
         self.click_action(self.gain_best_order_path)
