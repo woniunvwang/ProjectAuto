@@ -29,6 +29,7 @@ class AlertError:
     alert_message_cancel_order_interval = "请输入撤单间隔"
     alert_illegal_cancel_order_interval = "撤单间隔不合法"
     alert_illegal_end_time = "结束时间必须超过当前时间"
+    alert_illegal_time_interval = "时间间隔不合法"
     alert_message_cancel_limit = "请输入撤单上限"
     alert_message_price_limit = "请输入限价"
     alert_illegal_price_limit = "限价不合法"

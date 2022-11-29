@@ -350,12 +350,12 @@ class CaseTwapOrder(unittest.TestCase):
         result = self.twap_order_page.start_time_default()
         default_value = result[0]
         option_value = result[1]
-        self.assertTrue("true", default_value)
+        self.assertTrue(default_value)
         self.assertEqual("false", option_value)
 
     def test_56_start_time_default_value_and_order_should_success(self):
         order_detail_start_time = self.twap_order_page.start_time_default_value_and_order()
-        self.assertTrue("立刻下单", order_detail_start_time)
+        self.assertEqual("立刻下单", order_detail_start_time)
         order_message = self.twap_order_page.alert_order_details_message()
         self.assertEqual(order_message, AlertError.alert_order_message)
 
@@ -363,7 +363,7 @@ class CaseTwapOrder(unittest.TestCase):
         result = self.twap_order_page.start_time_radio_and_order()
         start_time = result[0]
         order_detail_start_time = result[1]
-        self.assertTrue(start_time, order_detail_start_time)
+        self.assertEqual(start_time, order_detail_start_time)
         order_message = self.twap_order_page.alert_order_details_message()
         self.assertEqual(order_message, AlertError.alert_order_message)
 
@@ -374,17 +374,17 @@ class CaseTwapOrder(unittest.TestCase):
         click_time = result[2]
         start_time_value = result[3]
         start_time_enabled = result[4]
-        self.assertTrue("false", default_checked)
-        self.assertEqual("true", option_checked)
-        self.assertEqual("true", start_time_enabled)
+        self.assertFalse(default_checked)
+        self.assertTrue(option_checked)
+        self.assertTrue(start_time_enabled)
         self.assertEqual(click_time, start_time_value)
 
     def test_59_end_time_default_value_should_always_execute(self):
         result = self.twap_order_page.end_time_default()
         default_value = result[0]
         option_value = result[1]
-        self.assertTrue("true", default_value)
-        self.assertEqual("false", option_value)
+        self.assertTrue(default_value)
+        self.assertFalse(option_value)
 
     def test_60_change_end_time_radio_and_end_time_should_click_time(self):
         result = self.twap_order_page.change_end_time_radio()
@@ -393,16 +393,16 @@ class CaseTwapOrder(unittest.TestCase):
         click_time = result[2]
         end_time_value = result[3]
         end_time_enabled = result[4]
-        self.assertTrue("false", default_checked)
-        self.assertEqual("true", option_checked)
-        self.assertEqual("true", end_time_enabled)
+        self.assertFalse(default_checked)
+        self.assertTrue(option_checked)
+        self.assertTrue(end_time_enabled)
         self.assertEqual(click_time, end_time_value)
 
     def test_61_change_end_time_radio_and_now_time_and_order_should_fail(self):
         result = self.twap_order_page.end_time_radio_and_order()
         end_time = result[0]
         order_detail_end_time = result[1]
-        self.assertTrue(end_time, order_detail_end_time)
+        self.assertEqual(end_time, order_detail_end_time)
         result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_end_time)
         self.assertTrue(result)
 
@@ -410,8 +410,8 @@ class CaseTwapOrder(unittest.TestCase):
         result = self.twap_order_page.cancel_limit()
         switch_checked = result[0]
         switch_text_enabled = result[1]
-        self.assertTrue("false", switch_checked)
-        self.assertTrue("false", switch_text_enabled)
+        self.assertFalse(switch_checked)
+        self.assertFalse(switch_text_enabled)
 
     def test_63_open_cancel_limit_default_should_closed(self):
         result = self.twap_order_page.open_cancel_limit()
@@ -443,8 +443,8 @@ class CaseTwapOrder(unittest.TestCase):
         result = self.twap_order_page.price_limit()
         switch_checked = result[0]
         switch_text_enabled = result[1]
-        self.assertTrue("false", switch_checked)
-        self.assertTrue("false", switch_text_enabled)
+        self.assertFalse(switch_checked)
+        self.assertFalse(switch_text_enabled)
 
     def test_68_open_price_limit_default_should_closed(self):
         result = self.twap_order_page.open_price_limit()
@@ -456,7 +456,7 @@ class CaseTwapOrder(unittest.TestCase):
     def test_69_open_price_limit_and_text_none_should_fail(self):
         self.twap_order_page.input_price_limit_text("")
         result = self.twap_order_page.is_toast_exist(AlertError.alert_message_price_limit)
-        self.assertTrue("true", result)
+        self.assertTrue(result)
 
     def test_70_open_price_limit_and_text_value_illegal_should_fail(self):
         self.twap_order_page.input_price_limit_text("-")

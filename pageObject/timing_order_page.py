@@ -38,7 +38,7 @@ class TimingOrderPage(BasePage):
     lots_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/lots']/android.view.ViewGroup/android.widget.EditText")
     single_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/single']/android.view.ViewGroup/android.widget.EditText")
     price_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price']/android.view.ViewGroup/android.widget.EditText")
-    type_xpath = (AppiumBy.XPATH, "//*[@text='类型' or @text='Type']/../android.widget.LinearLayout/android.widget.Button")
+    type_xpath = (AppiumBy.XPATH, "//*[@text='类型' or @text='Type']/../android.widget.Button")
     start_time_id = (AppiumBy.ID, "com.atp.newdemo2:id/start_time")
     end_time_id = (AppiumBy.ID, "com.atp.newdemo2:id/end_time")
     end_time_title = (AppiumBy.ID, "com.atp.newdemo2:id/timeTitle")
@@ -71,7 +71,7 @@ class TimingOrderPage(BasePage):
     order_details_start_time = (AppiumBy.XPATH,
                           "//*[@text='开始时间' or @text='Start time']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_end_time = (AppiumBy.XPATH,
-                          "//*[@text='结束时间' or @text='End time']/../android.view.ViewGroup/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+                          "//*[@text='结束时间' or @text='End time']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_time_interval = (AppiumBy.XPATH,
                           "//*[@text='时间间隔' or @text='Time interval']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_offset_flag = (AppiumBy.XPATH, "//*[@text='开平标志' or @text='Offset Flag']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
@@ -189,6 +189,14 @@ class TimingOrderPage(BasePage):
         self.slide_action(880, 832, 330, 832)
         self.click_action(self.timing_order_path)
 
+    def change_end_time_and_time_interval_legal(self):
+        self.click_action(self.end_time_id)
+        self.change_datetime_after_now(450)
+        self.press_confirm_button()
+        self.click_action(self.time_interval_id)
+        self.change_datetime_after_now(411)
+        self.press_confirm_button()
+
     def change_trade_account(self):
         self.press_offer()
         self.click_action(self.trade_account_ID)
@@ -197,6 +205,7 @@ class TimingOrderPage(BasePage):
         self.click_action(self.change_account_ID)
         changed_trade_account_value = self.get_visible_element(self.trade_account_ID).text
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_account_value = self.get_visible_element(self.order_details_account).text
         return trade_account_value, changed_trade_account_value, order_details_account_value
@@ -208,6 +217,7 @@ class TimingOrderPage(BasePage):
         buy_checkbox = buy_value.get_attribute("checked")
         sell_checkbox = sell_value.get_attribute("checked")
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_side_value = self.get_visible_element(self.order_details_side).text
         self.press_confirm_button()
@@ -409,6 +419,22 @@ class TimingOrderPage(BasePage):
         self.press_confirm_button()
         return order_detail_single_value
 
+    def type_default_value_and_order(self):
+        self.press_offer()
+        type_element = self.get_visible_element(self.type_xpath)
+        type_value = type_element.text
+        default_enabled = type_element.get_attribute("enabled")
+        self.click_action(self.end_time_id)
+        self.change_datetime_after_now(450)
+        self.press_confirm_button()
+        self.click_action(self.time_interval_id)
+        self.change_datetime_after_now(411)
+        self.press_confirm_button()
+        self.slide_action(460, 1750, 460, 1400)
+        self.press_confirm_button()
+        order_detail_type_value = self.get_visible_element(self.order_details_type).text
+        return type_value, default_enabled, order_detail_type_value
+
     def start_time_default_value_and_order(self):
         self.press_offer()
         click_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
@@ -427,6 +453,8 @@ class TimingOrderPage(BasePage):
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
         return click_time, end_time_value
+    # 开始和结束时间的日期坐标X轴为Y150、m300、d450、H630、M780、S920
+    # 时间间隔的时间坐标X轴为H410、M560、S705
 
     def change_end_time_after_now_and_order(self):
         self.press_offer()
@@ -436,15 +464,24 @@ class TimingOrderPage(BasePage):
         end_time_title = self.get_visible_element(self.end_time_title).text
         self.change_datetime_after_now(450)
         self.press_confirm_button()
+        self.click_action(self.time_interval_id)
+        self.change_datetime_after_now(411)
+        self.press_confirm_button()
         changed_end_time_value = self.get_visible_element(self.end_time_id).text
         self.press_confirm_button()
         order_detail_end_time = self.get_visible_element(self.order_details_end_time).text
         self.press_confirm_button()
         return end_time_value, end_time_title, changed_end_time_value, order_detail_end_time
 
-
-
-
+    def time_interval_default_value(self):
+        self.press_offer()
+        self.click_action(self.end_time_id)
+        self.change_datetime_after_now(450)
+        self.press_confirm_button()
+        time_interval_value = self.get_visible_element(self.time_interval_id).text
+        self.slide_action(460, 1750, 460, 1400)
+        self.press_confirm_button()
+        return time_interval_value
 
     def offset_flag_auto_and_order(self):
         self.press_offer()
@@ -493,6 +530,12 @@ class TimingOrderPage(BasePage):
 
     def offset_flag_CT_O_and_order(self):
         result = self.change_offset_flag_and_order(self.offset_flag_CT_O_xpath)
+        offset_flag_value = result[0]
+        order_details_offset_flag_value = result[1]
+        return offset_flag_value, order_details_offset_flag_value
+
+    def offset_flag_CY_O_and_order(self):
+        result = self.change_offset_flag_and_order(self.offset_flag_CY_O_xpath)
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
         return offset_flag_value, order_details_offset_flag_value

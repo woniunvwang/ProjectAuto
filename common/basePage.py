@@ -65,10 +65,11 @@ class BasePage:
         actions.perform()
 
     def change_datetime_after_now(self, datetime):
-        self.slide_action(datetime, 850, datetime, 680)
+        self.slide_action(datetime, 1290, datetime, 1100)
 
     def change_datetime_before_now(self, datetime):
-        self.slide_action(datetime, 680, datetime, 850)
+        self.slide_action(datetime, 1100, datetime, 1290)
+
 
     def isElementExist(self, element):
         try:
