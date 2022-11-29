@@ -197,6 +197,16 @@ class TimingOrderPage(BasePage):
         self.change_datetime_after_now(411)
         self.press_confirm_button()
 
+    def change_end_time_legal(self):
+        self.click_action(self.end_time_id)
+        self.change_datetime_after_now(450)
+        self.press_confirm_button()
+
+    def change_time_interval_legal(self):
+        self.click_action(self.time_interval_id)
+        self.change_datetime_after_now(411)
+        self.press_confirm_button()
+
     def change_trade_account(self):
         self.press_offer()
         self.click_action(self.trade_account_ID)
@@ -227,6 +237,8 @@ class TimingOrderPage(BasePage):
         bid_price_value = self.get_visible_element(self.bid_price_path).text
         self.press_bid()
         price_value = self.get_visible_element(self.price_xpath).text
+        self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_price_value = self.order_details_price_value()
         if bid_price_value == "-":
@@ -241,6 +253,7 @@ class TimingOrderPage(BasePage):
         buy_checkbox = buy_value.get_attribute("checked")
         sell_checkbox = sell_value.get_attribute("checked")
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_side_value = self.get_visible_element(self.order_details_side).text
         self.press_confirm_button()
@@ -254,6 +267,7 @@ class TimingOrderPage(BasePage):
         buy_checkbox = buy_value.get_attribute("checked")
         sell_checkbox = sell_value.get_attribute("checked")
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_side_value = self.get_visible_element(self.order_details_side).text
         self.press_confirm_button()
@@ -264,6 +278,7 @@ class TimingOrderPage(BasePage):
         self.press_bid()
         lots_value = self.get_visible_element(self.lots_xpath).text
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_lots_value = self.order_details_lots_value()
         if bid_lots_value == "-":
@@ -276,6 +291,7 @@ class TimingOrderPage(BasePage):
         self.press_offer()
         lots_value = self.get_visible_element(self.lots_xpath).text
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_lots_value = self.order_details_lots_value()
         if offer_lots_value == "-":
@@ -288,6 +304,7 @@ class TimingOrderPage(BasePage):
         self.press_offer()
         price_value = self.get_visible_element(self.price_xpath).text
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_price_value = self.order_details_price_value()
         if offer_price_value == "-":
@@ -308,6 +325,7 @@ class TimingOrderPage(BasePage):
         buy_checkbox = buy_value.get_attribute("checked")
         sell_checkbox = sell_value.get_attribute("checked")
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_side_value = self.get_visible_element(self.order_details_side).text
         self.press_confirm_button()
@@ -319,9 +337,11 @@ class TimingOrderPage(BasePage):
         self.slide_and_chg()
         chg_value = self.get_visible_element(self.Chg_path).text
         self.click_action(self.Chg_path)
+        self.slide_action(880, 832, 330, 832)
         self.click_action(self.timing_order_path)
         price_value = self.get_visible_element(self.price_xpath).text
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_price_value = self.order_details_price_value()
         if chg_value == "-":
@@ -339,6 +359,7 @@ class TimingOrderPage(BasePage):
         self.click_action(self.timing_order_path)
         lots_value = self.get_visible_element(self.lots_xpath).text
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_lots_value = self.order_details_lots_value()
         if Chg_value == "-":
@@ -350,17 +371,20 @@ class TimingOrderPage(BasePage):
         self.press_bid()
         self.clear_action(self.lots_xpath)
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
 
     def clear_price_and_order(self):
         self.press_offer()
         self.clear_action(self.price_xpath)
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
 
     def not_input_gap_and_order(self):
         self.press_offer()
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
 
     def input_illegal_lots_and_order(self, lots):
@@ -368,6 +392,7 @@ class TimingOrderPage(BasePage):
         self.clear_action(self.lots_xpath)
         self.input_action(self.lots_xpath, lots)
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
 
     def input_illegal_price_and_order(self, price):
@@ -375,6 +400,7 @@ class TimingOrderPage(BasePage):
         self.clear_action(self.price_xpath)
         self.input_action(self.price_xpath, price)
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
 
     def input_lots_and_price_and_order(self, lots, price):
@@ -384,6 +410,7 @@ class TimingOrderPage(BasePage):
         self.clear_action(self.price_xpath)
         self.input_action(self.price_xpath, price)
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_lots_value = self.order_details_lots_value()
         order_details_price_value = self.order_details_price_value()
@@ -399,8 +426,9 @@ class TimingOrderPage(BasePage):
         self.press_offer()
         self.clear_action(self.single_xpath)
         self.input_action(self.single_xpath, single_value)
-        self.slide_action(460, 1750, 460, 1400)
         single_value = self.get_visible_element(self.single_xpath).text
+        self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         return single_value
 
@@ -411,6 +439,7 @@ class TimingOrderPage(BasePage):
         self.clear_action(self.lots_xpath)
         self.input_action(self.lots_xpath, lots)
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
 
     def input_single_value_and_lots_and_order(self, single_value, lots):
@@ -424,12 +453,7 @@ class TimingOrderPage(BasePage):
         type_element = self.get_visible_element(self.type_xpath)
         type_value = type_element.text
         default_enabled = type_element.get_attribute("enabled")
-        self.click_action(self.end_time_id)
-        self.change_datetime_after_now(450)
-        self.press_confirm_button()
-        self.click_action(self.time_interval_id)
-        self.change_datetime_after_now(411)
-        self.press_confirm_button()
+        self.change_end_time_and_time_interval_legal()
         self.slide_action(460, 1750, 460, 1400)
         self.press_confirm_button()
         order_detail_type_value = self.get_visible_element(self.order_details_type).text
@@ -441,6 +465,7 @@ class TimingOrderPage(BasePage):
         start_time = self.get_visible_element(self.start_time_id)
         start_time_value = start_time.text
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_detail_start_time = self.get_visible_element(self.order_details_start_time).text
         self.press_confirm_button()
@@ -451,22 +476,21 @@ class TimingOrderPage(BasePage):
         click_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
         end_time_value = self.get_visible_element(self.end_time_id).text
         self.slide_action(460, 1750, 460, 1400)
+        self.change_time_interval_legal()
         self.press_confirm_button()
         return click_time, end_time_value
     # 开始和结束时间的日期坐标X轴为Y150、m300、d450、H630、M780、S920
     # 时间间隔的时间坐标X轴为H410、M560、S705
 
-    def change_end_time_after_now_and_order(self):
+    def change_end_time_after_now_and_order(self, date_value):
         self.press_offer()
         self.slide_action(460, 1750, 460, 1400)
         end_time_value = self.get_visible_element(self.end_time_id).text
         self.click_action(self.end_time_id)
         end_time_title = self.get_visible_element(self.end_time_title).text
-        self.change_datetime_after_now(450)
+        self.change_datetime_after_now(date_value)
         self.press_confirm_button()
-        self.click_action(self.time_interval_id)
-        self.change_datetime_after_now(411)
-        self.press_confirm_button()
+        self.change_time_interval_legal()
         changed_end_time_value = self.get_visible_element(self.end_time_id).text
         self.press_confirm_button()
         order_detail_end_time = self.get_visible_element(self.order_details_end_time).text
@@ -475,18 +499,30 @@ class TimingOrderPage(BasePage):
 
     def time_interval_default_value(self):
         self.press_offer()
-        self.click_action(self.end_time_id)
-        self.change_datetime_after_now(450)
-        self.press_confirm_button()
         time_interval_value = self.get_visible_element(self.time_interval_id).text
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_legal()
         self.press_confirm_button()
         return time_interval_value
+
+    def change_time_interval_value_and_order(self, time_value):
+        self.press_offer()
+        self.change_end_time_legal()
+        self.slide_action(460, 1750, 460, 1400)
+        self.click_action(self.time_interval_id)
+        self.change_datetime_after_now(time_value)
+        self.press_confirm_button()
+        changed_time_interval_value = self.get_visible_element(self.time_interval_id).text
+        self.press_confirm_button()
+        order_detail_time_interval_value = self.get_visible_element(self.order_details_time_interval).text
+        self.press_confirm_button()
+        return changed_time_interval_value, order_detail_time_interval_value
 
     def offset_flag_auto_and_order(self):
         self.press_offer()
         offset_flag_default_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
@@ -499,6 +535,7 @@ class TimingOrderPage(BasePage):
         self.press_confirm_button()
         offset_flag_value = self.get_visible_element(self.offset_flag_change_button).text
         self.slide_action(460, 1750, 460, 1200)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_offset_flag_value = self.order_details_offset_flag_value()
         self.press_confirm_button()
@@ -544,6 +581,7 @@ class TimingOrderPage(BasePage):
         self.press_offer()
         hedge_flag_default_value = self.get_visible_element(self.hedge_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_hedge_flag_value = self.order_details_hedge_flag_value()
         self.press_confirm_button()
@@ -556,6 +594,7 @@ class TimingOrderPage(BasePage):
         self.press_confirm_button()
         hedge_flag_value = self.get_visible_element(self.hedge_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_hedge_flag_value = self.order_details_hedge_flag_value()
         self.press_confirm_button()
@@ -568,6 +607,7 @@ class TimingOrderPage(BasePage):
         self.press_confirm_button()
         hedge_flag_value = self.get_visible_element(self.hedge_flag_change_button).text
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.press_confirm_button()
         order_details_hedge_flag_value = self.order_details_hedge_flag_value()
         self.press_confirm_button()
@@ -576,6 +616,7 @@ class TimingOrderPage(BasePage):
     def edit_memo_and_order(self):
         self.press_offer()
         self.slide_action(460, 1750, 460, 1400)
+        self.change_end_time_and_time_interval_legal()
         self.click_action(self.edit_memo_ID)
         # 生成随机数的方法1
         # l1 = []

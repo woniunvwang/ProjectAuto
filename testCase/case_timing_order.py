@@ -192,7 +192,7 @@ class CaseTimingOrder(unittest.TestCase):
 
     # 价差为0.1
     def test_24_input_illegal_price_and_order_should_fail(self):
-        self.timing_order_page.input_illegal_price_and_order("0.0000001")
+        self.timing_order_page.input_illegal_price_and_order("100.00001")
         result = self.timing_order_page.is_toast_exist(AlertError.alert_illegal_price_tick_size)
         self.assertEqual(True, result)
 
@@ -267,8 +267,8 @@ class CaseTimingOrder(unittest.TestCase):
         result = self.timing_order_page.is_toast_exist(AlertError.alert_illegal_end_time)
         self.assertTrue(result)
 
-    def test_36_change_end_time_after_now_and_order_should_success(self):
-        result = self.timing_order_page.change_end_time_after_now_and_order()
+    def test_36_change_end_time_after_current_year_and_order_should_success(self):
+        result = self.timing_order_page.change_end_time_after_now_and_order(150)
         end_time_value = result[0]
         end_time_title = result[1]
         changed_end_time_value = result[2]+"(GTM+8)"
@@ -278,13 +278,92 @@ class CaseTimingOrder(unittest.TestCase):
         order_message = self.timing_order_page.alert_order_details_title()
         self.assertEqual(order_message, AlertError.alert_order_message_title)
 
-    def test_37_time_interval_default_value_and_order_should_fail(self):
+    def test_37_change_end_time_after_current_month_and_order_should_success(self):
+        result = self.timing_order_page.change_end_time_after_now_and_order(300)
+        end_time_value = result[0]
+        end_time_title = result[1]
+        changed_end_time_value = result[2]+"(GTM+8)"
+        order_detail_end_time = result[3]
+        self.assertEqual(end_time_value, end_time_title)
+        self.assertEqual(changed_end_time_value, order_detail_end_time)
+        order_message = self.timing_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
+
+    def test_38_change_end_time_after_current_day_and_order_should_success(self):
+        result = self.timing_order_page.change_end_time_after_now_and_order(450)
+        end_time_value = result[0]
+        end_time_title = result[1]
+        changed_end_time_value = result[2]+"(GTM+8)"
+        order_detail_end_time = result[3]
+        self.assertEqual(end_time_value, end_time_title)
+        self.assertEqual(changed_end_time_value, order_detail_end_time)
+        order_message = self.timing_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
+
+    def test_39_change_end_time_after_current_hour_and_order_should_success(self):
+        result = self.timing_order_page.change_end_time_after_now_and_order(630)
+        end_time_value = result[0]
+        end_time_title = result[1]
+        changed_end_time_value = result[2]+"(GTM+8)"
+        order_detail_end_time = result[3]
+        self.assertEqual(end_time_value, end_time_title)
+        self.assertEqual(changed_end_time_value, order_detail_end_time)
+        order_message = self.timing_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
+
+    def test_40_change_end_time_after_current_minute_and_order_should_success(self):
+        result = self.timing_order_page.change_end_time_after_now_and_order(780)
+        end_time_value = result[0]
+        end_time_title = result[1]
+        changed_end_time_value = result[2]+"(GTM+8)"
+        order_detail_end_time = result[3]
+        self.assertEqual(end_time_value, end_time_title)
+        self.assertEqual(changed_end_time_value, order_detail_end_time)
+        order_message = self.timing_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
+
+    def test_41_change_end_time_after_current_second_and_order_should_success(self):
+        result = self.timing_order_page.change_end_time_after_now_and_order(920)
+        end_time_value = result[0]
+        end_time_title = result[1]
+        changed_end_time_value = result[2]+"(GTM+8)"
+        order_detail_end_time = result[3]
+        self.assertEqual(end_time_value, end_time_title)
+        self.assertEqual(changed_end_time_value, order_detail_end_time)
+        order_message = self.timing_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
+
+    def test_42_time_interval_default_value_and_order_should_fail(self):
         time_interval_value = self.timing_order_page.time_interval_default_value()
         self.assertEqual("0 时 0 分 0 秒", time_interval_value)
         result = self.timing_order_page.is_toast_exist(AlertError.alert_illegal_time_interval)
         self.assertTrue(result)
 
-    def test_38_offset_flag_auto_and_order_should_success(self):
+    def test_43_change_time_interval_after_current_hour_and_order_should_success(self):
+        result = self.timing_order_page.change_time_interval_value_and_order(410)
+        changed_time_interval_value = result[0].replace(" ", "")
+        order_detail_time_interval_value = result[1].replace(" ", "")
+        self.assertEqual(changed_time_interval_value, order_detail_time_interval_value)
+        order_message = self.timing_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
+
+    def test_44_change_time_interval_after_current_minute_and_order_should_success(self):
+        result = self.timing_order_page.change_time_interval_value_and_order(560)
+        changed_time_interval_value = result[0].replace(" ", "")
+        order_detail_time_interval_value = result[1].replace(" ", "")
+        self.assertEqual(changed_time_interval_value, order_detail_time_interval_value)
+        order_message = self.timing_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
+
+    def test_45_change_time_interval_after_current_second_and_order_should_success(self):
+        result = self.timing_order_page.change_time_interval_value_and_order(705)
+        changed_time_interval_value = result[0].replace(" ", "")
+        order_detail_time_interval_value = result[1].replace(" ", "")
+        self.assertEqual(changed_time_interval_value, order_detail_time_interval_value)
+        order_message = self.timing_order_page.alert_order_details_title()
+        self.assertEqual(order_message, AlertError.alert_order_message_title)
+
+    def test_46_offset_flag_auto_and_order_should_success(self):
         self.timing_order_page.permission_contract_to_top()  # 让权限合约TCU1907-SH排在合约列表的第一位来进行
         result = self.timing_order_page.offset_flag_auto_and_order()
         offset_flag_default_value = result[0]
@@ -294,7 +373,7 @@ class CaseTimingOrder(unittest.TestCase):
         self.assertEqual(offset_flag_default_value, '自动')
         self.assertEqual(offset_flag_default_value, order_details_offset_flag_value)
 
-    def test_39_offset_flag_open_and_order_should_success(self):
+    def test_47_offset_flag_open_and_order_should_success(self):
         result = self.timing_order_page.offset_flag_open_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
@@ -303,7 +382,7 @@ class CaseTimingOrder(unittest.TestCase):
         self.assertEqual(offset_flag_value, '开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
-    def test_40_offset_flag_C_CT_O_and_order_should_success(self):
+    def test_48_offset_flag_C_CT_O_and_order_should_success(self):
         result = self.timing_order_page.offset_flag_C_CT_O_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
@@ -312,7 +391,7 @@ class CaseTimingOrder(unittest.TestCase):
         self.assertEqual(offset_flag_value, '平仓-平今-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
-    def test_41_offset_flag_CT_C_O_and_order_should_success(self):
+    def test_49_offset_flag_CT_C_O_and_order_should_success(self):
         result = self.timing_order_page.offset_flag_CT_C_O_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
@@ -321,7 +400,7 @@ class CaseTimingOrder(unittest.TestCase):
         self.assertEqual(offset_flag_value, '平今-平仓-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
-    def test_42_offset_flag_C_O_and_order_should_success(self):
+    def test_50_offset_flag_C_O_and_order_should_success(self):
         result = self.timing_order_page.offset_flag_C_O_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
@@ -330,7 +409,7 @@ class CaseTimingOrder(unittest.TestCase):
         self.assertEqual(offset_flag_value, '平仓-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
-    def test_43_offset_flag_CT_O_and_order_should_success(self):
+    def test_51_offset_flag_CT_O_and_order_should_success(self):
         result = self.timing_order_page.offset_flag_CT_O_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
@@ -339,7 +418,7 @@ class CaseTimingOrder(unittest.TestCase):
         self.assertEqual(offset_flag_value, '平今-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
-    def test_44_offset_flag_CY_O_and_order_should_success(self):
+    def test_52_offset_flag_CY_O_and_order_should_success(self):
         result = self.timing_order_page.offset_flag_CY_O_and_order()
         offset_flag_value = result[0]
         order_details_offset_flag_value = result[1]
@@ -348,7 +427,7 @@ class CaseTimingOrder(unittest.TestCase):
         self.assertEqual(offset_flag_value, '平昨-开仓')
         self.assertEqual(offset_flag_value, order_details_offset_flag_value)
 
-    def test_45_hedge_flag_speculation_and_order_should_success(self):
+    def test_53_hedge_flag_speculation_and_order_should_success(self):
         result = self.timing_order_page.hedge_flag_speculation_and_order()
         hedge_flag_default_value = result[0]
         order_details_hedge_flag_value = result[1]
@@ -357,7 +436,7 @@ class CaseTimingOrder(unittest.TestCase):
         self.assertEqual(hedge_flag_default_value, '投机')
         self.assertEqual(hedge_flag_default_value, order_details_hedge_flag_value)
 
-    def test_46_hedge_flag_arbitrage_and_order_should_success(self):
+    def test_54_hedge_flag_arbitrage_and_order_should_success(self):
         result = self.timing_order_page.hedge_flag_arbitrage_and_order()
         hedge_flag_value = result[0]
         order_details_hedge_flag_value = result[1]
@@ -366,7 +445,7 @@ class CaseTimingOrder(unittest.TestCase):
         self.assertEqual(hedge_flag_value, '套利')
         self.assertEqual(hedge_flag_value, order_details_hedge_flag_value)
 
-    def test_47_hedge_flag_hedge_and_order_should_success(self):
+    def test_55_hedge_flag_hedge_and_order_should_success(self):
         result = self.timing_order_page.hedge_flag_hedge_and_order()
         hedge_flag_value = result[0]
         order_details_hedge_flag_value = result[1]
@@ -375,7 +454,7 @@ class CaseTimingOrder(unittest.TestCase):
         self.assertEqual(hedge_flag_value, '套保')
         self.assertEqual(hedge_flag_value, order_details_hedge_flag_value)
 
-    def test_48_edit_memo_and_order_should_success(self):
+    def test_56_edit_memo_and_order_should_success(self):
         self.timing_order_page.permission_contract_to_bottom()  # 权限合约排到最底部，主合约排到第一位
         result = self.timing_order_page.edit_memo_and_order()
         hint = result[0]
