@@ -14,12 +14,12 @@ class TestCaseStrategiesOrder:
     def teardown_method(self) -> None:
         self.driver.quit()
 
-    # 涔板崠鐩樺強娑ㄨ穼骞呮湁鏁版嵁鏃舵牴鎹氦鏄撴柟鍚戠浉鍙嶆暟鎹～鍏�
+    # 买卖盘及涨跌幅有数据时根据交易方向相反数据填充
     def test_01_press_bid_and_side_should_sell(self):
         pass
 
     def test_87_edit_memo_and_order_should_success(self):
-        self.strategies_order_page.permission_contract_to_bottom()  # 鏉冮檺鍚堢害鎺掑埌鏈�搴曢儴锛屼富鍚堢害鎺掑埌绗竴浣�
+        self.strategies_order_page.permission_contract_to_bottom()  # 权限合约排到最底部，主合约排到第一位
         result = self.strategies_order_page.edit_memo_and_order()
         hint = result[0]
         memo_value = result[1]

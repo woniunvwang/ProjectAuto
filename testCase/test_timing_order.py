@@ -14,7 +14,7 @@ class TestCaseTimingOrder:
     def teardown_method(self) -> None:
         self.driver.quit()
 
-    # 涔板崠鐩樺強娑ㄨ穼骞呮湁鏁版嵁鏃舵牴鎹氦鏄撴柟鍚戠浉鍙嶆暟鎹～鍏�
+    # 买卖盘及涨跌幅有数据时根据交易方向相反数据填充
     def test_01_press_bid_and_side_should_sell(self):
         result = self.timing_order_page.press_bid_and_order()
         buy_checkbox = result[0]
@@ -24,7 +24,7 @@ class TestCaseTimingOrder:
         # assert(order_message == AlertError.alert_message_succeed)
         assert("false" == buy_checkbox)
         assert("true" == sell_checkbox)
-        assert("鍗�" == order_details_side_value)
+        assert("卖" == order_details_side_value)
 
     def test_02_press_bid_and_lots_should_bid_value(self):
         result = self.timing_order_page.press_bid_and_check_lots()
@@ -51,7 +51,7 @@ class TestCaseTimingOrder:
         # assert(order_message == AlertError.alert_message_succeed)
         assert("true" == buy_checkbox)
         assert("false" == sell_checkbox)
-        assert("涔�" == order_details_side_value)
+        assert("买" == order_details_side_value)
 
     def test_05_press_offer_and_lots_should_offer_value(self):
         result = self.timing_order_page.press_offer_and_check_lots()
@@ -78,7 +78,7 @@ class TestCaseTimingOrder:
         # assert(order_message == AlertError.alert_message_succeed)
         assert("true" == buy_checkbox)
         assert("false" == sell_checkbox)
-        assert("涔�" == order_details_side_value)
+        assert("买" == order_details_side_value)
 
     def test_08_press_chg_and_lots_should_last_lots_value(self):
         result = self.timing_order_page.press_chg_and_check_lots()
@@ -96,9 +96,9 @@ class TestCaseTimingOrder:
         assert(last_price == price_value)
         assert(price_value == order_details_price_value)
 
-    # 涔板崠鐩樺強娑ㄨ穼骞呮病鏈夋暟鎹椂鎵嬫暟鍜屼环鏍兼寜鐓�"1"锛�"0"濉厖銆�
+    # 买卖盘及涨跌幅没有数据时手数和价格按照"1"，"0"填充。
     def test_10_press_no_data_bid_and_lots_should_fix_num(self):
-        self.timing_order_page.no_data_contract_to_top()  # 璁㏕2209-CF鎺掑湪鍚堢害鍒楄〃鐨勭涓�浣嶆潵杩涜娌℃湁鏁版嵁鏃剁殑娴嬭瘯
+        self.timing_order_page.no_data_contract_to_top()  # 让T2209-CF排在合约列表的第一位来进行没有数据时的测试
         result = self.timing_order_page.press_bid_and_check_lots()
         lots_value = result[0]
         order_details_lots_value = result[1]
@@ -141,7 +141,7 @@ class TestCaseTimingOrder:
         assert(price_value == order_details_price_value)
 
     def test_16_change_trade_account_should_success(self):
-        self.timing_order_page.main_contract_to_top()  # 娌℃湁鏁版嵁鏃剁殑娴嬭瘯缁撴潫锛岃涓绘祴璇曞悎绾C2212-CME鎺掑湪鍚堢害鍒楄〃鐨勭涓�浣嶆潵杩涜
+        self.timing_order_page.main_contract_to_top()  # 没有数据时的测试结束，让主测试合约GC2212-CME排在合约列表的第一位来进行
         result = self.timing_order_page.change_trade_account()
         trade_account_value = result[0]
         changed_trade_account_value = result[1]
@@ -158,7 +158,7 @@ class TestCaseTimingOrder:
         # assert(order_message == AlertError.alert_message_succeed)
         assert("false" == buy_checkbox)
         assert("true" == sell_checkbox)
-        assert("鍗�" == order_details_side_value)
+        assert("卖" == order_details_side_value)
 
     def test_18_clear_lots_and_order_should_fail(self):
         self.timing_order_page.clear_lots_and_order()
@@ -190,7 +190,7 @@ class TestCaseTimingOrder:
         result = self.timing_order_page.is_toast_exist(AlertError.alert_illegal_price)
         assert(True == result)
 
-    # 浠峰樊涓�0.1
+    # 价差为0.1
     def test_24_input_illegal_price_and_order_should_fail(self):
         self.timing_order_page.input_illegal_price_and_order("100.00001")
         result = self.timing_order_page.is_toast_exist(AlertError.alert_illegal_price_tick_size)
@@ -335,7 +335,7 @@ class TestCaseTimingOrder:
 
     def test_42_time_interval_default_value_and_order_should_fail(self):
         time_interval_value = self.timing_order_page.time_interval_default_value()
-        assert("0 鏃� 0 鍒� 0 绉�" == time_interval_value)
+        assert("0 时 0 分 0 秒" == time_interval_value)
         result = self.timing_order_page.is_toast_exist(AlertError.alert_illegal_time_interval)
         assert result
 
@@ -364,13 +364,13 @@ class TestCaseTimingOrder:
         assert(order_message == AlertError.alert_order_message_title)
 
     def test_46_offset_flag_auto_and_order_should_success(self):
-        self.timing_order_page.permission_contract_to_top()  # 璁╂潈闄愬悎绾CU1907-SH鎺掑湪鍚堢害鍒楄〃鐨勭涓�浣嶆潵杩涜
+        self.timing_order_page.permission_contract_to_top()  # 让权限合约TCU1907-SH排在合约列表的第一位来进行
         result = self.timing_order_page.offset_flag_auto_and_order()
         offset_flag_default_value = result[0]
         order_details_offset_flag_value = result[1]
         order_message = self.timing_order_page.alert_order_details_title()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(offset_flag_default_value == '鑷姩')
+        assert(offset_flag_default_value == '自动')
         assert(offset_flag_default_value == order_details_offset_flag_value)
 
     def test_47_offset_flag_open_and_order_should_success(self):
@@ -379,7 +379,7 @@ class TestCaseTimingOrder:
         order_details_offset_flag_value = result[1]
         order_message = self.timing_order_page.alert_order_details_title()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(offset_flag_value == '寮�浠�')
+        assert(offset_flag_value == '开仓')
         assert(offset_flag_value == order_details_offset_flag_value)
 
     def test_48_offset_flag_C_CT_O_and_order_should_success(self):
@@ -388,7 +388,7 @@ class TestCaseTimingOrder:
         order_details_offset_flag_value = result[1]
         order_message = self.timing_order_page.alert_order_details_title()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(offset_flag_value == '骞充粨-骞充粖-寮�浠�')
+        assert(offset_flag_value == '平仓-平今-开仓')
         assert(offset_flag_value == order_details_offset_flag_value)
 
     def test_49_offset_flag_CT_C_O_and_order_should_success(self):
@@ -397,7 +397,7 @@ class TestCaseTimingOrder:
         order_details_offset_flag_value = result[1]
         order_message = self.timing_order_page.alert_order_details_title()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(offset_flag_value == '骞充粖-骞充粨-寮�浠�')
+        assert(offset_flag_value == '平今-平仓-开仓')
         assert(offset_flag_value == order_details_offset_flag_value)
 
     def test_50_offset_flag_C_O_and_order_should_success(self):
@@ -406,7 +406,7 @@ class TestCaseTimingOrder:
         order_details_offset_flag_value = result[1]
         order_message = self.timing_order_page.alert_order_details_title()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(offset_flag_value == '骞充粨-寮�浠�')
+        assert(offset_flag_value == '平仓-开仓')
         assert(offset_flag_value == order_details_offset_flag_value)
 
     def test_51_offset_flag_CT_O_and_order_should_success(self):
@@ -415,7 +415,7 @@ class TestCaseTimingOrder:
         order_details_offset_flag_value = result[1]
         order_message = self.timing_order_page.alert_order_details_title()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(offset_flag_value == '骞充粖-寮�浠�')
+        assert(offset_flag_value == '平今-开仓')
         assert(offset_flag_value == order_details_offset_flag_value)
 
     def test_52_offset_flag_CY_O_and_order_should_success(self):
@@ -424,7 +424,7 @@ class TestCaseTimingOrder:
         order_details_offset_flag_value = result[1]
         order_message = self.timing_order_page.alert_order_details_title()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(offset_flag_value == '骞虫槰-寮�浠�')
+        assert(offset_flag_value == '平昨-开仓')
         assert(offset_flag_value == order_details_offset_flag_value)
 
     def test_53_hedge_flag_speculation_and_order_should_success(self):
@@ -433,7 +433,7 @@ class TestCaseTimingOrder:
         order_details_hedge_flag_value = result[1]
         order_message = self.timing_order_page.alert_order_details_title()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(hedge_flag_default_value == '鎶曟満')
+        assert(hedge_flag_default_value == '投机')
         assert(hedge_flag_default_value == order_details_hedge_flag_value)
 
     def test_54_hedge_flag_arbitrage_and_order_should_success(self):
@@ -442,7 +442,7 @@ class TestCaseTimingOrder:
         order_details_hedge_flag_value = result[1]
         order_message = self.timing_order_page.alert_order_details_title()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(hedge_flag_value == '濂楀埄')
+        assert(hedge_flag_value == '套利')
         assert(hedge_flag_value == order_details_hedge_flag_value)
 
     def test_55_hedge_flag_hedge_and_order_should_success(self):
@@ -451,11 +451,11 @@ class TestCaseTimingOrder:
         order_details_hedge_flag_value = result[1]
         order_message = self.timing_order_page.alert_order_details_title()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(hedge_flag_value == '濂椾繚')
+        assert(hedge_flag_value == '套保')
         assert(hedge_flag_value == order_details_hedge_flag_value)
 
     def test_56_edit_memo_and_order_should_success(self):
-        self.timing_order_page.permission_contract_to_bottom()  # 鏉冮檺鍚堢害鎺掑埌鏈�搴曢儴锛屼富鍚堢害鎺掑埌绗竴浣�
+        self.timing_order_page.permission_contract_to_bottom()  # 权限合约排到最底部，主合约排到第一位
         result = self.timing_order_page.edit_memo_and_order()
         hint = result[0]
         memo_value = result[1]

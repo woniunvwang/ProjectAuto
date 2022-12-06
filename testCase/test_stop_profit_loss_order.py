@@ -14,7 +14,7 @@ class TestCaseStopProfitLossOrder:
     def teardown_method(self) -> None:
         self.driver.quit()
 
-    # 涔板崠鐩樺強娑ㄨ穼骞呮湁鏁版嵁鏃舵牴鎹氦鏄撴柟鍚戠浉鍙嶆暟鎹～鍏�
+    # 买卖盘及涨跌幅有数据时根据交易方向相反数据填充
     def test_01_press_bid_and_side_should_sell(self):
         result = self.stop_profit_loss_order_page.press_bid_and_order()
         buy_checkbox = result[0]
@@ -24,7 +24,7 @@ class TestCaseStopProfitLossOrder:
         assert(order_message == AlertError.alert_order_message)
         assert("false" == buy_checkbox)
         assert("true" == sell_checkbox)
-        assert("鍗�" == order_details_side_value)
+        assert("卖" == order_details_side_value)
 
     def test_02_press_bid_and_lots_should_bid_value(self):
         result = self.stop_profit_loss_order_page.press_bid_and_check_lots()
@@ -51,7 +51,7 @@ class TestCaseStopProfitLossOrder:
         assert(order_message == AlertError.alert_order_message)
         assert("true" == buy_checkbox)
         assert("false" == sell_checkbox)
-        assert("涔�" == order_details_side_value)
+        assert("买" == order_details_side_value)
 
     def test_05_press_offer_and_lots_should_offer_value(self):
         result = self.stop_profit_loss_order_page.press_offer_and_check_lots()
@@ -78,7 +78,7 @@ class TestCaseStopProfitLossOrder:
         assert(order_message == AlertError.alert_order_message)
         assert("true" == buy_checkbox)
         assert("false" == sell_checkbox)
-        assert("涔�" == order_details_side_value)
+        assert("买" == order_details_side_value)
 
     def test_08_press_chg_and_lots_should_last_lots_value(self):
         result = self.stop_profit_loss_order_page.press_chg_and_check_lots()
@@ -96,9 +96,9 @@ class TestCaseStopProfitLossOrder:
         assert(last_price == price_value)
         assert(price_value == order_details_price_value)
 
-    # 涔板崠鐩樺強娑ㄨ穼骞呮病鏈夋暟鎹椂鎵嬫暟鍜屼环鏍兼寜鐓�"1"锛�"0"濉厖銆�
+    # 买卖盘及涨跌幅没有数据时手数和价格按照"1"，"0"填充。
     def test_10_press_no_data_bid_and_lots_should_fix_num(self):
-        self.stop_profit_loss_order_page.no_data_contract_to_top()  # 璁㏕2209-CF鎺掑湪鍚堢害鍒楄〃鐨勭涓�浣嶆潵杩涜娌℃湁鏁版嵁鏃剁殑娴嬭瘯
+        self.stop_profit_loss_order_page.no_data_contract_to_top()  # 让T2209-CF排在合约列表的第一位来进行没有数据时的测试
         result = self.stop_profit_loss_order_page.press_bid_and_check_lots()
         lots_value = result[0]
         order_details_lots_value = result[1]
@@ -141,7 +141,7 @@ class TestCaseStopProfitLossOrder:
         assert(price_value == order_details_price_value)
 
     def test_16_change_trade_account_should_success(self):
-        self.stop_profit_loss_order_page.main_contract_to_top()  # 娌℃湁鏁版嵁鏃剁殑娴嬭瘯缁撴潫锛岃涓绘祴璇曞悎绾C2212-CME鎺掑湪鍚堢害鍒楄〃鐨勭涓�浣嶆潵杩涜
+        self.stop_profit_loss_order_page.main_contract_to_top()  # 没有数据时的测试结束，让主测试合约GC2212-CME排在合约列表的第一位来进行
         result = self.stop_profit_loss_order_page.change_trade_account()
         trade_account_value = result[0]
         changed_trade_account_value = result[1]
@@ -158,7 +158,7 @@ class TestCaseStopProfitLossOrder:
         assert(order_message == AlertError.alert_order_message)
         assert("false" == buy_checkbox)
         assert("true" == sell_checkbox)
-        assert("鍗�" == order_details_side_value)
+        assert("卖" == order_details_side_value)
 
     def test_18_clear_lots_and_order_should_fail(self):
         self.stop_profit_loss_order_page.clear_lots_and_order()
@@ -190,7 +190,7 @@ class TestCaseStopProfitLossOrder:
         result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_price)
         assert result
 
-    # 浠峰樊涓�0.1
+    # 价差为0.1
     def test_24_input_illegal_price_and_order_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_price_and_order("0.0000001")
         result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_order_price_tick_size)
@@ -285,8 +285,8 @@ class TestCaseStopProfitLossOrder:
         order_details_mode_value = result[2]
         order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(mode_default_value == '鎸夊紑浠撳潎浠锋鐩堟鎹�')
-        assert(mode_value == '鎸夎嚜瀹氫箟浠锋鐩堟鎹�(涓嶅紑浠�)')
+        assert(mode_default_value == '按开仓均价止盈止损')
+        assert(mode_value == '按自定义价止盈止损(不开仓)')
         assert(mode_value == order_details_mode_value)
 
     def test_40_change_mode_open_and_order_should_success(self):
@@ -297,7 +297,7 @@ class TestCaseStopProfitLossOrder:
         order_details_mode_value = result[3]
         order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(mode_value == '鎸夊紑浠撳潎浠锋鐩堟鎹�')
+        assert(mode_value == '按开仓均价止盈止损')
         assert(type_enabled == 'true')
         assert(type_value == "LIM")
         assert(mode_value == order_details_mode_value)
@@ -343,7 +343,7 @@ class TestCaseStopProfitLossOrder:
         result = self.stop_profit_loss_order_page.exchange_market_order_default()
         exchange_market_order_default = result[0]
         order_detail_exchange_market_order = result[1]
-        assert("鍏抽棴" == exchange_market_order_default)
+        assert("关闭" == exchange_market_order_default)
         assert not order_detail_exchange_market_order
 
     def test_45_lim_type_and_exchange_market_order_value_Open_and_close_pxdiff_should_disappear(self):
@@ -353,7 +353,7 @@ class TestCaseStopProfitLossOrder:
         order_detail_exchange_market_order_value = result[2]
         assert not close_pxdiff
         assert not order_detail_close_pxdiff
-        assert("[骞充粨]" == order_detail_exchange_market_order_value)
+        assert("[平仓]" == order_detail_exchange_market_order_value)
 
     def test_46_market_type_and_exchange_market_order_value_Open_and_close_pxdiff_should_disappear(self):
         result = self.stop_profit_loss_order_page.market_type_and_exchange_market_order_open()
@@ -366,7 +366,7 @@ class TestCaseStopProfitLossOrder:
         assert not order_detail_close_pxdiff
         assert not open_pxdiff
         assert not order_detail_open_pxdiff
-        assert("[寮�浠� ==骞充粨]" == order_detail_exchange_market_order_value)
+        assert("[开仓 ==平仓]" == order_detail_exchange_market_order_value)
 
     def test_47_clear_close_pxdiff_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.clear_close_pxdiff_and_press_confirm()
@@ -448,7 +448,7 @@ class TestCaseStopProfitLossOrder:
         assert result
 
     def test_62_input_illegal_times_and_press_confirm_should_fail(self):
-        self.stop_profit_loss_order_page.input_times_and_press_confirm("+~!@#楼%^&*()_-")
+        self.stop_profit_loss_order_page.input_times_and_press_confirm("+~!@#¥%^&*()_-")
         result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_times)
         assert result
 
@@ -480,13 +480,13 @@ class TestCaseStopProfitLossOrder:
         assert("100" == order_detail_times)
 
     def test_68_offset_flag_auto_and_order_should_success(self):
-        self.stop_profit_loss_order_page.permission_contract_to_top()  # 璁╂潈闄愬悎绾CU1907-SH鎺掑湪鍚堢害鍒楄〃鐨勭涓�浣嶆潵杩涜
+        self.stop_profit_loss_order_page.permission_contract_to_top()  # 让权限合约TCU1907-SH排在合约列表的第一位来进行
         result = self.stop_profit_loss_order_page.offset_flag_auto_and_order()
         offset_flag_default_value = result[0]
         order_details_offset_flag_value = result[1]
         order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(offset_flag_default_value == '鑷姩')
+        assert(offset_flag_default_value == '自动')
         assert(offset_flag_default_value == order_details_offset_flag_value)
 
     def test_69_offset_flag_open_and_order_should_success(self):
@@ -495,7 +495,7 @@ class TestCaseStopProfitLossOrder:
         order_details_offset_flag_value = result[1]
         order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(offset_flag_value == '寮�浠�')
+        assert(offset_flag_value == '开仓')
         assert(offset_flag_value == order_details_offset_flag_value)
 
     def test_70_offset_flag_C_CT_O_and_order_should_success(self):
@@ -504,7 +504,7 @@ class TestCaseStopProfitLossOrder:
         order_details_offset_flag_value = result[1]
         order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(offset_flag_value == '骞充粨-骞充粖-寮�浠�')
+        assert(offset_flag_value == '平仓-平今-开仓')
         assert(offset_flag_value == order_details_offset_flag_value)
 
     def test_71_offset_flag_CT_C_O_and_order_should_success(self):
@@ -513,7 +513,7 @@ class TestCaseStopProfitLossOrder:
         order_details_offset_flag_value = result[1]
         order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(offset_flag_value == '骞充粖-骞充粨-寮�浠�')
+        assert(offset_flag_value == '平今-平仓-开仓')
         assert(offset_flag_value == order_details_offset_flag_value)
 
     def test_72_offset_flag_C_O_and_order_should_success(self):
@@ -522,7 +522,7 @@ class TestCaseStopProfitLossOrder:
         order_details_offset_flag_value = result[1]
         order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(offset_flag_value == '骞充粨-寮�浠�')
+        assert(offset_flag_value == '平仓-开仓')
         assert(offset_flag_value == order_details_offset_flag_value)
 
     def test_73_offset_flag_CT_O_and_order_should_success(self):
@@ -531,7 +531,7 @@ class TestCaseStopProfitLossOrder:
         order_details_offset_flag_value = result[1]
         order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(offset_flag_value == '骞充粖-寮�浠�')
+        assert(offset_flag_value == '平今-开仓')
         assert(offset_flag_value == order_details_offset_flag_value)
 
     def test_74_offset_flag_CY_O_and_order_should_success(self):
@@ -540,7 +540,7 @@ class TestCaseStopProfitLossOrder:
         order_details_offset_flag_value = result[1]
         order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(offset_flag_value == '骞虫槰-寮�浠�')
+        assert(offset_flag_value == '平昨-开仓')
         assert(offset_flag_value == order_details_offset_flag_value)
 
     def test_75_hedge_flag_speculation_and_order_should_success(self):
@@ -549,7 +549,7 @@ class TestCaseStopProfitLossOrder:
         order_details_hedge_flag_value = result[1]
         order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(hedge_flag_default_value == '鎶曟満')
+        assert(hedge_flag_default_value == '投机')
         assert(hedge_flag_default_value == order_details_hedge_flag_value)
 
     def test_76_hedge_flag_arbitrage_and_order_should_success(self):
@@ -558,7 +558,7 @@ class TestCaseStopProfitLossOrder:
         order_details_hedge_flag_value = result[1]
         order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(hedge_flag_value == '濂楀埄')
+        assert(hedge_flag_value == '套利')
         assert(hedge_flag_value == order_details_hedge_flag_value)
 
     def test_77_hedge_flag_hedge_and_order_should_success(self):
@@ -567,11 +567,11 @@ class TestCaseStopProfitLossOrder:
         order_details_hedge_flag_value = result[1]
         order_message = self.stop_profit_loss_order_page.alert_title_send_order_successfully()
         assert(order_message == AlertError.alert_order_message_title)
-        assert(hedge_flag_value == '濂椾繚')
+        assert(hedge_flag_value == '套保')
         assert(hedge_flag_value == order_details_hedge_flag_value)
 
     def test_78_edit_memo_and_order_should_success(self):
-        self.stop_profit_loss_order_page.permission_contract_to_bottom()  # 鏉冮檺鍚堢害鎺掑埌鏈�搴曢儴锛屼富鍚堢害鎺掑埌绗竴浣�
+        self.stop_profit_loss_order_page.permission_contract_to_bottom()  # 权限合约排到最底部，主合约排到第一位
         result = self.stop_profit_loss_order_page.edit_memo_and_order()
         hint = result[0]
         memo_value = result[1]
