@@ -163,37 +163,37 @@ class CaseNormalOrder(unittest.TestCase):
 
     def test_18_clear_lots_and_order_should_fail(self):
         self.normal_order_page.clear_lots_and_order()
-        result = self.normal_order_page.is_toast_exist(AlertError.alert_message_lots)
+        result = self.normal_order_page.is_error_text_exist(AlertError.alert_message_lots)
         self.assertEqual(True, result)
 
     def test_19_input_illegal_lots_and_order_should_fail(self):
         self.normal_order_page.input_illegal_lots_and_order("1.")
-        result = self.normal_order_page.is_toast_exist(AlertError.alert_illegal_lots)
+        result = self.normal_order_page.is_error_text_exist(AlertError.alert_illegal_lots)
         self.assertEqual(True, result)
 
     def test_20_clear_price_and_order_should_fail(self):
         self.normal_order_page.clear_price_and_order()
-        result = self.normal_order_page.is_toast_exist(AlertError.alert_message_price)
+        result = self.normal_order_page.is_error_text_exist(AlertError.alert_message_price)
         self.assertEqual(True, result)
 
     def test_21_input_illegal_price_and_order_should_fail(self):
         self.normal_order_page.input_illegal_price_and_order(".")
-        result = self.normal_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.normal_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     def test_22_input_illegal_price_and_order_should_fail(self):
         self.normal_order_page.input_illegal_price_and_order("+")
-        result = self.normal_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.normal_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     def test_23_input_illegal_price_and_order_should_fail(self):
         self.normal_order_page.input_illegal_price_and_order("-")
-        result = self.normal_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.normal_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     def test_24_input_illegal_price_tick_size_and_order_should_fail(self):
         self.normal_order_page.input_illegal_price_and_order("0.0000001")
-        result = self.normal_order_page.is_toast_exist(AlertError.alert_illegal_price_tick_size)
+        result = self.normal_order_page.is_error_text_exist(AlertError.alert_illegal_price_tick_size)
         self.assertEqual(True, result)
 
     def test_25_input_legal_lots_and_price_and_order_should_success(self):
@@ -270,7 +270,7 @@ class CaseNormalOrder(unittest.TestCase):
 
     def test_34_stp_type_clear_StPx_and_order_should_fail(self):
         self.normal_order_page.stp_clear_StPx_and_order()
-        result = self.normal_order_page.is_toast_exist(AlertError.alert_message_StPx)
+        result = self.normal_order_page.is_error_text_exist(AlertError.alert_message_StPx)
         self.assertEqual(True, result)
 
     def test_35_stp_type_and_buy_side_and_input_StPx_above_last_price_should_success(self):
@@ -325,7 +325,7 @@ class CaseNormalOrder(unittest.TestCase):
 
     def test_41_stl_type_and_clear_StPx_and_order_should_fail(self):
         self.normal_order_page.stl_clear_StPx_and_order()
-        result = self.normal_order_page.is_toast_exist(AlertError.alert_message_StPx)
+        result = self.normal_order_page.is_error_text_exist(AlertError.alert_message_StPx)
         self.assertEqual(True, result)
 
     def test_42_stl_type_and_buy_side_and_input_price_equal_StPx_above_last_price_should_success(self):
@@ -382,12 +382,12 @@ class CaseNormalOrder(unittest.TestCase):
 
     def test_47_stl_type_and_buy_side_and_above_last_price_and_StPx_above_price_should_fail(self):
         self.normal_order_page.stl_type_input_StPx_above_price_and_buy_order()
-        result = self.normal_order_page.is_toast_exist(AlertError.alert_buy_order_illegal_StPx)
+        result = self.normal_order_page.is_error_text_exist(AlertError.alert_buy_order_illegal_StPx)
         self.assertEqual(True, result)
 
     def test_48_stl_type_and_sell_side_and_above_last_price_and_StPx_below_price_should_fail(self):
         self.normal_order_page.stl_type_input_StPx_below_price_and_sell_order()
-        result = self.normal_order_page.is_toast_exist(AlertError.alert_sell_order_illegal_StPx)
+        result = self.normal_order_page.is_error_text_exist(AlertError.alert_sell_order_illegal_StPx)
         self.assertEqual(True, result)
 
     def test_49_stl_type_and_sell_side_and_above_last_price_and_StPx_above_price_should_success(self):
@@ -453,7 +453,7 @@ class CaseNormalOrder(unittest.TestCase):
 
     def test_56_ice_type_and_clear_chunk_size_and_order_should_fail(self):
         self.normal_order_page.ice_type_clear_chunk_size_and_order()
-        result = self.normal_order_page.is_toast_exist(AlertError.alert_message_chunk_size)
+        result = self.normal_order_page.is_error_text_exist(AlertError.alert_message_chunk_size)
         self.assertEqual(True, result)
 
     def test_56_ice_type_and_input_chunk_size_legal_value_and_order_should_success(self):
@@ -497,7 +497,7 @@ class CaseNormalOrder(unittest.TestCase):
 
     def test_62_tif_fak_and_clear_min_quantity_and_order_should_fail(self):
         self.normal_order_page.tif_fak_and_clear_min_quantity_and_order()
-        result = self.normal_order_page.is_toast_exist(AlertError.alert_message_min_quantity)
+        result = self.normal_order_page.is_error_text_exist(AlertError.alert_message_min_quantity)
         self.assertEqual(True, result)
 
     def test_63_tif_fak_and_input_illegal_min_quantity_should_fix_value(self):

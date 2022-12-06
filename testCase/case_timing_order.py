@@ -162,38 +162,38 @@ class CaseTimingOrder(unittest.TestCase):
 
     def test_18_clear_lots_and_order_should_fail(self):
         self.timing_order_page.clear_lots_and_order()
-        result = self.timing_order_page.is_toast_exist(AlertError.alert_message_lots)
+        result = self.timing_order_page.is_error_text_exist(AlertError.alert_message_lots)
         self.assertEqual(True, result)
 
     def test_19_input_illegal_lots_and_order_should_fail(self):
         self.timing_order_page.input_illegal_lots_and_order("1.")
-        result = self.timing_order_page.is_toast_exist(AlertError.alert_illegal_lots)
+        result = self.timing_order_page.is_error_text_exist(AlertError.alert_illegal_lots)
         self.assertEqual(True, result)
 
     def test_20_clear_price_and_order_should_fail(self):
         self.timing_order_page.clear_price_and_order()
-        result = self.timing_order_page.is_toast_exist(AlertError.alert_message_price)
+        result = self.timing_order_page.is_error_text_exist(AlertError.alert_message_price)
         self.assertEqual(True, result)
 
     def test_21_input_illegal_price_and_order_should_fail(self):
         self.timing_order_page.input_illegal_price_and_order(".")
-        result = self.timing_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.timing_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     def test_22_input_illegal_price_and_order_should_fail(self):
         self.timing_order_page.input_illegal_price_and_order("+")
-        result = self.timing_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.timing_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     def test_23_input_illegal_price_and_order_should_fail(self):
         self.timing_order_page.input_illegal_price_and_order("-")
-        result = self.timing_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.timing_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     # 价差为0.1
     def test_24_input_illegal_price_and_order_should_fail(self):
         self.timing_order_page.input_illegal_price_and_order("100.00001")
-        result = self.timing_order_page.is_toast_exist(AlertError.alert_illegal_price_tick_size)
+        result = self.timing_order_page.is_error_text_exist(AlertError.alert_illegal_price_tick_size)
         self.assertEqual(True, result)
 
     def test_25_input_legal_lots_and_price_and_order_should_success(self):
@@ -211,12 +211,12 @@ class CaseTimingOrder(unittest.TestCase):
 
     def test_27_clear_single_value_and_order_should_fail(self):
         self.timing_order_page.input_single_value("")
-        result = self.timing_order_page.is_toast_exist(AlertError.alert_message_single)
+        result = self.timing_order_page.is_error_text_exist(AlertError.alert_message_single)
         self.assertTrue(result)
 
     def test_28_clear_single_value_and_order_should_fail(self):
         self.timing_order_page.input_single_value("")
-        result = self.timing_order_page.is_toast_exist(AlertError.alert_message_single)
+        result = self.timing_order_page.is_error_text_exist(AlertError.alert_message_single)
         self.assertTrue(result)
 
     def test_29_input_illegal_single_value_and_order_should_fail(self):
@@ -226,7 +226,7 @@ class CaseTimingOrder(unittest.TestCase):
 
     def test_30_input_single_value_above_lots_and_order_should_fail(self):
         self.timing_order_page.input_single_value_and_lots("10", "5")
-        result = self.timing_order_page.is_toast_exist(AlertError.alert_message_single_and_lots)
+        result = self.timing_order_page.is_error_text_exist(AlertError.alert_message_single_and_lots)
         self.assertTrue(result)
 
     def test_31_input_single_value_equal_lots_and_order_should_success(self):
@@ -264,7 +264,7 @@ class CaseTimingOrder(unittest.TestCase):
         click_time = result[0]
         end_time_value = result[1]
         self.assertEqual(click_time, end_time_value)
-        result = self.timing_order_page.is_toast_exist(AlertError.alert_illegal_end_time)
+        result = self.timing_order_page.is_error_text_exist(AlertError.alert_illegal_end_time)
         self.assertTrue(result)
 
     def test_36_change_end_time_after_current_year_and_order_should_success(self):
@@ -336,7 +336,7 @@ class CaseTimingOrder(unittest.TestCase):
     def test_42_time_interval_default_value_and_order_should_fail(self):
         time_interval_value = self.timing_order_page.time_interval_default_value()
         self.assertEqual("0 时 0 分 0 秒", time_interval_value)
-        result = self.timing_order_page.is_toast_exist(AlertError.alert_illegal_time_interval)
+        result = self.timing_order_page.is_error_text_exist(AlertError.alert_illegal_time_interval)
         self.assertTrue(result)
 
     def test_43_change_time_interval_after_current_hour_and_order_should_success(self):

@@ -34,6 +34,14 @@ class BasePage:
         except:
             return False
 
+    def is_error_text_exist(self, text):
+        error_text_loc = (AppiumBy.ID, "com.atp.newdemo2:id/error_text")
+        result = self.get_visible_element(error_text_loc).text
+        if result == text:
+            return True
+        else:
+            return False
+
     def get_element_clickable(self, locator):
         """通过元素id获取该元素的enabled属性值，为false置灰不可点击，为true亮起可点击"""
         clickable = self.get_visible_element(locator).is_enabled()

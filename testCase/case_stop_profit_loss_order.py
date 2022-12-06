@@ -162,38 +162,38 @@ class CaseStopProfitLossOrder(unittest.TestCase):
 
     def test_18_clear_lots_and_order_should_fail(self):
         self.stop_profit_loss_order_page.clear_lots_and_order()
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_message_lots)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_message_lots)
         self.assertEqual(True, result)
 
     def test_19_input_illegal_lots_and_order_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_lots_and_order("1.")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_lots)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_lots)
         self.assertEqual(True, result)
 
     def test_20_clear_price_and_order_should_fail(self):
         self.stop_profit_loss_order_page.clear_price_and_order()
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_message_price)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_message_price)
         self.assertEqual(True, result)
 
     def test_21_input_illegal_price_and_order_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_price_and_order(".")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     def test_22_input_illegal_price_and_order_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_price_and_order("+")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     def test_23_input_illegal_price_and_order_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_price_and_order("-")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     # 价差为0.1
     def test_24_input_illegal_price_and_order_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_price_and_order("0.0000001")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_order_price_tick_size)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_order_price_tick_size)
         self.assertEqual(True, result)
 
     def test_25_input_legal_lots_and_price_and_order_should_success(self):
@@ -207,27 +207,27 @@ class CaseStopProfitLossOrder(unittest.TestCase):
 
     def test_26_not_input_stop_loss_and_order_should_fail(self):
         self.stop_profit_loss_order_page.not_input_stop_loss_and_order()
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_message_stop_loss)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_message_stop_loss)
         self.assertEqual(True, result)
 
     def test_27_input_illegal_stop_loss_and_order_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_stop_loss_and_order(".")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_loss)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_stop_loss)
         self.assertEqual(True, result)
 
     def test_28_input_illegal_stop_loss_and_order_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_stop_loss_and_order("+")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_loss)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_stop_loss)
         self.assertEqual(True, result)
 
     def test_29_input_illegal_stop_loss_and_order_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_stop_loss_and_order("-")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_loss)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_stop_loss)
         self.assertEqual(True, result)
 
     def test_30_input_illegal_stop_loss_and_order_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_stop_loss_and_order("0")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_loss)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_stop_loss)
         self.assertEqual(True, result)
 
     def test_31_input_max_stop_loss_and_order_should_success(self):
@@ -238,27 +238,27 @@ class CaseStopProfitLossOrder(unittest.TestCase):
 
     def test_32_not_input_stop_profit_and_order_should_fail(self):
         self.stop_profit_loss_order_page.not_input_stop_profit_and_order()
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_message_stop_profit)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_message_stop_profit)
         self.assertEqual(True, result)
 
     def test_33_input_illegal_stop_profit_and_order_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_stop_profit_and_order(".")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_profit)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_stop_profit)
         self.assertEqual(True, result)
 
     def test_34_input_illegal_stop_profit_and_order_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_stop_profit_and_order("+")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_profit)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_stop_profit)
         self.assertEqual(True, result)
 
     def test_35_input_illegal_stop_profit_and_order_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_stop_profit_and_order("-")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_profit)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_stop_profit)
         self.assertEqual(True, result)
 
     def test_36_input_illegal_stop_profit_and_order_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_stop_profit_and_order("0")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_stop_profit)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_stop_profit)
         self.assertEqual(True, result)
 
     def test_37_input_max_stop_profit_and_order_should_success(self):
@@ -370,27 +370,27 @@ class CaseStopProfitLossOrder(unittest.TestCase):
 
     def test_47_clear_close_pxdiff_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.clear_close_pxdiff_and_press_confirm()
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_message_close_pxdiff)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_message_close_pxdiff)
         self.assertEqual(True, result)
 
     def test_48_input_illegal_close_pxdiff_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_close_pxdiff_and_press_confirm(".")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_close_pxdiff)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_close_pxdiff)
         self.assertEqual(True, result)
 
     def test_49_input_illegal_close_pxdiff_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_close_pxdiff_and_press_confirm("+")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_close_pxdiff)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_close_pxdiff)
         self.assertEqual(True, result)
 
     def test_50_input_illegal_close_pxdiff_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_close_pxdiff_and_press_confirm("-")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_close_pxdiff)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_close_pxdiff)
         self.assertEqual(True, result)
 
     def test_51_input_illegal_close_pxdiff_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_close_pxdiff_and_press_confirm("1.0001")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_close_pxdiff_tick_size)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_close_pxdiff_tick_size)
         self.assertEqual(True, result)
 
     def test_52_legal_close_pxdiff_and_order_should_success(self):
@@ -407,27 +407,27 @@ class CaseStopProfitLossOrder(unittest.TestCase):
 
     def test_54_clear_open_pxdiff_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.clear_open_pxdiff_and_press_confirm()
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_message_open_pxdiff)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_message_open_pxdiff)
         self.assertEqual(True, result)
 
     def test_55_input_illegal_open_pxdiff_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_open_pxdiff_and_press_confirm(".")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_open_pxdiff)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_open_pxdiff)
         self.assertEqual(True, result)
 
     def test_56_input_illegal_open_pxdiff_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_open_pxdiff_and_press_confirm("+")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_open_pxdiff)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_open_pxdiff)
         self.assertEqual(True, result)
 
     def test_57_input_illegal_open_pxdiff_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_open_pxdiff_and_press_confirm("-")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_open_pxdiff)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_open_pxdiff)
         self.assertEqual(True, result)
 
     def test_58_input_illegal_open_pxdiff_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.input_illegal_open_pxdiff_and_press_confirm("1.0001")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_open_pxdiff_tick_size)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_open_pxdiff_tick_size)
         self.assertEqual(True, result)
 
     def test_59_legal_open_pxdiff_and_order_should_success(self):
@@ -444,27 +444,27 @@ class CaseStopProfitLossOrder(unittest.TestCase):
 
     def test_61_clear_times_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.input_times_and_press_confirm("")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_message_times)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_message_times)
         self.assertEqual(True, result)
 
     def test_62_input_illegal_times_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.input_times_and_press_confirm("+~!@#¥%^&*()_-")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_times)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_times)
         self.assertEqual(True, result)
 
     def test_63_input_illegal_times_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.input_times_and_press_confirm("+")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_times)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_times)
         self.assertEqual(True, result)
 
     def test_64_input_illegal_times_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.input_times_and_press_confirm("-")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_times)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_times)
         self.assertEqual(True, result)
 
     def test_65_input_illegal_times_and_press_confirm_should_fail(self):
         self.stop_profit_loss_order_page.input_times_and_press_confirm("1.0001")
-        result = self.stop_profit_loss_order_page.is_toast_exist(AlertError.alert_illegal_times)
+        result = self.stop_profit_loss_order_page.is_error_text_exist(AlertError.alert_illegal_times)
         self.assertEqual(True, result)
 
     def test_66_illegal_times_and_order_should_success(self):

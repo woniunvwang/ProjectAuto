@@ -207,58 +207,58 @@ class CaseStopOrder(unittest.TestCase):
 
     def test_24_clear_lots_and_order_should_fail(self):
         self.stop_order_page.clear_lots_and_order()
-        result = self.stop_order_page.is_toast_exist(AlertError.alert_message_lots)
+        result = self.stop_order_page.is_error_text_exist(AlertError.alert_message_lots)
         self.assertEqual(True, result)
 
     def test_25_input_illegal_lots_and_order_should_fail(self):
         self.stop_order_page.input_illegal_lots_and_order("1.")
-        result = self.stop_order_page.is_toast_exist(AlertError.alert_illegal_lots)
+        result = self.stop_order_page.is_error_text_exist(AlertError.alert_illegal_lots)
         self.assertEqual(True, result)
 
     def test_26_clear_price_and_order_should_fail(self):
         self.stop_order_page.clear_price_and_order()
-        result = self.stop_order_page.is_toast_exist(AlertError.alert_message_price)
+        result = self.stop_order_page.is_error_text_exist(AlertError.alert_message_price)
         self.assertEqual(True, result)
 
     def test_27_input_illegal_price_and_order_should_fail(self):
         self.stop_order_page.input_illegal_price_and_order(".")
-        result = self.stop_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.stop_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     def test_28_input_illegal_price_and_order_should_fail(self):
         self.stop_order_page.input_illegal_price_and_order("+")
-        result = self.stop_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.stop_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     def test_29_input_illegal_price_and_order_should_fail(self):
         self.stop_order_page.input_illegal_price_and_order("-")
-        result = self.stop_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.stop_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     # 价差为0.1
     def test_30_input_illegal_price_and_order_should_fail(self):
         self.stop_order_page.input_illegal_price_and_order("0.00001")
-        result = self.stop_order_page.is_toast_exist(AlertError.alert_illegal_order_price_tick_size)
+        result = self.stop_order_page.is_error_text_exist(AlertError.alert_illegal_order_price_tick_size)
         self.assertEqual(True, result)
 
     def test_31_clear_stop_price_and_order_should_fail(self):
         self.stop_order_page.clear_stop_price_and_order()
-        result = self.stop_order_page.is_toast_exist(AlertError.alert_message_stop_price)
+        result = self.stop_order_page.is_error_text_exist(AlertError.alert_message_stop_price)
         self.assertEqual(True, result)
 
     def test_32_input_illegal_stop_price_and_order_should_fail(self):
         self.stop_order_page.input_illegal_stop_price_and_order(".")
-        result = self.stop_order_page.is_toast_exist(AlertError.alert_illegal_stop_price)
+        result = self.stop_order_page.is_error_text_exist(AlertError.alert_illegal_stop_price)
         self.assertEqual(True, result)
 
     def test_33_input_illegal_stop_price_and_order_should_fail(self):
         self.stop_order_page.input_illegal_stop_price_and_order("+")
-        result = self.stop_order_page.is_toast_exist(AlertError.alert_illegal_stop_price)
+        result = self.stop_order_page.is_error_text_exist(AlertError.alert_illegal_stop_price)
         self.assertEqual(True, result)
 
     def test_34_input_illegal_stop_price_and_order_should_fail(self):
         self.stop_order_page.input_illegal_stop_price_and_order("-")
-        result = self.stop_order_page.is_toast_exist(AlertError.alert_illegal_stop_price)
+        result = self.stop_order_page.is_error_text_exist(AlertError.alert_illegal_stop_price)
         self.assertEqual(True, result)
 
     def test_36_input_legal_lots_and_price_and_order_should_success(self):

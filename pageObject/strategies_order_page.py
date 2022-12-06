@@ -21,11 +21,23 @@ class StrategiesOrderPage(BasePage):
     list_title_strategy_name = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/list_title_root']/android.widget.TextView[1]")
     list_title_ratio1 = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/list_title_root']/android.widget.TextView[2]")
     list_title_ratio2 = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/list_title_root']/android.widget.TextView[3]")
-
-
-
-
-
+    toolbar_title = (AppiumBy.ID, "com.atp.newdemo2:id/toolbar_title")
+    action_done = (AppiumBy.ID, "com.atp.newdemo2:id/action_done")
+    strategy_name_input_edit_text = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/strategy_name']/android.view.ViewGroup/android.widget.EditText")
+    strategy_name_clear_text_icon = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/strategy_name']/android.view.ViewGroup/android.widget.ImageView")
+    formula_edit_text = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/formula_edit_text']/android.view.ViewGroup/android.widget.EditText")
+    execution_times = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/execution_times']/android.view.ViewGroup/android.widget.EditText")
+    execution_times_clear_text_icon = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/execution_times']/android.view.ViewGroup/android.widget.ImageView")
+    single_trigger_times = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/single_trigger_times']/android.view.ViewGroup/android.widget.EditText")
+    single_trigger_times_clear_text_icon = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/single_trigger_times']/android.view.ViewGroup/android.widget.ImageView")
+    digits = (AppiumBy.ID, "com.atp.newdemo2:id/digits")
+    split_switch = (AppiumBy.ID, "com.atp.newdemo2:id/split_switch")
+    protection = (AppiumBy.ID, "com.atp.newdemo2:id/protection")
+    active_leg_type = (AppiumBy.ID, "com.atp.newdemo2:id/active_leg_type")
+    commodity_type_A = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/commodity_root']/android.widget.LinearLayout[1]/android.view.ViewGroup/android.widget.TextView")
+    contract_text_A = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/commodity_root']/android.widget.LinearLayout[1]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
+    contract_text_A = (AppiumBy.XPATH,
+                       "//*[@resource-id='com.atp.newdemo2:id/commodity_root']/android.widget.LinearLayout[1]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
 
 
 

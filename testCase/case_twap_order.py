@@ -117,17 +117,17 @@ class CaseTwapOrder(unittest.TestCase):
 
     def test_12_clear_lots_and_order_should_fail(self):
         self.twap_order_page.clear_lots_and_order()
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_message_lots)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_message_lots)
         self.assertTrue(result)
 
     def test_13_input_illegal_lots_and_order_should_fail(self):
         self.twap_order_page.input_illegal_lots_and_order("1.")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_lots)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_lots)
         self.assertTrue(result)
 
     def test_14_input_illegal_lots_and_order_should_fail(self):
         self.twap_order_page.input_illegal_lots_and_order("+")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_lots)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_lots)
         self.assertTrue(result)
 
     def test_15_single_default_value_should_fix_value(self):
@@ -136,12 +136,12 @@ class CaseTwapOrder(unittest.TestCase):
 
     def test_16_clear_single_value_and_order_should_fail(self):
         self.twap_order_page.input_single_value("")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_message_single)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_message_single)
         self.assertTrue(result)
 
     def test_17_clear_single_value_and_order_should_fail(self):
         self.twap_order_page.input_single_value("")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_message_single)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_message_single)
         self.assertTrue(result)
 
     def test_18_input_illegal_single_value_and_order_should_fail(self):
@@ -151,7 +151,7 @@ class CaseTwapOrder(unittest.TestCase):
 
     def test_19_input_single_value_above_lots_and_order_should_fail(self):
         self.twap_order_page.input_single_value_and_lots("10", "5")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_message_single_and_lots)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_message_single_and_lots)
         self.assertTrue(result)
 
     def test_20_input_single_value_equal_lots_and_order_should_success(self):
@@ -172,28 +172,28 @@ class CaseTwapOrder(unittest.TestCase):
 
     def test_23_clear_price_diff_value_and_order_should_fail(self):
         self.twap_order_page.input_price_diff_value("")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_message_price_diff)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_message_price_diff)
         self.assertTrue(result)
 
     def test_24_input_illegal_price_diff_value_and_order_should_fail(self):
         self.twap_order_page.input_price_diff_value("+")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_price_diff)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_price_diff)
         self.assertTrue(result)
 
     def test_25_input_illegal_price_diff_value_and_order_should_fail(self):
         self.twap_order_page.input_price_diff_value("-")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_price_diff)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_price_diff)
         self.assertTrue(result)
 
     def test_26_input_illegal_price_diff_value_and_order_should_fail(self):
         self.twap_order_page.input_price_diff_value(".")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_price_diff)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_price_diff)
         self.assertTrue(result)
 
     #     价差不合法
     def test_27_input_illegal_price_diff_value_and_order_should_fail(self):
         self.twap_order_page.input_price_diff_value("1.000001")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_price_diff_tick_size)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_price_diff_tick_size)
         self.assertTrue(result)
 
     def test_28_input_legal_price_diff_value_and_order_should_success(self):
@@ -247,27 +247,27 @@ class CaseTwapOrder(unittest.TestCase):
 
     def test_35_clear_order_interval_value_and_order_should_fail(self):
         self.twap_order_page.input_order_interval_value("")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_message_order_interval)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_message_order_interval)
         self.assertTrue(result)
 
     def test_36_input_illegal_order_interval_value_and_order_should_fail(self):
         self.twap_order_page.input_order_interval_value("+")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_order_interval)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_order_interval)
         self.assertTrue(result)
 
     def test_37_input_illegal_order_interval_value_and_order_should_fail(self):
         self.twap_order_page.input_order_interval_value("-")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_order_interval)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_order_interval)
         self.assertTrue(result)
 
     def test_38_input_illegal_order_interval_value_and_order_should_fail(self):
         self.twap_order_page.input_order_interval_value(".")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_order_interval)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_order_interval)
         self.assertTrue(result)
 
     def test_39_input_illegal_order_interval_value_and_order_should_fail(self):
         self.twap_order_page.input_order_interval_value("0")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_order_interval)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_order_interval)
         self.assertTrue(result)
 
     def test_40_input_illegal_order_interval_value_and_order_should_fail(self):
@@ -292,27 +292,27 @@ class CaseTwapOrder(unittest.TestCase):
 
     def test_44_clear_cancel_order_interval_value_and_order_should_fail(self):
         self.twap_order_page.input_cancel_order_interval_value("")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_message_cancel_order_interval)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_message_cancel_order_interval)
         self.assertTrue(result)
 
     def test_45_input_illegal_cancel_order_interval_value_and_order_should_fail(self):
         self.twap_order_page.input_cancel_order_interval_value("+")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_cancel_order_interval)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_cancel_order_interval)
         self.assertTrue(result)
 
     def test_46_input_illegal_cancel_order_interval_value_and_order_should_fail(self):
         self.twap_order_page.input_cancel_order_interval_value("-")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_cancel_order_interval)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_cancel_order_interval)
         self.assertTrue(result)
 
     def test_47_input_illegal_cancel_order_interval_value_and_order_should_fail(self):
         self.twap_order_page.input_cancel_order_interval_value(".")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_cancel_order_interval)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_cancel_order_interval)
         self.assertTrue(result)
 
     def test_48_input_illegal_cancel_order_interval_value_and_order_should_fail(self):
         self.twap_order_page.input_cancel_order_interval_value("0")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_cancel_order_interval)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_cancel_order_interval)
         self.assertTrue(result)
 
     def test_49_input_illegal_cancel_order_interval_value_and_order_should_fail(self):
@@ -333,7 +333,7 @@ class CaseTwapOrder(unittest.TestCase):
 
     def test_52_input_cancel_order_interval_value_above_order_interval_and_order_should_fail(self):
         self.twap_order_page.input_order_interval_and_cancel_interval("5", "10")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_cancel_order_interval_value)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_cancel_order_interval_value)
         self.assertTrue(result)
 
     def test_53_input_cancel_order_interval_value_equal_order_interval_and_order_should_success(self):
@@ -403,7 +403,7 @@ class CaseTwapOrder(unittest.TestCase):
         end_time = result[0]
         order_detail_end_time = result[1]
         self.assertEqual(end_time, order_detail_end_time)
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_end_time)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_end_time)
         self.assertTrue(result)
 
     def test_62_cancel_limit_default_should_closed(self):
@@ -422,7 +422,7 @@ class CaseTwapOrder(unittest.TestCase):
 
     def test_64_open_cancel_limit_and_text_none_should_fail(self):
         self.twap_order_page.input_cancel_limit_text("")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_message_cancel_limit)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_message_cancel_limit)
         self.assertTrue(result)
 
     def test_65_open_cancel_limit_and_text_value_illegal_should_fail(self):
@@ -455,22 +455,22 @@ class CaseTwapOrder(unittest.TestCase):
 
     def test_69_open_price_limit_and_text_none_should_fail(self):
         self.twap_order_page.input_price_limit_text("")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_message_price_limit)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_message_price_limit)
         self.assertTrue(result)
 
     def test_70_open_price_limit_and_text_value_illegal_should_fail(self):
         self.twap_order_page.input_price_limit_text("-")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_price_limit)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_price_limit)
         self.assertTrue(result)
 
     def test_71_open_price_limit_and_text_value_illegal_should_fail(self):
         self.twap_order_page.input_price_limit_text("+")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_price_limit)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_price_limit)
         self.assertTrue(result)
 
     def test_72_open_price_limit_and_text_value_illegal_should_fail(self):
         self.twap_order_page.input_price_limit_text(".")
-        result = self.twap_order_page.is_toast_exist(AlertError.alert_illegal_price_limit)
+        result = self.twap_order_page.is_error_text_exist(AlertError.alert_illegal_price_limit)
         self.assertTrue(result)
 
     def test_73_open_price_limit_and_text_value_legal_should_success(self):

@@ -163,38 +163,38 @@ class CaseGainBestOrder(unittest.TestCase):
 
     def test_18_clear_lots_and_order_should_fail(self):
         self.gain_best_order_page.clear_lots_and_order()
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_message_lots)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_message_lots)
         self.assertEqual(True, result)
 
     def test_19_input_illegal_lots_and_order_should_fail(self):
         self.gain_best_order_page.input_illegal_lots_and_order("1.")
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_illegal_lots)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_illegal_lots)
         self.assertEqual(True, result)
 
     def test_20_clear_price_and_order_should_fail(self):
         self.gain_best_order_page.clear_price_and_order()
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_message_price)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_message_price)
         self.assertEqual(True, result)
 
     def test_21_input_illegal_price_and_order_should_fail(self):
         self.gain_best_order_page.input_illegal_price_and_order(".")
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     def test_22_input_illegal_price_and_order_should_fail(self):
         self.gain_best_order_page.input_illegal_price_and_order("+")
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     def test_23_input_illegal_price_and_order_should_fail(self):
         self.gain_best_order_page.input_illegal_price_and_order("-")
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_illegal_price)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_illegal_price)
         self.assertEqual(True, result)
 
     # 价差为0.1
     def test_24_input_illegal_price_and_order_should_fail(self):
         self.gain_best_order_page.input_illegal_price_and_order("0.0000001")
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_illegal_price_tick_size)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_illegal_price_tick_size)
         self.assertEqual(True, result)
 
     def test_25_input_legal_lots_and_price_and_order_should_success(self):
@@ -208,27 +208,27 @@ class CaseGainBestOrder(unittest.TestCase):
 
     def test_26_not_input_gap_and_order_should_fail(self):
         self.gain_best_order_page.not_input_gap_and_order()
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_message_gap)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_message_gap)
         self.assertEqual(True, result)
 
     def test_27_input_illegal_gap_and_order_should_fail(self):
         self.gain_best_order_page.input_illegal_gap_and_order(".")
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_illegal_gap)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_illegal_gap)
         self.assertEqual(True, result)
 
     def test_28_input_illegal_gap_and_order_should_fail(self):
         self.gain_best_order_page.input_illegal_gap_and_order("+")
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_illegal_gap)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_illegal_gap)
         self.assertEqual(True, result)
 
     def test_29_input_illegal_gap_and_order_should_fail(self):
         self.gain_best_order_page.input_illegal_gap_and_order("-5")
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_illegal_gap)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_illegal_gap)
         self.assertEqual(True, result)
 
     def test_30_input_illegal_gap_and_order_should_fail(self):
         self.gain_best_order_page.input_illegal_gap_and_order("00000")
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_illegal_gap)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_illegal_gap)
         self.assertEqual(True, result)
 
     def test_31_input_max_gap_and_order_should_success(self):
@@ -239,27 +239,27 @@ class CaseGainBestOrder(unittest.TestCase):
 
     def test_32_not_input_step_and_order_should_fail(self):
         self.gain_best_order_page.not_input_gap_and_order()
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_message_gap)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_message_gap)
         self.assertEqual(True, result)
 
     def test_33_input_illegal_step_and_order_should_fail(self):
         self.gain_best_order_page.input_illegal_step_and_order(".")
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_illegal_step)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_illegal_step)
         self.assertEqual(True, result)
 
     def test_34_input_illegal_step_and_order_should_fail(self):
         self.gain_best_order_page.input_illegal_step_and_order("+")
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_illegal_step)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_illegal_step)
         self.assertEqual(True, result)
 
     def test_35_input_illegal_step_and_order_should_fail(self):
         self.gain_best_order_page.input_illegal_step_and_order("-5")
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_illegal_step)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_illegal_step)
         self.assertEqual(True, result)
 
     def test_36_input_illegal_step_and_order_should_fail(self):
         self.gain_best_order_page.input_illegal_step_and_order("0")
-        result = self.gain_best_order_page.is_toast_exist(AlertError.alert_illegal_step)
+        result = self.gain_best_order_page.is_error_text_exist(AlertError.alert_illegal_step)
         self.assertEqual(True, result)
 
     def test_37_input_max_step_and_order_should_success(self):
