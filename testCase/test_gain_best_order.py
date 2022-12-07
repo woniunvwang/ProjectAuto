@@ -1,9 +1,13 @@
+import os
+import allure
 import pytest
 from common.AlertError import AlertError
 from common.baseDriver import android_driver
 from pageObject.gain_best_order_page import GainBestOrderPage
 
 
+@allure.epic("ATP下单功能测试")
+@allure.feature("Gain best单模块")
 class TestCaseGainBestOrder:
 
     def setup_method(self) -> None:
@@ -15,6 +19,11 @@ class TestCaseGainBestOrder:
         self.driver.quit()
 
     # 买卖盘及涨跌幅有数据时根据交易方向相反数据填充
+
+    @allure.story("点击买卖盘进入到下单页面的数据填充")
+    @allure.title("点击买盘，下单页面的交易方向为'卖'")
+    @allure.description("校验点击买盘进入到下单页面，买卖方向是否是'卖'")
+    @pytest.mark.pressBid
     def test_01_press_bid_and_side_should_sell(self):
         result = self.gain_best_order_page.press_bid_and_order()
         buy_checkbox = result[0]
@@ -26,6 +35,10 @@ class TestCaseGainBestOrder:
         assert("true" == sell_checkbox)
         assert("卖" == order_details_side_value)
 
+    @allure.story("点击买卖盘进入到下单页面的数据填充")
+    @allure.title("点击买盘，下单页面的手数应该填充为买盘数据")
+    @allure.description("校验点击买盘进入到下单页面，手数的数据是否为")
+    @pytest.mark.pressBid
     def test_02_press_bid_and_lots_should_bid_value(self):
         result = self.gain_best_order_page.press_bid_and_check_lots()
         bid_lots_value = result[0]
@@ -197,7 +210,7 @@ class TestCaseGainBestOrder:
         assert result
 
     def test_25_input_legal_lots_and_price_and_order_should_success(self):
-        result = self.gain_best_order_page.input_lots_and_price_and_order(10 , 80)
+        result = self.gain_best_order_page.input_lots_and_price_and_order(10, 80)
         order_details_lots_value = result[0]
         order_details_price_value = result[1]
         # order_message = self.gain_best_order_page.alert_order_details_message()
@@ -367,9 +380,10 @@ class TestCaseGainBestOrder:
         order_details_memo_value = result[2]
         # order_message = self.gain_best_order_page.alert_order_details_message()
         # assert(order_message == AlertError.alert_message_succeed)
-        assert(hint == AlertError.hint_message)
-        assert(memo_value == order_details_memo_value)
+        assert hint == AlertError.hint_message
+        assert memo_value == order_details_memo_value
 
 
 if __name__ == '__main__':
-    pytest.main()
+    pytest.main(['test_gain_best_order.py', '-s', '-q', '--alluredir', './result'])
+    os.system('allure generate ./result -o ./report --clean')
