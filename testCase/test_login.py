@@ -1,3 +1,5 @@
+import os
+
 import pytest
 from appium.webdriver.common.appiumby import AppiumBy
 import time
@@ -217,4 +219,5 @@ class TestCaseLogin:
 #     time.sleep(2)
 
 if __name__ == '__main__':
-    pytest.main()
+    pytest.main(['test_login.py', '-v', '--alluredir', './result'])
+    os.system('allure generate ./result -o ./report --clean')

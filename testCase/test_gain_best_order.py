@@ -20,9 +20,9 @@ class TestCaseGainBestOrder:
 
     # 买卖盘及涨跌幅有数据时根据交易方向相反数据填充
 
-    @allure.story("点击买卖盘进入到下单页面的数据填充")
+    @allure.story("点击有数据的买卖盘进入到下单页面的数据填充")
     @allure.title("点击买盘，下单页面的交易方向为'卖'")
-    @allure.description("校验点击买盘进入到下单页面，买卖方向是否是'卖'")
+    @allure.description("校验点击买盘进入到下单页面，交易方向是否是'卖'")
     @pytest.mark.pressBid
     def test_01_press_bid_and_side_should_sell(self):
         result = self.gain_best_order_page.press_bid_and_order()
@@ -35,9 +35,9 @@ class TestCaseGainBestOrder:
         assert("true" == sell_checkbox)
         assert("卖" == order_details_side_value)
 
-    @allure.story("点击买卖盘进入到下单页面的数据填充")
+    @allure.story("点击有数据的买卖盘进入到下单页面的数据填充")
     @allure.title("点击买盘，下单页面的手数应该填充为买盘数据")
-    @allure.description("校验点击买盘进入到下单页面，手数的数据是否为")
+    @allure.description("校验点击买盘进入到下单页面，手数的数据是否与买盘数据一致")
     @pytest.mark.pressBid
     def test_02_press_bid_and_lots_should_bid_value(self):
         result = self.gain_best_order_page.press_bid_and_check_lots()
@@ -47,6 +47,10 @@ class TestCaseGainBestOrder:
         assert(bid_lots_value == lots_value)
         assert(lots_value == order_details_lots_value)
 
+    @allure.story("点击有数据的买卖盘进入到下单页面的数据填充")
+    @allure.title("点击买盘，下单页面的价格应该填充为买盘数据")
+    @allure.description("校验点击买盘进入到下单页面，价格的数据是否与买盘数据一致")
+    @pytest.mark.pressBid
     def test_03_press_bid_and_price_should_bid_value(self):
         result = self.gain_best_order_page.press_bid_and_check_price()
         bid_price_value = result[0]
@@ -55,6 +59,10 @@ class TestCaseGainBestOrder:
         assert(bid_price_value == price_value)
         assert(price_value == order_details_price_value)
 
+    @allure.story("点击有数据的买卖盘进入到下单页面的数据填充")
+    @allure.title("点击卖盘，下单页面的交易方向应该为'买'")
+    @allure.description("校验点击卖盘进入到下单页面，交易方向是否为'买'")
+    @pytest.mark.pressOffer
     def test_04_press_offer_and_side_should_sell(self):
         result = self.gain_best_order_page.press_offer_and_order()
         buy_checkbox = result[0]
@@ -66,6 +74,10 @@ class TestCaseGainBestOrder:
         assert("false" == sell_checkbox)
         assert("买" == order_details_side_value)
 
+    @allure.story("点击有数据的买卖盘进入到下单页面的数据填充")
+    @allure.title("点击卖盘，下单页面的手数应该填充为卖盘数据")
+    @allure.description("校验点击卖盘进入到下单页面，手数的数据是否与卖盘数据一致")
+    @pytest.mark.pressOffer
     def test_05_press_offer_and_lots_should_offer_value(self):
         result = self.gain_best_order_page.press_offer_and_check_lots()
         offer_lots_value = result[0]
@@ -74,6 +86,10 @@ class TestCaseGainBestOrder:
         assert(offer_lots_value == lots_value)
         assert(lots_value == order_details_lots_value)
 
+    @allure.story("点击有数据的买卖盘进入到下单页面的数据填充")
+    @allure.title("点击卖盘，下单页面的价格应该填充为卖盘数据")
+    @allure.description("校验点击卖盘进入到下单页面，价格的数据是否与卖盘数据一致")
+    @pytest.mark.pressOffer
     def test_06_press_offer_and_price_should_offer_value(self):
         result = self.gain_best_order_page.press_offer_and_check_price()
         offer_price_value = result[0]
@@ -82,6 +98,10 @@ class TestCaseGainBestOrder:
         assert(offer_price_value == price_value)
         assert(price_value == order_details_price_value)
 
+    @allure.story("点击有数据的涨跌幅进入到下单页面的数据填充")
+    @allure.title("点击卖盘，下单页面的交易方向应该为'买'")
+    @allure.description("校验点击卖盘进入到下单页面，交易方向是否为'买'")
+    @pytest.mark.pressChg
     def test_07_press_chg_and_side_should_buy(self):
         result = self.gain_best_order_page.slide_and_press_chg()
         buy_checkbox = result[0]
@@ -385,5 +405,5 @@ class TestCaseGainBestOrder:
 
 
 if __name__ == '__main__':
-    pytest.main(['test_gain_best_order.py', '-s', '-q', '--alluredir', './result'])
+    pytest.main(['test_gain_best_order.py', '-v', '--alluredir', './result'])
     os.system('allure generate ./result -o ./report --clean')

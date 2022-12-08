@@ -1,3 +1,5 @@
+import os
+
 import pytest
 from common.AlertError import AlertError
 from common.baseDriver import android_driver
@@ -583,4 +585,5 @@ class TestCaseStopProfitLossOrder:
 
 
 if __name__ == '__main__':
-    pytest.main()
+    pytest.main(['test_stop_profit_loss_order.py', '-v', '--alluredir', './result'])
+    os.system('allure generate ./result -o ./report --clean')

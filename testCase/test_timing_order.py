@@ -1,3 +1,5 @@
+import os
+
 import pytest
 from common.AlertError import AlertError
 from common.baseDriver import android_driver
@@ -467,4 +469,5 @@ class TestCaseTimingOrder:
 
 
 if __name__ == '__main__':
-    pytest.main()
+    pytest.main(['test_timing_order.py', '-v', '--alluredir', './result'])
+    os.system('allure generate ./result -o ./report --clean')
