@@ -1,7 +1,6 @@
 import os
 import allure
 import pytest
-from common.AlertError import AlertError
 from common.baseDriver import android_driver
 from pageObject.gain_best_order_page import GainBestOrderPage
 

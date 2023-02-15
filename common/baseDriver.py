@@ -10,13 +10,25 @@ import time
 
 def android_driver():
     desired_caps = {
+        # "platformName": "Android",
+        # "platformVersion": "11",
+        # "deviceName": "V2073A",
+        # "appPackage": "com.atp.newdemo2",
+        # "appActivity": "com.atp.activity.AppActivity",
+        # "resetKeyboard": "true"
+
         "platformName": "Android",
         "appium:platformVersion": "10",
         "appium:deviceName": "MBJVB20707004299",
         "appium:appPackage": "com.atp.newdemo2",
         "appium:appActivity": "com.atp.activity.AppActivity",
         "unicodeKeyboard": "true",
-        "resetKeyboard": "true"
+        "resetKeyboard": "true",
+        #语言为英文时启用28/29行代码
+        # "locale": "US",
+        # "language": "en"
+        "locale": "CN",
+        "language": "Zh"
 
 
     }

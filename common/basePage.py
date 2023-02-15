@@ -5,6 +5,9 @@ from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from common.LangEn import LangEn
+from common.LangZh import LangZh
 from common.baseLog import logger
 
 
@@ -78,10 +81,32 @@ class BasePage:
     def change_datetime_before_now(self, datetime):
         self.slide_action(datetime, 1100, datetime, 1290)
 
-
     def isElementExist(self, element):
         try:
             self.get_visible_element(element)
             return True
         except:
             return False
+
+    # def getLocalizedString(self, langText):
+    #     if langText == "En":
+    #         return LangEn
+    #     else:
+    #         return LangZh
+
+
+class LocalizedTool:
+
+    # currentLanguage = "EN"
+    currentLanguage = "ZH"
+
+    englishStrings = LangEn.englishStrings
+    chineseStrings = LangZh.chineseStrings
+
+    @classmethod
+    def getLocalizedString(cls, text):
+
+        if cls.currentLanguage == "EN":
+            return cls.englishStrings[text]
+        else:
+            return cls.chineseStrings[text]

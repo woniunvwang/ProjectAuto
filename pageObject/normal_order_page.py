@@ -3,6 +3,8 @@ import random
 import string
 from appium.webdriver.common.appiumby import AppiumBy
 import time
+
+from charset_normalizer import detect
 from selenium.webdriver import ActionChains
 
 from common.All_path import all_path
