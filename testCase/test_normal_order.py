@@ -17,6 +17,38 @@ class TestCaseNormalOrder:
 
     # 买卖盘及涨跌幅有数据时根据交易方向相反数据填充
     # GC2212-CME为主测试合约
+    def test_new_order_page_check(self):
+        result = self.normal_order_page.new_order_page_check()
+        toolbar_title = result[0]
+        contract_code = result[1]
+        bid = result[2]
+        offer = result[3]
+        chg = result[4]
+        new_order_title = result[5]
+        account_title = result[6]
+        trade_direction_title = result[7]
+        lots_title = result[8]
+        price_title = result[9]
+        normal_order_type_title = result[10]
+        time_option_title = result[11]
+        memo_title = result[12]
+        confirm_button_text = result[13]
+
+        assert (toolbar_title == LocalizedTool.getLocalizedString("title_new_order"))
+        assert (contract_code == LocalizedTool.getLocalizedString("ContractCode") or LocalizedTool.getLocalizedString("ContractContractName"))
+        assert (bid == LocalizedTool.getLocalizedString("bid"))
+        assert (offer == LocalizedTool.getLocalizedString("offer"))
+        assert (chg == LocalizedTool.getLocalizedString("change_value") or LocalizedTool.getLocalizedString("change_rate"))
+        assert (new_order_title == LocalizedTool.getLocalizedString("normal_order"))
+        assert (account_title == LocalizedTool.getLocalizedString("trade_account"))
+        assert (trade_direction_title == LocalizedTool.getLocalizedString("transaction_direction"))
+        assert (lots_title == LocalizedTool.getLocalizedString("lots"))
+        assert (price_title == LocalizedTool.getLocalizedString("price"))
+        assert (normal_order_type_title == LocalizedTool.getLocalizedString("type"))
+        assert (time_option_title == LocalizedTool.getLocalizedString("time_option"))
+        assert (memo_title == LocalizedTool.getLocalizedString("memo"))
+        assert (confirm_button_text == LocalizedTool.getLocalizedString("confirm"))
+
     def test_01_press_bid_and_side_should_sell(self):
         result = self.normal_order_page.press_bid_and_order()
         buy_checkbox = result[0]
@@ -25,8 +57,8 @@ class TestCaseNormalOrder:
         order_message = self.normal_order_page.alert_order_details_message()
         assert ("false" == buy_checkbox)
         assert ("true" == sell_checkbox)
-        assert (order_details_side_value == LocalizedTool.getLocalizedString("order_direction_sell"))
-        assert order_message == LocalizedTool.getLocalizedString("alert_order_message")
+        assert (order_details_side_value == LocalizedTool.getLocalizedString("sell"))
+        assert order_message == LocalizedTool.getLocalizedString("order_success")
 
     def test_02_press_bid_and_lots_should_bid_value(self):
         result = self.normal_order_page.press_bid_and_check_lots()

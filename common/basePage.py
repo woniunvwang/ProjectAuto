@@ -1,3 +1,5 @@
+import locale
+
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.actions import interaction
@@ -6,6 +8,7 @@ from selenium.webdriver.common.actions.pointer_input import PointerInput
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from common import baseDriver
 from common.LangEn import LangEn
 from common.LangZh import LangZh
 from common.baseLog import logger
@@ -88,25 +91,17 @@ class BasePage:
         except:
             return False
 
-    # def getLocalizedString(self, langText):
-    #     if langText == "En":
-    #         return LangEn
-    #     else:
-    #         return LangZh
-
 
 class LocalizedTool:
-
-    # currentLanguage = "EN"
-    currentLanguage = "ZH"
-
+    # currentLanguage = "Zh"
+    currentLanguage = "en"
     englishStrings = LangEn.englishStrings
     chineseStrings = LangZh.chineseStrings
 
     @classmethod
     def getLocalizedString(cls, text):
 
-        if cls.currentLanguage == "EN":
+        if cls.currentLanguage == "en":
             return cls.englishStrings[text]
         else:
             return cls.chineseStrings[text]

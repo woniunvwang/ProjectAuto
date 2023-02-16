@@ -8,28 +8,37 @@ from selenium.webdriver.common.actions.pointer_input import PointerInput
 from common.baseLog import logger
 import time
 
+
 def android_driver():
     desired_caps = {
-        # "platformName": "Android",
-        # "platformVersion": "11",
-        # "deviceName": "V2073A",
-        # "appPackage": "com.atp.newdemo2",
-        # "appActivity": "com.atp.activity.AppActivity",
-        # "resetKeyboard": "true"
-
+        # vivo手机配置信息
         "platformName": "Android",
-        "appium:platformVersion": "10",
-        "appium:deviceName": "MBJVB20707004299",
-        "appium:appPackage": "com.atp.newdemo2",
-        "appium:appActivity": "com.atp.activity.AppActivity",
+        "platformVersion": "12",
+        "deviceName": "vivo",
+        "udid": "9589765384004KW",
+        "appPackage": "com.atp.newdemo2",
+        "appActivity": "com.atp.activity.AppActivity",
         "unicodeKeyboard": "true",
         "resetKeyboard": "true",
-        #语言为英文时启用28/29行代码
+        # "locale": "CN",
+        # "language": "Zh"
+        "locale": "US",
+        "language": "en"
+
+        # 华为手机配置信息
+        # "platformName": "Android",
+        # "appium:platformVersion": "10",
+        # "appium:deviceName": "huawei",
+        # "udid":"MBJVB20707004299",
+        # "appium:appPackage": "com.atp.newdemo2",
+        # "appium:appActivity": "com.atp.activity.AppActivity",
+        # "unicodeKeyboard": "true",
+        # "resetKeyboard": "true",
+        # #语言为英文时启用28/29行代码
         # "locale": "US",
         # "language": "en"
-        "locale": "CN",
-        "language": "Zh"
-
+        # "locale": "CN",
+        # "language": "Zh"
 
     }
     try:
@@ -57,5 +66,3 @@ def android_driver():
 
 if __name__ == '__main__':
     android_driver()
-
-

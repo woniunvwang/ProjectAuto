@@ -4,13 +4,48 @@ from appium.webdriver.common.appiumby import AppiumBy
 
 
 class all_path:
-    # 普通单path
+    # 共通path-new_order
+    toolbar_title = (AppiumBy.ID, "com.atp.newdemo2:id/toolbar_title")
+    contract_code_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/left_top_list']/android.view.ViewGroup/android.widget.TextView")
+    bid_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_top_list']/android.widget.LinearLayout[1]/android.widget.TextView")
+    offer_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_top_list']/android.widget.LinearLayout[2]/android.widget.TextView")
+    chg_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/right_top_list']/android.widget.LinearLayout[3]/android.widget.TextView")
+    account_title_ID = (AppiumBy.ID, "com.atp.newdemo2:id/account_title")
+    account_value_ID = (AppiumBy.ID, "com.atp.newdemo2:id/account")
+    trade_direction_title_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/include_trade_direction_layout']/android.widget.TextView")
+    order_direction_buy_ID = (AppiumBy.ID, "com.atp.newdemo2:id/order_direction_buy")
+    order_direction_sell_ID = (AppiumBy.ID, "com.atp.newdemo2:id/order_direction_sell")
+    lots_title_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/lots']/android.view.ViewGroup/android.widget.TextView")
+    lots_edit_text_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/lots']/android.view.ViewGroup/android.widget.EditText")
+    price_title_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price']/android.view.ViewGroup/android.widget.TextView")
+    price_edit_text_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price']/android.view.ViewGroup/android.widget.EditText")
+    normal_order_type_title_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/normal_order_type']/android.widget.LinearLayout/android.widget.TextView")
+    normal_order_type_button_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/normal_order_type']/android.widget.LinearLayout/android.widget.Button")
+
+    type_Market_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Market")')
+    type_Market_Limit_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Market Limit")')
+    type_Lim_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("LIM")')
+    type_STP_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("STP")')
+    type_STL_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("STL")')
+    type_ICE_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ICE")')
+    StPx_titile_xpath = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/stop_price']/android.view.ViewGroup/android.widget.TextView")
+    input_StPx_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/stop_price']/android.view.ViewGroup/android.widget.EditText")
+    chunk_size_title = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/max_iceberg_chunk_size']/android.view.ViewGroup/android.widget.TextView")
+    chunk_size_xpath = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/max_iceberg_chunk_size']/android.view.ViewGroup/android.widget.EditText")
+    time_option_title = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/time_option']/android.widget.LinearLayout/android.widget.TextView")
+    TIF_change_button = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/time_option']/android.widget.LinearLayout/android.widget.Button")
+    TIF_DAY = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("DAY")')
+    TIF_GTC = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("GTC")')
+    TIF_GTD = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("GTD")')
+    TIF_FAK = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("FAK")')
+    TIF_FOK = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("FOK")')
+    date_pick_ID = (AppiumBy.ID, "com.atp.newdemo2:id/date_pick_text_view")
+    fak_min_quantity = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/min_quantity']/android.view.ViewGroup/android.widget.EditText")
     confirm_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/confirm")
     allow_button_id = (AppiumBy.ID, "com.android.permissioncontroller:id/permission_allow_button")
     agree_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/agree")
     cancel_button_id = (AppiumBy.ID, "com.atp.newdemo2:id/cancel")
-    # 合约组 "自动化测试合约"的path
-    contract_group_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("自动化测试合约")')
+
     page_title = (AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget"
                                   ".FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget"
                                   ".LinearLayout/android.view.ViewGroup["
@@ -27,45 +62,16 @@ class all_path:
                         "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[2]/android.widget.TextView[1]")
     offer_lots_path = (AppiumBy.XPATH,
                        "//*[@resource-id='com.atp.newdemo2:id/right_bottom_list']/android.view.ViewGroup[2]/android.widget.TextView[2]")
-    trade_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/account")
+
     trade_account_text_path = (AppiumBy.XPATH,
                                "//*[@resource-id='com.atp.newdemo2:id/recycler_view_account']/android.widget.LinearLayout[2]/android.widget.TextView")
     change_account_ID = (AppiumBy.ID, "com.atp.newdemo2:id/action_change")
     back_button = (AppiumBy.ACCESSIBILITY_ID, "转到上一层级")
     sell_side_id = (AppiumBy.ID, "com.atp.newdemo2:id/order_direction_sell")
-    buy_side_id = (AppiumBy.ID, "com.atp.newdemo2:id/order_direction_buy")
-    lots_xpath = (
-        AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/lots']/android.view.ViewGroup/android.widget.EditText")
-    price_xpath = (
-        AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/price']/android.view.ViewGroup/android.widget.EditText")
-    change_type_button = (AppiumBy.XPATH,
-                          "//*[@resource-id='com.atp.newdemo2:id/normal_order_type']/android.widget.LinearLayout/android.widget.Button")
-    type_Market_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Market")')
-    type_Market_Limit_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Market Limit")')
-    type_Lim_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("LIM")')
-    type_STP_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("STP")')
-    type_STL_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("STL")')
-    type_ICE_path = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ICE")')
-    StPx_titile_xpath = (
-        AppiumBy.XPATH,
-        "//*[@resource-id='com.atp.newdemo2:id/stop_price']/android.view.ViewGroup/android.widget.TextView")
-    input_StPx_xpath = (
-        AppiumBy.XPATH,
-        "//*[@resource-id='com.atp.newdemo2:id/stop_price']/android.view.ViewGroup/android.widget.EditText")
-    chunk_size_title = (AppiumBy.XPATH,
-                        "//*[@resource-id='com.atp.newdemo2:id/max_iceberg_chunk_size']/android.view.ViewGroup/android.widget.TextView")
-    chunk_size_xpath = (AppiumBy.XPATH,
-                        "//*[@resource-id='com.atp.newdemo2:id/max_iceberg_chunk_size']/android.view.ViewGroup/android.widget.EditText")
-    TIF_change_button = (AppiumBy.XPATH,
-                         "//*[@resource-id='com.atp.newdemo2:id/time_option']/android.widget.LinearLayout/android.widget.Button")
-    TIF_DAY = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("DAY")')
-    TIF_GTC = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("GTC")')
-    TIF_GTD = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("GTD")')
-    TIF_FAK = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("FAK")')
-    TIF_FOK = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("FOK")')
-    date_pick_ID = (AppiumBy.ID, "com.atp.newdemo2:id/date_pick_text_view")
-    fak_min_quantity = (AppiumBy.XPATH,
-                        "//*[@resource-id='com.atp.newdemo2:id/min_quantity']/android.view.ViewGroup/android.widget.EditText")
+
+
+
+
     offset_flag_change_button = (AppiumBy.XPATH,
                                  "//*[@resource-id='com.atp.newdemo2:id/offset_flag_type']/android.widget.LinearLayout/android.widget.Button")
     offset_flag_auto_xpath = (AppiumBy.XPATH, "//*[@text='自动' or @text='Auto']/..")
@@ -112,6 +118,8 @@ class all_path:
                        "//*[@text='T+1']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_memo = (AppiumBy.XPATH,
                           "//*[@text='备注' or @text='Memo']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+
+
     alert_title = (AppiumBy.ID, 'com.atp.newdemo2:id/title')
     alert_contract_code = (AppiumBy.ID, 'com.atp.newdemo2:id/contract_code')
     alert_order_id = (AppiumBy.ID, 'com.atp.newdemo2:id/order_id')
@@ -129,38 +137,19 @@ class all_path:
     no_data_contract_drag_path = ("//*[@text='GC2806-CME']/../android.widget.ImageView")
     illegal_lots_xpath = (AppiumBy.XPATH, "//*[@text='非法手数']")
     T_switch_ID = (AppiumBy.ID, "com.atp.newdemo2:id/one_plus_switch")
+    memo_title_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_title")
     edit_memo_ID = (AppiumBy.ID, "com.atp.newdemo2:id/edit_memo")
     error_hint_ID = (AppiumBy.ID, "com.atp.newdemo2:id/memo_error_hint")
 
-    # gain best单path
-    gain_best_order_path = (
-        AppiumBy.XPATH, "//android.widget.LinearLayout[@content-desc='Gain best单']/android.widget.TextView")
-    gap_xpath = (
-        AppiumBy.XPATH,
-        "//*[@resource-id='com.atp.newdemo2:id/gap_price']/android.view.ViewGroup/android.widget.EditText")
-    step_xpath = (
-        AppiumBy.XPATH,
-        "//*[@resource-id='com.atp.newdemo2:id/step_price']/android.view.ViewGroup/android.widget.EditText")
-    order_details_title = (AppiumBy.ID, 'com.atp.newdemo2:id/title')
-    order_details_gap = (AppiumBy.XPATH,
-                         "//*[@text='Gap']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_step = (AppiumBy.XPATH,
-                          "//*[@text='Step']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    # 合约组 "自动化测试合约"的path
+    contract_group_text = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("自动化测试合约")')
 
-    # 登录path
-    usernameID = (AppiumBy.ID, 'com.atp.newdemo2:id/username')
-    passwordID = (AppiumBy.ID, 'com.atp.newdemo2:id/password')
-    login_button_ID = (AppiumBy.ID, 'com.atp.newdemo2:id/sign_in_button')
-    error_alert_title_ID = (AppiumBy.ID, "com.atp.newdemo2:id/title")
-    error_alert_content_ID = (AppiumBy.ID, "com.atp.newdemo2:id/content_view")
-    alert_title_ID = (AppiumBy.ID, "com.atp.newdemo2:id/disclaimer_title")
-    cancel_button = (AppiumBy.ID, "com.atp.newdemo2:id/cancel")
-    checkBox_allow = (AppiumBy.ID, "com.atp.newdemo2:id/checkBox_allow_collect_system_information")
-    permission_allow = (AppiumBy.ID, "com.android.permissioncontroller:id""/permission_allow_foreground_only_button")
-    agree_button = (AppiumBy.ID, "com.atp.newdemo2:id/agree")
+    # 普通单path
+    normal_order_path = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/new_order_tab_layout']/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.TextView")
+
 
     # stop单path
-    stop_order_path = (AppiumBy.XPATH, "//android.widget.LinearLayout[@content-desc='Stop单']/android.widget.TextView")
+    stop_order_path = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/new_order_tab_layout']/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.TextView")
     stop_price_xpath = (
         AppiumBy.XPATH,
         "//*[@resource-id='com.atp.newdemo2:id/stop_price']/android.view.ViewGroup/android.widget.EditText")
@@ -173,10 +162,24 @@ class all_path:
     order_details_stop_option = (AppiumBy.XPATH,
                                  "//*[@text='Stop @']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
 
-    # 止盈止损单path
 
-    stop_profit_loss_order_path = (
-        AppiumBy.XPATH, "//android.widget.LinearLayout[@content-desc='止盈止损单']/android.widget.TextView")
+    # gain best单path
+    gain_best_order_path = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/new_order_tab_layout']/android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.TextView")
+    gap_xpath = (
+        AppiumBy.XPATH,
+        "//*[@resource-id='com.atp.newdemo2:id/gap_price']/android.view.ViewGroup/android.widget.EditText")
+    step_xpath = (
+        AppiumBy.XPATH,
+        "//*[@resource-id='com.atp.newdemo2:id/step_price']/android.view.ViewGroup/android.widget.EditText")
+    order_details_title = (AppiumBy.ID, 'com.atp.newdemo2:id/title')
+    order_details_gap = (AppiumBy.XPATH,
+                         "//*[@text='Gap']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_step = (AppiumBy.XPATH,
+                          "//*[@text='Step']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+
+
+    # 止盈止损单path
+    stop_profit_loss_order_path = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/new_order_tab_layout']/android.widget.LinearLayout/android.widget.LinearLayout[4]/android.widget.TextView")
     stop_profit_mode_xpath = (AppiumBy.XPATH,
                               "//*[@resource-id='com.atp.newdemo2:id/stop_profit_mode']/android.widget.LinearLayout/android.widget.Button")
     By_open_position_average_price_xpath = (
@@ -222,63 +225,10 @@ class all_path:
     order_details_times = (AppiumBy.XPATH,
                            "//*[@text='数量' or @text='Times']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
 
-    # 策略单path
-    strategies_tabbar_xpath = (AppiumBy.XPATH,
-                               "//*[@resource-id='com.atp.newdemo2:id/bottom_navigation_view']/android.view.ViewGroup/android.widget.FrameLayout[2]")
-    edit_strategy = (AppiumBy.ID, "com.atp.newdemo2:id/edit_strategy")
-    add_strategy = (AppiumBy.ID, "com.atp.newdemo2:id/add_strategy")
-    list_title_strategy_name = (
-        AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/list_title_root']/android.widget.TextView[1]")
-    list_title_ratio1 = (
-        AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/list_title_root']/android.widget.TextView[2]")
-    list_title_ratio2 = (
-        AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/list_title_root']/android.widget.TextView[3]")
-    toolbar_title = (AppiumBy.ID, "com.atp.newdemo2:id/toolbar_title")
-    action_done = (AppiumBy.ID, "com.atp.newdemo2:id/action_done")
-    strategy_name_input_edit_text = (AppiumBy.XPATH,
-                                     "//*[@resource-id='com.atp.newdemo2:id/strategy_name']/android.view.ViewGroup/android.widget.EditText")
-    strategy_name_clear_text_icon = (AppiumBy.XPATH,
-                                     "//*[@resource-id='com.atp.newdemo2:id/strategy_name']/android.view.ViewGroup/android.widget.ImageView")
-    formula_edit_text = (AppiumBy.XPATH,
-                         "//*[@resource-id='com.atp.newdemo2:id/formula_edit_text']/android.view.ViewGroup/android.widget.EditText")
-    execution_times = (AppiumBy.XPATH,
-                       "//*[@resource-id='com.atp.newdemo2:id/execution_times']/android.view.ViewGroup/android.widget.EditText")
-    execution_times_clear_text_icon = (AppiumBy.XPATH,
-                                       "//*[@resource-id='com.atp.newdemo2:id/execution_times']/android.view.ViewGroup/android.widget.ImageView")
-    single_trigger_times = (AppiumBy.XPATH,
-                            "//*[@resource-id='com.atp.newdemo2:id/single_trigger_times']/android.view.ViewGroup/android.widget.EditText")
-    single_trigger_times_clear_text_icon = (AppiumBy.XPATH,
-                                            "//*[@resource-id='com.atp.newdemo2:id/single_trigger_times']/android.view.ViewGroup/android.widget.ImageView")
-    digits = (AppiumBy.ID, "com.atp.newdemo2:id/digits")
-    split_switch = (AppiumBy.ID, "com.atp.newdemo2:id/split_switch")
-    protection = (AppiumBy.ID, "com.atp.newdemo2:id/protection")
-    active_leg_type = (AppiumBy.ID, "com.atp.newdemo2:id/active_leg_type")
-    commodity_type_A = (AppiumBy.XPATH,
-                        "//*[@resource-id='com.atp.newdemo2:id/commodity_root']/android.widget.LinearLayout[1]/android.view.ViewGroup/android.widget.TextView")
-    contract_text_A = (AppiumBy.XPATH,
-                       "//*[@resource-id='com.atp.newdemo2:id/commodity_root']/android.widget.LinearLayout[1]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
 
-    # 定时单path
-    timing_order_path = (
-        AppiumBy.XPATH, "//android.widget.LinearLayout[@content-desc='定时单']/android.widget.TextView")
-    single_xpath = (
-        AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/single']/android.view.ViewGroup/android.widget.EditText")
-    type_xpath = (AppiumBy.XPATH, "//*[@text='类型' or @text='Type']/../android.widget.Button")
-    start_time_id = (AppiumBy.ID, "com.atp.newdemo2:id/start_time")
-    end_time_id = (AppiumBy.ID, "com.atp.newdemo2:id/end_time")
-    end_time_title = (AppiumBy.ID, "com.atp.newdemo2:id/timeTitle")
-    time_interval_id = (AppiumBy.ID, "com.atp.newdemo2:id/time_interval")
-    order_details_single = (AppiumBy.XPATH,
-                            "//*[@text='单次手数' or @text='Single']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_start_time = (AppiumBy.XPATH,
-                                "//*[@text='开始时间' or @text='Start time']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_end_time = (AppiumBy.XPATH,
-                              "//*[@text='结束时间' or @text='End time']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
-    order_details_time_interval = (AppiumBy.XPATH,
-                                   "//*[@text='时间间隔' or @text='Time interval']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
 
-    # 定时单path
-    twap_order_path = (AppiumBy.XPATH, "//android.widget.LinearLayout[@content-desc='TWAP单']/android.widget.TextView")
+    # TWAP path
+    twap_order_path = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/new_order_tab_layout']/android.widget.LinearLayout/android.widget.LinearLayout[5]/android.widget.TextView")
     price_diff_xpath = (
         AppiumBy.XPATH,
         "//*[@resource-id='com.atp.newdemo2:id/price_diff']/android.view.ViewGroup/android.widget.EditText")
@@ -319,3 +269,72 @@ class all_path:
                                   "//*[@text='撤单上限' or @text='Cancel limit']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
     order_details_price_limit = (AppiumBy.XPATH,
                                  "//*[@text='限价' or @text='Price limit']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+
+
+
+    # 登录path
+    usernameID = (AppiumBy.ID, 'com.atp.newdemo2:id/username')
+    passwordID = (AppiumBy.ID, 'com.atp.newdemo2:id/password')
+    login_button_ID = (AppiumBy.ID, 'com.atp.newdemo2:id/sign_in_button')
+    error_alert_title_ID = (AppiumBy.ID, "com.atp.newdemo2:id/title")
+    error_alert_content_ID = (AppiumBy.ID, "com.atp.newdemo2:id/content_view")
+    alert_title_ID = (AppiumBy.ID, "com.atp.newdemo2:id/disclaimer_title")
+    cancel_button = (AppiumBy.ID, "com.atp.newdemo2:id/cancel")
+    checkBox_allow = (AppiumBy.ID, "com.atp.newdemo2:id/checkBox_allow_collect_system_information")
+    permission_allow = (AppiumBy.ID, "com.android.permissioncontroller:id""/permission_allow_foreground_only_button")
+    agree_button = (AppiumBy.ID, "com.atp.newdemo2:id/agree")
+
+
+    # 定时单path
+    timing_order_path = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/new_order_tab_layout']/android.widget.LinearLayout/android.widget.LinearLayout[6]/android.widget.TextView")
+    single_xpath = (AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/single']/android.view.ViewGroup/android.widget.EditText")
+    start_time_id = (AppiumBy.ID, "com.atp.newdemo2:id/start_time")
+    end_time_id = (AppiumBy.ID, "com.atp.newdemo2:id/end_time")
+    end_time_title = (AppiumBy.ID, "com.atp.newdemo2:id/timeTitle")
+    time_interval_id = (AppiumBy.ID, "com.atp.newdemo2:id/time_interval")
+    order_details_single = (AppiumBy.XPATH,
+                            "//*[@text='单次手数' or @text='Single']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_start_time = (AppiumBy.XPATH,
+                                "//*[@text='开始时间' or @text='Start time']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_end_time = (AppiumBy.XPATH,
+                              "//*[@text='结束时间' or @text='End time']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+    order_details_time_interval = (AppiumBy.XPATH,
+                                   "//*[@text='时间间隔' or @text='Time interval']/../android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView")
+
+
+    # 策略单path
+    strategies_tabbar_xpath = (AppiumBy.XPATH,"//*[@resource-id='com.atp.newdemo2:id/bottom_navigation_view']/android.view.ViewGroup/android.widget.FrameLayout[2]")
+    edit_strategy = (AppiumBy.ID, "com.atp.newdemo2:id/edit_strategy")
+    add_strategy = (AppiumBy.ID, "com.atp.newdemo2:id/add_strategy")
+    list_title_strategy_name = (
+        AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/list_title_root']/android.widget.TextView[1]")
+    list_title_ratio1 = (
+        AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/list_title_root']/android.widget.TextView[2]")
+    list_title_ratio2 = (
+        AppiumBy.XPATH, "//*[@resource-id='com.atp.newdemo2:id/list_title_root']/android.widget.TextView[3]")
+
+    action_done = (AppiumBy.ID, "com.atp.newdemo2:id/action_done")
+    strategy_name_input_edit_text = (AppiumBy.XPATH,
+                                     "//*[@resource-id='com.atp.newdemo2:id/strategy_name']/android.view.ViewGroup/android.widget.EditText")
+    strategy_name_clear_text_icon = (AppiumBy.XPATH,
+                                     "//*[@resource-id='com.atp.newdemo2:id/strategy_name']/android.view.ViewGroup/android.widget.ImageView")
+    formula_edit_text = (AppiumBy.XPATH,
+                         "//*[@resource-id='com.atp.newdemo2:id/formula_edit_text']/android.view.ViewGroup/android.widget.EditText")
+    execution_times = (AppiumBy.XPATH,
+                       "//*[@resource-id='com.atp.newdemo2:id/execution_times']/android.view.ViewGroup/android.widget.EditText")
+    execution_times_clear_text_icon = (AppiumBy.XPATH,
+                                       "//*[@resource-id='com.atp.newdemo2:id/execution_times']/android.view.ViewGroup/android.widget.ImageView")
+    single_trigger_times = (AppiumBy.XPATH,
+                            "//*[@resource-id='com.atp.newdemo2:id/single_trigger_times']/android.view.ViewGroup/android.widget.EditText")
+    single_trigger_times_clear_text_icon = (AppiumBy.XPATH,
+                                            "//*[@resource-id='com.atp.newdemo2:id/single_trigger_times']/android.view.ViewGroup/android.widget.ImageView")
+    digits = (AppiumBy.ID, "com.atp.newdemo2:id/digits")
+    split_switch = (AppiumBy.ID, "com.atp.newdemo2:id/split_switch")
+    protection = (AppiumBy.ID, "com.atp.newdemo2:id/protection")
+    active_leg_type = (AppiumBy.ID, "com.atp.newdemo2:id/active_leg_type")
+    commodity_type_A = (AppiumBy.XPATH,
+                        "//*[@resource-id='com.atp.newdemo2:id/commodity_root']/android.widget.LinearLayout[1]/android.view.ViewGroup/android.widget.TextView")
+    contract_text_A = (AppiumBy.XPATH,
+                       "//*[@resource-id='com.atp.newdemo2:id/commodity_root']/android.widget.LinearLayout[1]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
+
+

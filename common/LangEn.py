@@ -38,8 +38,6 @@ class LangEn:
                       "alert_illegal_open_pxdiff_tick_size": "开仓价差必须是最小变动价格的整数倍",
                       "alert_message_times": "请输入数量",
                       "alert_illegal_times": "数量不合法",
-                      "alert_order_message": "Order successfully",
-                      "alert_order_message_title": "下单请求发送成功!",
                       "alert_message_StPx": "请输入StPx",
                       "alert_message_chunk_size": "请输入暴露数量",
                       "alert_message_min_quantity": "请输入最小数量",
@@ -48,8 +46,7 @@ class LangEn:
                       "alert_message_buy_order_rejected": "New order rejected, Buy order stop price must be above last trade price.",
                       "alert_message_sell_order_rejected": "New order rejected, Sell order stop price must be below last trade price.",
                       "hint_message": "输入长度不能超过255个字符",
-                      "order_direction_buy": "buy",
-                      "order_direction_sell": "Sell",
+
 
                       "networking_issue": "There seems to be something wrong with the network",
 

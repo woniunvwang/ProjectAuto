@@ -3,8 +3,6 @@ import random
 import string
 from appium.webdriver.common.appiumby import AppiumBy
 import time
-
-from charset_normalizer import detect
 from selenium.webdriver import ActionChains
 
 from common.All_path import all_path
@@ -25,6 +23,26 @@ class NormalOrderPage(BasePage):
         self.slide_action(960, 280, 700, 280)
         self.click_action(all_path.contract_group_text)
 
+    def new_order_page_check(self):
+        self.press_offer()
+        toolbar_title = self.get_visible_element(all_path.toolbar_title).text
+        contract_code = self.get_visible_element(all_path.contract_code_xpath).text
+        bid = self.get_visible_element(all_path.bid_xpath).text
+        offer = self.get_visible_element(all_path.offer_xpath).text
+        chg = self.get_visible_element(all_path.chg_xpath).text
+        new_order_title = self.get_visible_element(all_path.normal_order_path).text
+        account_title = self.get_visible_element(all_path.account_title_ID).text
+        trade_direction_title = self.get_visible_element(all_path.trade_direction_title_xpath).text
+        lots_title = self.get_visible_element(all_path.lots_title_xpath).text
+        price_title = self.get_visible_element(all_path.price_title_xpath).text
+        normal_order_type_title = self.get_visible_element(all_path.normal_order_type_title_xpath).text
+        time_option_title = self.get_visible_element(all_path.time_option_title).text
+        memo_title = self.get_visible_element(all_path.memo_title_ID).text
+        confirm_button_text = self.get_visible_element(all_path.confirm_button_id).text
+        return toolbar_title,contract_code,bid,offer,chg,new_order_title,account_title,trade_direction_title,lots_title,price_title,normal_order_type_title,time_option_title,memo_title,confirm_button_text
+
+
+
     def alert_order_details_title(self):
         alert_message_title = self.get_visible_element(all_path.alert_message_title).text
         return alert_message_title
@@ -34,7 +52,7 @@ class NormalOrderPage(BasePage):
         return alert_message
 
     def alert_illegal_lots_title(self):
-        return self.get_visible_element(all_path.illegal_lots_xpath).text
+        return self.get_visible_element(all_path.illegal_order_direction_buy_ID).text
 
     def order_details_side_value(self):
         order_details_side_value = self.get_visible_element(all_path.order_details_side).text
@@ -107,18 +125,18 @@ class NormalOrderPage(BasePage):
 
     def change_trade_account(self):
         self.press_offer()
-        self.click_action(all_path.trade_account_ID)
+        self.click_action(all_path.account_value_ID)
         trade_account_value = self.get_visible_element(all_path.trade_account_text_path).text
         self.click_action(all_path.trade_account_text_path)
         self.click_action(all_path.change_account_ID)
-        changed_trade_account_value = self.get_visible_element(all_path.trade_account_ID).text
+        changed_trade_account_value = self.get_visible_element(all_path.account_value_ID).text
         self.press_confirm_button()
         order_details_account_value = self.get_visible_element(all_path.order_details_account).text
         return trade_account_value, changed_trade_account_value, order_details_account_value
 
     def press_bid_and_order(self):
         self.press_bid()
-        buy_value = self.get_visible_element(all_path.buy_side_id)
+        buy_value = self.get_visible_element(all_path.order_direction_buy_ID)
         sell_value = self.get_visible_element(all_path.sell_side_id)
         buy_checkbox = buy_value.get_attribute("checked")
         sell_checkbox = sell_value.get_attribute("checked")
@@ -129,7 +147,7 @@ class NormalOrderPage(BasePage):
 
     def press_offer_and_order(self):
         self.press_offer()
-        buy_value = self.get_visible_element(all_path.buy_side_id)
+        buy_value = self.get_visible_element(all_path.order_direction_buy_ID)
         sell_value = self.get_visible_element(all_path.sell_side_id)
         buy_checkbox = buy_value.get_attribute("checked")
         sell_checkbox = sell_value.get_attribute("checked")
@@ -141,7 +159,7 @@ class NormalOrderPage(BasePage):
     def change_buy_side(self):
         self.press_offer()
         self.click_action(all_path.sell_side_id)
-        buy_value = self.get_visible_element(all_path.buy_side_id)
+        buy_value = self.get_visible_element(all_path.order_direction_buy_ID)
         sell_value = self.get_visible_element(all_path.sell_side_id)
         buy_checkbox = buy_value.get_attribute("checked")
         sell_checkbox = sell_value.get_attribute("checked")
@@ -153,7 +171,7 @@ class NormalOrderPage(BasePage):
     def press_bid_and_check_lots(self):
         bid_lots_value = self.get_visible_element(all_path.bid_lots_path).text
         self.press_bid()
-        lots_value = self.get_visible_element(all_path.lots_xpath).text
+        lots_value = self.get_visible_element(all_path.lots_edit_text_xpath).text
         self.press_confirm_button()
         order_details_lots_value = self.order_details_lots_value()
         if bid_lots_value == "-":
@@ -164,7 +182,7 @@ class NormalOrderPage(BasePage):
     def press_bid_and_check_price(self):
         bid_price_value = self.get_visible_element(all_path.bid_price_path).text
         self.press_bid()
-        price_value = self.get_visible_element(all_path.price_xpath).text
+        price_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         self.press_confirm_button()
         order_details_price_value = self.order_details_price_value()
         if bid_price_value == "-":
@@ -175,7 +193,7 @@ class NormalOrderPage(BasePage):
     def press_offer_and_check_lots(self):
         offer_lots_value = self.get_visible_element(all_path.offer_lots_path).text
         self.press_offer()
-        lots_value = self.get_visible_element(all_path.lots_xpath).text
+        lots_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         self.press_confirm_button()
         order_details_lots_value = self.order_details_lots_value()
         if offer_lots_value == "-":
@@ -186,7 +204,7 @@ class NormalOrderPage(BasePage):
     def press_offer_and_check_price(self):
         offer_price_value = self.get_visible_element(all_path.offer_price_path).text
         self.press_offer()
-        price_value = self.get_visible_element(all_path.price_xpath).text
+        price_value = self.get_visible_element(all_path.price_edit_text_xpath).text
         self.press_confirm_button()
         order_details_price_value = self.order_details_price_value()
         if offer_price_value == "-":
@@ -200,7 +218,7 @@ class NormalOrderPage(BasePage):
     def slide_and_press_chg(self):
         self.slide_and_chg()
         self.click_action(all_path.Chg_path)
-        buy_value = self.get_visible_element(all_path.buy_side_id)
+        buy_value = self.get_visible_element(all_path.order_direction_buy_ID)
         sell_value = self.get_visible_element(all_path.sell_side_id)
         buy_checkbox = buy_value.get_attribute("checked")
         sell_checkbox = sell_value.get_attribute("checked")
@@ -215,7 +233,7 @@ class NormalOrderPage(BasePage):
         self.slide_and_chg()
         Chg_value = self.get_visible_element(all_path.Chg_path).text
         self.click_action(all_path.Chg_path)
-        price_value = self.get_visible_element(all_path.price_xpath).text
+        price_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         self.press_confirm_button()
         order_details_price_value = self.order_details_price_value()
         if Chg_value == "-":
@@ -229,7 +247,7 @@ class NormalOrderPage(BasePage):
         self.slide_and_chg()
         Chg_value = self.get_visible_element(all_path.Chg_path).text
         self.click_action(all_path.Chg_path)
-        lots_value = self.get_visible_element(all_path.lots_xpath).text
+        lots_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         self.press_confirm_button()
         order_details_lots_value = self.order_details_lots_value()
         if Chg_value == "-":
@@ -265,11 +283,11 @@ class NormalOrderPage(BasePage):
 
     def change_type_market(self):
         self.press_offer()
-        self.click_action(all_path.change_type_button)
+        self.click_action(all_path.normal_order_type_button_xpath)
         self.click_action(all_path.type_Market_text)
         self.press_confirm_button()
-        price_value = self.get_visible_element(all_path.price_xpath).text
-        type_value = self.get_visible_element(all_path.change_type_button).text
+        price_value = self.get_visible_element(all_path.order_direction_buy_ID).text
+        type_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         return price_value, type_value
 
     # 类型为STP/Market/Market Limit时价格处显示为置灰的Market
@@ -284,11 +302,11 @@ class NormalOrderPage(BasePage):
 
     def change_type_market_limit(self):
         self.press_offer()
-        self.click_action(all_path.change_type_button)
+        self.click_action(all_path.order_direction_buy_ID)
         self.click_action(all_path.type_Market_Limit_text)
         self.press_confirm_button()
-        price_value = self.get_visible_element(all_path.price_xpath).text
-        type_value = self.get_visible_element(all_path.change_type_button).text
+        price_value = self.get_visible_element(all_path.order_direction_buy_ID).text
+        type_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         return price_value, type_value
 
     def market_Limit_type_and_order(self):
@@ -302,32 +320,32 @@ class NormalOrderPage(BasePage):
     def market_type_changed_lim_type(self):
         bid_price_value = self.get_visible_element(all_path.offer_price_path).text
         self.change_type_market()
-        self.click_action(all_path.change_type_button)
+        self.click_action(all_path.order_direction_buy_ID)
         self.click_action(all_path.type_Lim_path)
         self.press_confirm_button()
-        price_value = self.get_visible_element(all_path.price_xpath).text
-        type_value = self.get_visible_element(all_path.change_type_button).text
+        price_value = self.get_visible_element(all_path.order_direction_buy_ID).text
+        type_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         return bid_price_value, price_value, type_value
 
     def market_Limit_type_changed_lim_type(self):
         bid_price_value = self.get_visible_element(all_path.offer_price_path).text
         self.change_type_market_limit()
-        self.click_action(all_path.change_type_button)
+        self.click_action(all_path.order_direction_buy_ID)
         self.click_action(all_path.type_Lim_path)
         self.press_confirm_button()
-        price_value = self.get_visible_element(all_path.price_xpath).text
-        type_value = self.get_visible_element(all_path.change_type_button).text
+        price_value = self.get_visible_element(all_path.order_direction_buy_ID).text
+        type_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         return bid_price_value, price_value, type_value
 
     def change_type_stp(self):
         offer_price_value = self.get_visible_element(all_path.offer_price_path).text
         self.press_offer()
-        self.click_action(all_path.change_type_button)
+        self.click_action(all_path.order_direction_buy_ID)
         self.click_action(all_path.type_STP_path)
         self.press_confirm_button()
         input_StPx = self.get_visible_element(all_path.input_StPx_xpath).text
-        price_value = self.get_visible_element(all_path.price_xpath).text
-        type_value = self.get_visible_element(all_path.change_type_button).text
+        price_value = self.get_visible_element(all_path.order_direction_buy_ID).text
+        type_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         StPx_title = self.get_visible_element(all_path.order_details_stpx_title).text
         return offer_price_value, StPx_title, input_StPx, price_value, type_value
 
@@ -379,12 +397,12 @@ class NormalOrderPage(BasePage):
     def change_type_stl(self):
         offer_price_value = self.get_visible_element(all_path.offer_price_path).text
         self.press_offer()
-        self.click_action(all_path.change_type_button)
+        self.click_action(all_path.order_direction_buy_ID)
         self.click_action(all_path.type_STL_path)
         self.press_confirm_button()
-        price_value = self.get_visible_element(all_path.price_xpath).text
+        price_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         input_StPx = self.get_visible_element(all_path.input_StPx_xpath).text
-        type_value = self.get_visible_element(all_path.change_type_button).text
+        type_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         StPx_title = self.get_visible_element(all_path.order_details_stpx_title).text
         return offer_price_value, StPx_title, input_StPx, price_value, type_value
 
@@ -396,14 +414,14 @@ class NormalOrderPage(BasePage):
     def stl_type_input_difference_value(self, difference):
         self.change_type_stl()
         self.clear_action(all_path.input_StPx_xpath)
-        self.clear_action(all_path.price_xpath)
+        self.clear_action(all_path.order_direction_buy_ID)
         last_price_and_lots = self.get_visible_element(all_path.last_price_and_lots).text
         last_trade_price = float(last_price_and_lots.split('@')[1])
         price_value = last_trade_price + int(difference)
         self.input_action(all_path.input_StPx_xpath, price_value)
-        self.input_action(all_path.price_xpath, price_value)
+        self.input_action(all_path.order_direction_buy_ID, price_value)
         StPx_value = self.get_visible_element(all_path.input_StPx_xpath).text
-        price_value = self.get_visible_element(all_path.price_xpath).text
+        price_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         return StPx_value, price_value
 
     def stl_type_input_StPx_above_last_price_and_buy_order(self):
@@ -443,15 +461,15 @@ class NormalOrderPage(BasePage):
     def stl_type_input_StPx_diff_and_price_diff(self, StPx_diff, price_diff):
         self.change_type_stl()
         self.clear_action(all_path.input_StPx_xpath)
-        self.clear_action(all_path.price_xpath)
+        self.clear_action(all_path.order_direction_buy_ID)
         last_price_and_lots = self.get_visible_element(all_path.last_price_and_lots).text
         last_trade_price = float(last_price_and_lots.split('@')[1])
         price_value = last_trade_price + int(price_diff)
         StPx_value = last_trade_price + int(StPx_diff)
         self.input_action(all_path.input_StPx_xpath, StPx_value)
-        self.input_action(all_path.price_xpath, price_value)
+        self.input_action(all_path.order_direction_buy_ID, price_value)
         StPx_value = self.get_visible_element(all_path.input_StPx_xpath).text
-        price_value = self.get_visible_element(all_path.price_xpath).text
+        price_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         return StPx_value, price_value
 
     def stl_type_input_StPx_below_price_and_buy_order(self):
@@ -490,22 +508,22 @@ class NormalOrderPage(BasePage):
     def change_type_ice(self):
         offer_price_value = self.get_visible_element(all_path.offer_price_path).text
         self.press_offer()
-        self.click_action(all_path.change_type_button)
+        self.click_action(all_path.order_direction_buy_ID)
         self.click_action(all_path.type_ICE_path)
         self.press_confirm_button()
-        price_value = self.get_visible_element(all_path.price_xpath).text
-        type_value = self.get_visible_element(all_path.change_type_button).text
+        price_value = self.get_visible_element(all_path.order_direction_buy_ID).text
+        type_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         chunk_size_title = self.get_visible_element(all_path.chunk_size_title).text
         chunk_size_value = self.get_visible_element(all_path.chunk_size_xpath).text
         return chunk_size_value, chunk_size_title, price_value, offer_price_value, type_value
 
     def ice_type_and_input_lots_and_chunk_size(self, lots, chunk_size_value):
         self.change_type_ice()
-        self.clear_action(all_path.lots_xpath)
-        self.input_action(all_path.lots_xpath, lots)
+        self.clear_action(all_path.order_direction_buy_ID)
+        self.input_action(all_path.order_direction_buy_ID, lots)
         self.clear_action(all_path.chunk_size_xpath)
         self.input_action(all_path.chunk_size_xpath, chunk_size_value)
-        lots_value = self.get_visible_element(all_path.lots_xpath).text
+        lots_value = self.get_visible_element(all_path.order_direction_buy_ID).text
         chunk_size_value = self.get_visible_element(all_path.chunk_size_xpath).text
         return lots_value, chunk_size_value
 
@@ -527,32 +545,32 @@ class NormalOrderPage(BasePage):
 
     def clear_lots_and_order(self):
         self.press_bid()
-        self.clear_action(all_path.lots_xpath)
+        self.clear_action(all_path.order_direction_buy_ID)
         self.press_confirm_button()
 
     def clear_price_and_order(self):
         self.press_offer()
-        self.clear_action(all_path.price_xpath)
+        self.clear_action(all_path.order_direction_buy_ID)
         self.press_confirm_button()
 
     def input_illegal_lots_and_order(self, lots):
         self.press_offer()
-        self.clear_action(all_path.lots_xpath)
-        self.input_action(all_path.lots_xpath, lots)
+        self.clear_action(all_path.order_direction_buy_ID)
+        self.input_action(all_path.order_direction_buy_ID, lots)
         self.press_confirm_button()
 
     def input_illegal_price_and_order(self, price):
         self.press_offer()
-        self.clear_action(all_path.price_xpath)
-        self.input_action(all_path.price_xpath, price)
+        self.clear_action(all_path.order_direction_buy_ID)
+        self.input_action(all_path.order_direction_buy_ID, price)
         self.press_confirm_button()
 
     def input_lots_and_price_and_order(self, lots, price):
         self.press_offer()
-        self.clear_action(all_path.lots_xpath)
-        self.input_action(all_path.lots_xpath, lots)
-        self.clear_action(all_path.price_xpath)
-        self.input_action(all_path.price_xpath, price)
+        self.clear_action(all_path.order_direction_buy_ID)
+        self.input_action(all_path.order_direction_buy_ID, lots)
+        self.clear_action(all_path.order_direction_buy_ID)
+        self.input_action(all_path.order_direction_buy_ID, price)
         self.press_confirm_button()
         order_details_lots_value = self.order_details_lots_value()
         order_details_price_value = self.order_details_price_value()
@@ -629,8 +647,8 @@ class NormalOrderPage(BasePage):
 
     def tif_fak_and_input_min_quantity_and_lots(self, fak_min, lots):
         self.change_tif_fak()
-        self.clear_action(all_path.lots_xpath)
-        self.input_action(all_path.lots_xpath, lots)
+        self.clear_action(all_path.order_direction_buy_ID)
+        self.input_action(all_path.order_direction_buy_ID, lots)
         self.clear_action(all_path.fak_min_quantity)
         self.input_action(all_path.fak_min_quantity, fak_min)
         return self.get_visible_element(all_path.fak_min_quantity).text
